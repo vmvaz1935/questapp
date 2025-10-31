@@ -1,0 +1,320 @@
+{
+  "name": "Questionário Subjetivo de Joelho do Comitê Internacional de Documentação do Joelho",
+  "acronym": "IKDC",
+  "domain": "Sintomas, função e atividade esportiva do joelho",
+  "instructions": {
+    "text": "Este questionário foi desenvolvido para ajudar os profissionais de saúde a entender como o seu joelho afeta sua capacidade de realizar atividades cotidianas. Por favor, responda cada pergunta marcando a resposta que melhor descreve sua situação atual.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {
+      "id": "Q1",
+      "text": "Qual é o mais alto nível de atividade física que você pode realizar sem sentir dor significativa no joelho?",
+      "domain": "Atividade",
+      "options": [
+        {"label": "Muito vigorosa (basquete, futebol, corrida agressiva, saltos)", "score": 4},
+        {"label": "Vigorosa (tênis, dança, aeróbica de alto impacto, escalada)", "score": 3},
+        {"label": "Moderada (caminhada rápida, aeróbica de baixo impacto, ciclismo, natação)", "score": 2},
+        {"label": "Leve (caminhada, jardinagem, trabalho em casa)", "score": 1},
+        {"label": "Incapaz de realizar qualquer atividade acima", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q2",
+      "text": "Durante as últimas 4 semanas, ou desde sua lesão, com que frequência você sentiu dor no joelho?",
+      "domain": "Dor",
+      "options": [
+        {"label": "Nunca", "score": 10},
+        {"label": "Raramente (1 vez por semana)", "score": 8},
+        {"label": "Às vezes (2-3 vezes por semana)", "score": 6},
+        {"label": "Frequentemente (4-5 vezes por semana)", "score": 3},
+        {"label": "Constantemente (diariamente)", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q3",
+      "text": "Se você sentiu dor durante as últimas 4 semanas, qual foi a intensidade da pior dor?",
+      "domain": "Dor",
+      "options": [
+        {"label": "Sem dor (0)", "score": 10},
+        {"label": "Leve (1-2)", "score": 8},
+        {"label": "Moderada (3-4)", "score": 5},
+        {"label": "Severa (5-7)", "score": 2},
+        {"label": "Extrema (8-10)", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q4",
+      "text": "Durante as últimas 4 semanas, quão rígido ou inchado esteve seu joelho?",
+      "domain": "Sintomas",
+      "options": [
+        {"label": "Nem um pouco", "score": 4},
+        {"label": "Pouco", "score": 3},
+        {"label": "Moderado", "score": 2},
+        {"label": "Muito", "score": 1},
+        {"label": "Extremamente", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q5",
+      "text": "Qual é o mais alto nível de atividade que você pode realizar sem que seu joelho fique significativamente inchado?",
+      "domain": "Atividade",
+      "options": [
+        {"label": "Muito vigorosa (basquete, futebol, corrida agressiva, saltos)", "score": 4},
+        {"label": "Vigorosa (tênis, dança, aeróbica de alto impacto, escalada)", "score": 3},
+        {"label": "Moderada (caminhada rápida, aeróbica de baixo impacto, ciclismo, natação)", "score": 2},
+        {"label": "Leve (caminhada, jardinagem, trabalho em casa)", "score": 1},
+        {"label": "Incapaz de realizar qualquer atividade acima", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q6",
+      "text": "Durante as últimas 4 semanas, seu joelho travou ou ficou preso, e não foi possível movê-lo?",
+      "domain": "Sintomas",
+      "options": [
+        {"label": "Não", "score": 1},
+        {"label": "Sim", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q7",
+      "text": "Qual é o mais alto nível de atividade que você pode realizar sem que seu joelho falhe, ou sem que você sinta que está prestes a cair?",
+      "domain": "Atividade",
+      "options": [
+        {"label": "Muito vigorosa (basquete, futebol, corrida agressiva, saltos)", "score": 4},
+        {"label": "Vigorosa (tênis, dança, aeróbica de alto impacto, escalada)", "score": 3},
+        {"label": "Moderada (caminhada rápida, aeróbica de baixo impacto, ciclismo, natação)", "score": 2},
+        {"label": "Leve (caminhada, jardinagem, trabalho em casa)", "score": 1},
+        {"label": "Incapaz de realizar qualquer atividade acima", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q8",
+      "text": "Qual é o mais alto nível de atividade física que você pode participar regularmente?",
+      "domain": "Atividade",
+      "options": [
+        {"label": "Muito vigorosa (basquete, futebol, corrida agressiva, saltos)", "score": 4},
+        {"label": "Vigorosa (tênis, dança, aeróbica de alto impacto, escalada)", "score": 3},
+        {"label": "Moderada (caminhada rápida, aeróbica de baixo impacto, ciclismo, natação)", "score": 2},
+        {"label": "Leve (caminhada, jardinagem, trabalho em casa)", "score": 1},
+        {"label": "Incapaz de realizar qualquer atividade acima", "score": 0}
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q9",
+      "text": "Como seu joelho afeta sua capacidade de:",
+      "domain": "Função",
+      "format": "table",
+      "subitems": [
+        {
+          "id": "Q9a",
+          "text": "Subir escadas",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9b",
+          "text": "Descer escadas",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9c",
+          "text": "Ajoelhar de frente",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9d",
+          "text": "Agachar",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9e",
+          "text": "Sentar com os joelhos dobrados",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9f",
+          "text": "Levantar-se de uma cadeira",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9g",
+          "text": "Correr para frente",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9h",
+          "text": "Saltar e aterrissar com a perna lesionada",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        },
+        {
+          "id": "Q9i",
+          "text": "Parar e iniciar rapidamente (mudança de direção)",
+          "options": [
+            {"label": "Nenhuma", "score": 4},
+            {"label": "Leve", "score": 3},
+            {"label": "Moderada", "score": 2},
+            {"label": "Extrema", "score": 1},
+            {"label": "Incapaz de fazer", "score": 0}
+          ]
+        }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q10",
+      "text": "Como você classificaria a função do seu joelho em uma escala de 0 a 10, onde 10 é função normal e excelente e 0 é a incapacidade de realizar suas atividades diárias habituais, que podem incluir esportes?",
+      "domain": "Função",
+      "format": "dual_scale",
+      "subitems": [
+        {
+          "id": "Q10a",
+          "text": "Função antes da lesão no joelho:",
+          "options": [
+            {"label": "0", "score": 0},
+            {"label": "1", "score": 1},
+            {"label": "2", "score": 2},
+            {"label": "3", "score": 3},
+            {"label": "4", "score": 4},
+            {"label": "5", "score": 5},
+            {"label": "6", "score": 6},
+            {"label": "7", "score": 7},
+            {"label": "8", "score": 8},
+            {"label": "9", "score": 9},
+            {"label": "10", "score": 10}
+          ],
+          "not_scored": true,
+          "label_left": "Não consegue realizar AVD",
+          "label_right": "Sem limitação de AVD"
+        },
+        {
+          "id": "Q10b",
+          "text": "Função atual do seu joelho:",
+          "options": [
+            {"label": "0", "score": 0},
+            {"label": "1", "score": 1},
+            {"label": "2", "score": 2},
+            {"label": "3", "score": 3},
+            {"label": "4", "score": 4},
+            {"label": "5", "score": 5},
+            {"label": "6", "score": 6},
+            {"label": "7", "score": 7},
+            {"label": "8", "score": 8},
+            {"label": "9", "score": 9},
+            {"label": "10", "score": 10}
+          ],
+          "not_scored": false,
+          "label_left": "Não consegue realizar AVD",
+          "label_right": "Sem limitação de AVD"
+        }
+      ],
+      "reverse_scored": false
+    }
+  ],
+  "scoring": {
+    "domains": [
+      {
+        "name": "Sintomas",
+        "items": ["Q2", "Q3", "Q4", "Q6"],
+        "formula": "Soma dos scores"
+      },
+      {
+        "name": "Atividade",
+        "items": ["Q1", "Q5", "Q7", "Q8"],
+        "formula": "Soma dos scores"
+      },
+      {
+        "name": "Função",
+        "items": ["Q9a", "Q9b", "Q9c", "Q9d", "Q9e", "Q9f", "Q9g", "Q9h", "Q9i", "Q10b"],
+        "formula": "Soma dos scores"
+      }
+    ],
+    "total_formula": "(Soma de todos os itens / 87) * 100",
+    "missing_data_rule": "Exigir pelo menos 16 de 18 itens respondidos para validade do questionário. Para itens faltantes, imputar a média dos itens respondidos na mesma subescala. Nota: Q10a (função anterior) não é pontuada, apenas para referência.",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "interpretation": "Pontuação de 0 a 100 pontos, onde maior pontuação indica melhor função e menos sintomas. Pontuação = 100: função normal sem sintomas. Pontuação = 0: incapacidade grave. Referência: população saudável geralmente > 90 pontos. MCID (mudança clinicamente importante): aproximadamente 10-15 pontos."
+  },
+  "metadata": {
+    "about_score": "O IKDC Subjective Knee Form avalia sintomas, função e participação em atividades esportivas. A pontuação total é calculada somando os escores de todos os 18 itens pontuados e normalizando para uma escala de 0 a 100. Pontuações mais altas indicam melhor função do joelho e menos sintomas. O questionário é amplamente utilizado para avaliar resultados em pacientes com lesões do ligamento cruzado anterior, lesões meniscais, osteoartrite e outras condições do joelho.",
+    "supporting_literature": [
+      {
+        "type": "Desenvolvimento Original",
+        "citation": "IRRGANG, J. J. et al. Development and validation of the International Knee Documentation Committee Subjective Knee Form. The American Journal of Sports Medicine, v. 29, n. 5, p. 600-613, 2001. DOI: 10.1177/03635465010290051301."
+      },
+      {
+        "type": "Tradução e Adaptação Cultural Brasileira",
+        "citation": "METSAVAHT, L. et al. Translation and cross-cultural adaptation of the Brazilian version of the International Knee Documentation Committee Subjective Knee Form: validity and reproducibility. The American Journal of Sports Medicine, v. 38, n. 11, p. 2404-2412, 2010. DOI: 10.1177/0363546510365314."
+      }
+    ],
+    "about_developer": "O International Knee Documentation Committee (IKDC) foi estabelecido pela American Orthopaedic Society for Sports Medicine (AOSSM) para padronizar a avaliação de lesões e resultados do joelho. O Subjective Knee Form foi desenvolvido em 2001 por Irrgang et al. para avaliar sintomas, função e participação esportiva. A versão brasileira foi traduzida e adaptada culturalmente por Metsavaht et al. em 2010, seguindo diretrizes internacionais de adaptação transcultural, incluindo traduções independentes, síntese, retro-tradução, revisão por comitê de especialistas e pré-teste com pacientes para garantir equivalência semântica, idiomática, experiencial e conceitual.",
+    "translation_cultural_adaptation": {
+      "original_language": "Inglês (Estados Unidos)",
+      "target_language": "Português do Brasil",
+      "adaptation_year": 2010,
+      "adaptation_authors": "Metsavaht, L. et al.",
+      "process": "O processo de adaptação transcultural seguiu as diretrizes internacionais, incluindo: (1) duas traduções independentes para português; (2) síntese das traduções; (3) retro-tradução para inglês; (4) revisão por comitê de especialistas; (5) pré-teste com 30 pacientes para verificação da compreensão; (6) ajustes finais baseados no feedback. Adaptações culturais incluíram substituições de exemplos de atividades (ex: substituição de referências a esqui por atividades mais relevantes ao contexto brasileiro quando apropriado).",
+      "validation_study": "O estudo de validação foi realizado com 103 pacientes (média de idade 35 anos, 67% homens) com diversas patologias do joelho. Demonstrou excelente reprodutibilidade (coeficiente de correlação intraclasse 0,98), consistência interna (alfa de Cronbach 0,93) e validade convergente com SF-36 (r = 0,81), WOMAC (r = -0,87) e Lysholm (r = 0,92). Não foram observados efeitos de piso ou teto significativos."
+    }
+  },
+  "source": {
+    "filename": "questionarios.md"
+  }
+}

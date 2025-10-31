@@ -1,0 +1,43 @@
+{
+  "name": "Quebec Back Pain Disability Scale",
+  "acronym": "QBPDS",
+  "domain": "Incapacidade por dor lombar",
+  "instructions": {
+    "text": "Para cada atividade, marque 0 (sem dificuldade) a 5 (incapaz), considerando a ÚLTIMA SEMANA.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Virar-se na cama","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q2","text":"Levantar-se de uma cadeira","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q3","text":"Ficar em pé por 10 minutos","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q4","text":"Caminhar por 10 minutos","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q5","text":"Subir escadas","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q6","text":"Descer escadas","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q7","text":"Agachar-se/ajoelhar-se","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q8","text":"Pegar algo no chão","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q9","text":"Virar-se para olhar para trás","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q10","text":"Fazer a cama","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q11","text":"Levantar objetos leves","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q12","text":"Levantar objetos pesados","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q13","text":"Carregar uma sacola de compras","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q14","text":"Andar em terreno irregular","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q15","text":"Entrar e sair do carro","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q16","text":"Dirigir por 1 hora","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q17","text":"Dormir a noite toda","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q18","text":"Caminhar 1 km","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q19","text":"Ficar sentado por 1 hora","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q20","text":"Ficar em pé por 1 hora","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20"],"formula":"Soma (0-100)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 100) * 100",
+    "missing_data_rule": "Permitir até 2 itens ausentes; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = maior incapacidade lombar."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

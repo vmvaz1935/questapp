@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "FisioQ",
+    "beta": "Beta",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "navigation": {
+    "patients": "Patients",
+    "questionnaires": "Questionnaires",
+    "report": "Reports",
+    "comparison": "Compare",
+    "privacy": "Privacy",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "landing": {
+    "title": "Clinical Questionnaires for Physical Therapists",
+    "subtitle": "Manage patients, apply validated questionnaires and track treatment evolution professionally and efficiently.",
+    "choosePlan": "Choose Your Plan",
+    "planDescription": "Start free or choose the Pro plan for unlimited features",
+    "planFree": "Free",
+    "planPro": "Pro",
+    "planPriceFree": "$0.00",
+    "planPricePro": "$50.00",
+    "planPriceMonth": "/month",
+    "planMostPopular": "Most Popular",
+    "startFree": "Start Free",
+    "signPro": "Sign Up Pro",
+    "features": {
+      "title": "Included Features",
+      "validatedQuestionnaires": "Validated Questionnaires",
+      "validatedQuestionnairesDesc": "Access to over 25 scientifically validated clinical questionnaires",
+      "detailedReports": "Detailed Reports",
+      "detailedReportsDesc": "Generate complete reports with graphs and temporal comparisons",
+      "cloudSync": "Cloud Sync",
+      "cloudSyncDesc": "Access your data from any device with automatic synchronization"
+    },
+    "featuresIncluded": {
+      "title": "Included Functionality",
+      "free": {
+        "patients": "Up to 3 patients",
+        "questionnaires": "Generate up to 3 questionnaires",
+        "access": "Access to all questionnaire types",
+        "reports": "Basic reports",
+        "support": "Email support"
+      },
+      "pro": {
+        "patients": "Unlimited patients",
+        "questionnaires": "Unlimited questionnaires",
+        "access": "Access to all questionnaire types",
+        "reports": "Advanced reports",
+        "export": "Data export",
+        "cloud": "Cloud synchronization",
+        "support": "Priority support"
+      }
+    }
+  },
+  "login": {
+    "title": "FisioQ",
+    "subtitle": "Clinical Questionnaires",
+    "loginButton": "Login",
+    "signUpButton": "Sign Up",
+    "googleLogin": "Continue with Google",
+    "googleLoginLoading": "Signing in with Google...",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "forgotPassword": "Forgot password?",
+    "newAccount": "Create new account",
+    "existingAccount": "I already have an account",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "fillAllFields": "Fill in name, email and password.",
+    "emailExists": "Email already registered.",
+    "invalidCredentials": "Invalid email or password.",
+    "firebaseNotInstalled": "Firebase is not installed. Please run: npm install\n\nThe application works normally without Firebase using only localStorage.",
+    "loginCancelled": "Login cancelled by user.",
+    "popupBlocked": "Popup blocked by browser. Please allow popups for this site.",
+    "firebaseError": "Error signing in with Google. Check if Firebase is configured correctly."
+  }
+}
+

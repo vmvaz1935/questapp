@@ -1,0 +1,32 @@
+{
+  "name": "Chronic Pain Grade",
+  "acronym": "CPG",
+  "domain": "Classificação de gravidade da dor crônica",
+  "instructions": {
+    "text": "Responda de 0 a 10 (0 = nenhum, 10 = máximo) sobre as ÚLTIMAS 6 SEMANAS.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"I1","text":"Pior dor sentida","domain":"Intensidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"I2","text":"Dor média","domain":"Intensidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"I3","text":"Dor atual (agora)","domain":"Intensidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D1","text":"Quanto a dor interferiu em suas atividades diárias?","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D2","text":"Quanto a dor interferiu em sua vida social?","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D3","text":"Quanto a dor interferiu em seu trabalho (pago ou doméstico)?","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Ddays","text":"Dias totalmente incapaz devido à dor (últimos 3 meses)","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10+","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Índice de Intensidade (0-100)","items":["I1","I2","I3"],"formula":"(soma/30)*100"},
+      {"name":"Índice de Incapacidade (0-100)","items":["D1","D2","D3"],"formula":"(soma/30)*100"},
+      {"name":"Dias de Incapacidade (0-10)","items":["Ddays"],"formula":"valor do item"}
+    ],
+    "total_formula": "Classificação por regras do CPG (0-4) — ver guidelines; aqui reportamos índices e dias.",
+    "missing_data_rule": "Permitir 1 item ausente por índice; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Combina intensidade, incapacidade e dias para grade 0–4 (não calculado automaticamente nesta versão)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

@@ -1,0 +1,34 @@
+{
+  "name": "Escala de Cinesiofobia de Tampa (11 itens)",
+  "acronym": "TSK-11",
+  "domain": "Cinesiofobia (medo do movimento)",
+  "instructions": {
+    "text": "Indique seu grau de concordância (1 = discordo totalmente; 4 = concordo totalmente).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Tenho medo de me machucar se me exercitar","domain":"Medo","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q2","text":"Se eu tentar superar esta dor, posso me machucar de verdade","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q3","text":"Dor significa que há algo seriamente errado com meu corpo","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q4","text":"Exercícios são arriscados para mim","domain":"Medo","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q5","text":"Tentar ser ativo pode piorar minha dor","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q6","text":"Se eu me recuperasse totalmente, me exercitaria","domain":"Atitude","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":true},
+    {"id":"Q7","text":"Quando sinto dor, devo parar o que estou fazendo","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q8","text":"A dor me diz quando parar de me exercitar para não me machucar","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q9","text":"Além de dor, tenho sensação de fraqueza nas costas/articulação afetada","domain":"Sintomas","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q10","text":"Eu não deveria fazer atividade física quando sinto dor","domain":"Crenças","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":false},
+    {"id":"Q11","text":"Eu posso fazer a maioria das atividades físicas apesar da dor","domain":"Atitude","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4}],"reverse_scored":true}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11"],"formula":"Soma (11-44)"}
+    ],
+    "total_formula": "((Soma de todos os itens - 11) / 33) * 100",
+    "missing_data_rule": "Permitir 1 item ausente; imputar média arredondada.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Escala 0–100% (normalizada). Referência: TSK‑11 bruto ≥ 29 (≈ ≥ 66%) indica cinesiofobia elevada."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

@@ -1,0 +1,91 @@
+{
+  "common": {
+    "appName": "FisioQ",
+    "beta": "Beta",
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar",
+    "submit": "Enviar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior"
+  },
+  "navigation": {
+    "patients": "Pacientes",
+    "questionnaires": "Questionários",
+    "report": "Relatórios",
+    "comparison": "Comparar",
+    "privacy": "Privacidade",
+    "logout": "Sair",
+    "login": "Entrar",
+    "main": "Navegação principal"
+  },
+  "landing": {
+    "title": "Questionários Clínicos para Fisioterapeutas",
+    "subtitle": "Gerencie pacientes, aplique questionários validados e acompanhe a evolução do tratamento de forma profissional e eficiente.",
+    "choosePlan": "Escolha seu Plano",
+    "planDescription": "Comece grátis ou escolha o plano Pro para recursos ilimitados",
+    "planFree": "Gratuito",
+    "planPro": "Pro",
+    "planPriceFree": "R$ 0,00",
+    "planPricePro": "R$ 50,00",
+    "planPriceMonth": "/mês",
+    "planMostPopular": "Mais Popular",
+    "startFree": "Começar Grátis",
+    "signPro": "Assinar Pro",
+    "features": {
+      "title": "Recursos Inclusos",
+      "validatedQuestionnaires": "Questionários Validados",
+      "validatedQuestionnairesDesc": "Acesso a mais de 25 questionários clínicos validados cientificamente",
+      "detailedReports": "Relatórios Detalhados",
+      "detailedReportsDesc": "Gere relatórios completos com gráficos e comparações temporais",
+      "cloudSync": "Sincronização na Nuvem",
+      "cloudSyncDesc": "Acesse seus dados de qualquer dispositivo com sincronização automática"
+    },
+    "featuresIncluded": {
+      "title": "Funcionalidades Incluídas",
+      "free": {
+        "patients": "Até 3 pacientes",
+        "questionnaires": "Geração de até 3 questionários",
+        "access": "Acesso a todos os tipos de questionários",
+        "reports": "Relatórios básicos",
+        "support": "Suporte por email"
+      },
+      "pro": {
+        "patients": "Pacientes ilimitados",
+        "questionnaires": "Questionários ilimitados",
+        "access": "Acesso a todos os tipos de questionários",
+        "reports": "Relatórios avançados",
+        "export": "Exportação de dados",
+        "cloud": "Sincronização na nuvem",
+        "support": "Suporte prioritário"
+      }
+    }
+  },
+  "login": {
+    "title": "FisioQ",
+    "subtitle": "Questionários Clínicos",
+    "loginButton": "Entrar",
+    "signUpButton": "Cadastrar",
+    "googleLogin": "Continuar com Google",
+    "googleLoginLoading": "Entrando com Google...",
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome",
+    "forgotPassword": "Esqueceu a senha?",
+    "newAccount": "Criar nova conta",
+    "existingAccount": "Já tenho uma conta",
+    "passwordMinLength": "A senha deve ter no mínimo 6 caracteres.",
+    "fillAllFields": "Preencha nome, e-mail e senha.",
+    "emailExists": "E-mail já cadastrado.",
+    "invalidCredentials": "E-mail ou senha inválidos.",
+    "firebaseNotInstalled": "Firebase não está instalado. Por favor, execute: npm install\n\nA aplicação funciona normalmente sem Firebase usando apenas localStorage.",
+    "loginCancelled": "Login cancelado pelo usuário.",
+    "popupBlocked": "Popup bloqueado pelo navegador. Por favor, permita popups para este site.",
+    "firebaseError": "Erro ao fazer login com Google. Verifique se o Firebase está configurado corretamente."
+  }
+}
+

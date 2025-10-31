@@ -1,0 +1,33 @@
+{
+  "name": "Neck Disability Index",
+  "acronym": "NDI",
+  "domain": "Incapacidade cervical",
+  "instructions": {
+    "text": "Selecione UMA opção por seção (0 a 5) que melhor descreve sua condição hoje.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Dor — intensidade","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q2","text":"Cuidado pessoal","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q3","text":"Levantamento de peso","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q4","text":"Leitura","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q5","text":"Dores de cabeça","domain":"Sintomas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q6","text":"Concentração","domain":"Sintomas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q7","text":"Trabalho","domain":"Impacto","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q8","text":"Dirigir","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q9","text":"Sono","domain":"Sintomas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q10","text":"Atividades recreativas","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],"formula":"Soma (0-50); % = (soma/50)*100"}
+    ],
+    "total_formula": "(Soma de todos os itens / 50) * 100 (0-100; maior = pior)",
+    "missing_data_rule": "Permitir até 2 itens faltantes; imputar média dos respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "0–8 mín., 10–28 leve, 30–48 moderada, 50–68 severa, 70–100 completa."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

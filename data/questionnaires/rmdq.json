@@ -1,0 +1,47 @@
+{
+  "name": "Roland-Morris Disability Questionnaire",
+  "acronym": "RMDQ",
+  "domain": "Incapacidade lombar (função)",
+  "instructions": {
+    "text": "Marque cada afirmação que descreve sua condição HOJE (Sim=1 ponto, Não=0).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Fico em casa a maior parte do tempo devido a minha coluna.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q2","text":"Eu mudo de posição freqüentemente para tentar aliviar minha coluna.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q3","text":"Eu ando mais lentamente do que o meu normal por causa de minha coluna.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q4","text":"Por causa de minhas costas não estou fazendo nenhum dos trabalhos que fazia em minha casa.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q5","text":"Por causa de minhas costas, eu uso um corrimão para subir escadas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q6","text":"Por causa de minhas costas, eu deito para descansar mais freqüentemente.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q7","text":"Por causa de minhas costas, eu necessito de apoio para levantar-me de uma cadeira.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q8","text":"Por causa de minhas costas, eu tento arranjar pessoas para fazerem coisas para mim.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q9","text":"Eu me visto mais lentamente do que o usual, Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q10","text":"Eu fico de pé por períodos curtos, Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q11","text":"Por causa de minhas costas, eu procuro não me curvar ou agachar.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q12","text":"Eu acho difícil sair de uma cadeira, Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q13","text":"Minhas costas doem a maior parte do tempo.","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q14","text":"Eu acho difícil me virar na cama Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q15","text":"Meu apetite não é bom por causa de dor nas costas.","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q16","text":"Tenho problemas para causar meias devido a dor nas minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q17","text":"Só consigo andar distâncias curtas Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q18","text":"Durmo pior de barriga para cima.","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q19","text":"Devido a minha dor nas costas, preciso de ajuda para me vestir.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q20","text":"Eu fico sentado a maior parte do dia Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q21","text":"Eu evito trabalhos pesados em casa Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q22","text":"Devido a minha dor nas costas fico mais irritado e de mau humor com as pessoas, do que normalmente.","domain":"Impacto","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q23","text":"Por causa de minhas costas, subo escadas mais devagar do que o usual.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q24","text":"Fico na cama a maior parte do tempo Por causa de minhas costas.","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20","Q21","Q22","Q23","Q24"],"formula":"Soma (0-24)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 24) * 100",
+    "missing_data_rule": "Recomenda-se resposta a todos os itens.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = maior incapacidade lombar (0–100%). Referência: < 20% leve, 20–40% moderada, > 40% severa."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

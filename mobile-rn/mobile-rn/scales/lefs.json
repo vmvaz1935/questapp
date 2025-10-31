@@ -1,0 +1,14 @@
+{
+  "name": "Lower Extremity Functional Scale",
+  "acronym": "LEFS",
+  "instructions": {"text": "Para cada atividade, escolha a dificuldade na última semana."},
+  "items": [
+    {"id":"Q1","text":"Caminhar entre cômodos"},
+    {"id":"Q2","text":"Subir ou descer 10 escadas"},
+    {"id":"Q3","text":"Ficar em pé por 1 hora"},
+    {"id":"Q4","text":"Correr em terreno plano"},
+    {"id":"Q5","text":"Trabalho pesado (jardinagem/limpeza)"}
+  ]
+}
+
+

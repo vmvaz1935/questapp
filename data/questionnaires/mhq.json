@@ -1,0 +1,80 @@
+{
+  "name": "Michigan Hand Outcomes Questionnaire",
+  "acronym": "MHQ",
+  "domain": "Resultados de mão e punho",
+  "instructions": {
+    "text": "Avalie suas mãos na última semana. Itens com 1–5 pontos. Subescala Dor é invertida.",
+    "reproduction_permitted": false
+  },
+  "items": [
+    {"id":"F1","text":"[Protegido: Função da mão 1]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F2","text":"[Protegido: Função da mão 2]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F3","text":"[Protegido: Função da mão 3]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F4","text":"[Protegido: Função da mão 4]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F5","text":"[Protegido: Função da mão 5]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F6","text":"[Protegido: Função da mão 6]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F7","text":"[Protegido: Função da mão 7]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F8","text":"[Protegido: Função da mão 8]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F9","text":"[Protegido: Função da mão 9]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"F10","text":"[Protegido: Função da mão 10]","domain":"Função Geral","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+
+    {"id":"A1","text":"[Protegido: AVD 1]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A2","text":"[Protegido: AVD 2]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A3","text":"[Protegido: AVD 3]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A4","text":"[Protegido: AVD 4]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A5","text":"[Protegido: AVD 5]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A6","text":"[Protegido: AVD 6]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A7","text":"[Protegido: AVD 7]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A8","text":"[Protegido: AVD 8]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A9","text":"[Protegido: AVD 9]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A10","text":"[Protegido: AVD 10]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A11","text":"[Protegido: AVD 11]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A12","text":"[Protegido: AVD 12]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A13","text":"[Protegido: AVD 13]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A14","text":"[Protegido: AVD 14]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A15","text":"[Protegido: AVD 15]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A16","text":"[Protegido: AVD 16]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"A17","text":"[Protegido: AVD 17]","domain":"AVD","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+
+    {"id":"P1","text":"[Protegido: Dor 1]","domain":"Dor","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":true},
+    {"id":"P2","text":"[Protegido: Dor 2]","domain":"Dor","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":true},
+    {"id":"P3","text":"[Protegido: Dor 3]","domain":"Dor","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":true},
+    {"id":"P4","text":"[Protegido: Dor 4]","domain":"Dor","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":true},
+    {"id":"P5","text":"[Protegido: Dor 5]","domain":"Dor","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":true},
+
+    {"id":"W1","text":"[Protegido: Trabalho 1]","domain":"Trabalho","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"W2","text":"[Protegido: Trabalho 2]","domain":"Trabalho","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"W3","text":"[Protegido: Trabalho 3]","domain":"Trabalho","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"W4","text":"[Protegido: Trabalho 4]","domain":"Trabalho","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"W5","text":"[Protegido: Trabalho 5]","domain":"Trabalho","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+
+    {"id":"E1","text":"[Protegido: Estética 1]","domain":"Estética","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"E2","text":"[Protegido: Estética 2]","domain":"Estética","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"E3","text":"[Protegido: Estética 3]","domain":"Estética","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"E4","text":"[Protegido: Estética 4]","domain":"Estética","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+
+    {"id":"S1","text":"[Protegido: Satisfação 1]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"S2","text":"[Protegido: Satisfação 2]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"S3","text":"[Protegido: Satisfação 3]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"S4","text":"[Protegido: Satisfação 4]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"S5","text":"[Protegido: Satisfação 5]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"S6","text":"[Protegido: Satisfação 6]","domain":"Satisfação","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Função Geral","items":["F1","F2","F3","F4","F5","F6","F7","F8","F9","F10"],"formula":"[(soma - 10) / 40] * 100"},
+      {"name":"AVD","items":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17"],"formula":"[(soma - 17) / 68] * 100"},
+      {"name":"Dor","items":["P1","P2","P3","P4","P5"],"formula":"[(((6*5) - soma) - 5) / 20] * 100"},
+      {"name":"Trabalho","items":["W1","W2","W3","W4","W5"],"formula":"[(soma - 5) / 20] * 100"},
+      {"name":"Estética","items":["E1","E2","E3","E4"],"formula":"[(soma - 4) / 16] * 100"},
+      {"name":"Satisfação","items":["S1","S2","S3","S4","S5","S6"],"formula":"[(soma - 6) / 24] * 100"}
+    ],
+    "total_formula": "Média das subescalas (opcional)",
+    "missing_data_rule": "Até 50% ausente por subescala; imputar média dos itens respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = melhor nas subescalas (exceto Dor, onde maior = pior)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

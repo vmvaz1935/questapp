@@ -1,0 +1,37 @@
+{
+  "name": "Anterior Cruciate Ligament - Return to Sport after Injury",
+  "acronym": "ACL-RSI",
+  "domain": "Prontidão psicológica para retorno ao esporte",
+  "instructions": {
+    "text": "Indique em uma escala de 0 a 10 o quanto cada afirmação descreve você (0 = de modo nenhum, 10 = extremamente).",
+    "reproduction_permitted": false
+  },
+  "items": [
+    {"id":"Q1","text":"Confiança para desempenhar no nível anterior","domain":"Confiança","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q2","text":"Medo de se machucar novamente","domain":"Risco","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q3","text":"Preocupação com falha do joelho (falseio)","domain":"Emoções","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q4","text":"Confiança para treinar intensamente","domain":"Confiança","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q5","text":"Confiança no joelho para mudanças rápidas de direção","domain":"Confiança","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q6","text":"Medo de movimentos específicos","domain":"Emoções","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q7","text":"Preocupação com desempenho inferior","domain":"Emoções","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q8","text":"Confiança geral para voltar ao esporte","domain":"Confiança","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q9","text":"Ansiedade relacionada ao joelho","domain":"Emoções","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q10","text":"Medo de sentir dor durante o esporte","domain":"Risco","options":[{"label":"0","score":10},{"label":"1","score":9},{"label":"2","score":8},{"label":"3","score":7},{"label":"4","score":6},{"label":"5","score":5},{"label":"6","score":4},{"label":"7","score":3},{"label":"8","score":2},{"label":"9","score":1},{"label":"10","score":0}],"reverse_scored":true},
+    {"id":"Q11","text":"Confiança para competir","domain":"Confiança","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q12","text":"Percepção de risco de nova lesão","domain":"Risco","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Emoções","items":["Q3","Q6","Q7","Q9","Q10"],"formula":"Média (0-10) escalada a 0-100"},
+      {"name":"Confiança","items":["Q1","Q4","Q5","Q8","Q11"],"formula":"Média (0-10) escalada a 0-100"},
+      {"name":"Risco","items":["Q2","Q12"],"formula":"Média (0-10) escalada a 0-100"}
+    ],
+    "total_formula": "(Soma de todos os itens / 120) * 100",
+    "missing_data_rule": "Recomenda-se respostas completas; em falta mínima, imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = melhor prontidão psicológica. Referência: ≥ 65 sugere prontidão para retorno; < 56 baixa probabilidade (dependente da população)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

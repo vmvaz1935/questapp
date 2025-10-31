@@ -1,0 +1,48 @@
+{
+  "name": "Copenhagen Hip and Groin Outcome Score",
+  "acronym": "HAGOS",
+  "domain": "Quadril e virilha (dor, sintomas, função, esporte, QV)",
+  "instructions": {
+    "text": "Este questionário pergunta sobre seus problemas no quadril/virilha. Responda com base na ÚLTIMA SEMANA.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"P1","text":"Dor na virilha/quadril ao andar em superfície plana","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P2","text":"Dor ao subir/descer escadas","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P3","text":"Dor à noite (deitado)","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P4","text":"Dor ao sentar por longo período","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+
+    {"id":"S1","text":"Inchaço/rigidez no quadril/virilha","domain":"Sintomas","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"Sempre","score":4}],"reverse_scored":false},
+    {"id":"S2","text":"Clicar/estalido no quadril","domain":"Sintomas","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"Sempre","score":4}],"reverse_scored":false},
+    {"id":"S3","text":"Sensação de travamento","domain":"Sintomas","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"Sempre","score":4}],"reverse_scored":false},
+
+    {"id":"ADL1","text":"Vestir meias/sapatos","domain":"ADL","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"ADL2","text":"Entrar e sair do carro","domain":"ADL","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"ADL3","text":"Sentar e levantar de uma cadeira","domain":"ADL","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"ADL4","text":"Ficar em pé por 1 hora","domain":"ADL","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+
+    {"id":"Sport1","text":"Correr moderadamente","domain":"Esporte/Rec","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"Sport2","text":"Pular e aterrissar","domain":"Esporte/Rec","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"Sport3","text":"Girar rapidamente (pivotar)","domain":"Esporte/Rec","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+
+    {"id":"QOL1","text":"Consciência do problema no quadril/virilha","domain":"Qualidade de Vida","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"O tempo todo","score":4}],"reverse_scored":false},
+    {"id":"QOL2","text":"Mudança de estilo de vida devido ao problema","domain":"Qualidade de Vida","options":[{"label":"De modo nenhum","score":0},{"label":"Levemente","score":1},{"label":"Moderadamente","score":2},{"label":"Muito","score":3},{"label":"Extremamente","score":4}],"reverse_scored":false},
+    {"id":"QOL3","text":"Preocupação com a falta de confiança no quadril","domain":"Qualidade de Vida","options":[{"label":"De modo nenhum","score":0},{"label":"Levemente","score":1},{"label":"Moderadamente","score":2},{"label":"Muito","score":3},{"label":"Extremamente","score":4}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Dor","items":["P1","P2","P3","P4"],"formula":"100 - [(soma * 100) / (4 * 4)]"},
+      {"name":"Sintomas","items":["S1","S2","S3"],"formula":"100 - [(soma * 100) / (4 * 3)]"},
+      {"name":"ADL","items":["ADL1","ADL2","ADL3","ADL4"],"formula":"100 - [(soma * 100) / (4 * 4)]"},
+      {"name":"Esporte/Rec","items":["Sport1","Sport2","Sport3"],"formula":"100 - [(soma * 100) / (4 * 3)]"},
+      {"name":"Qualidade de Vida","items":["QOL1","QOL2","QOL3"],"formula":"100 - [(soma * 100) / (4 * 3)]"}
+    ],
+    "total_formula": "Não recomendado (interpretar por subescala)",
+    "missing_data_rule": "Até 1 item ausente por subescala; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Subescalas (0–100): maior = melhor. Referência: atletas/assintomáticos geralmente > 80–90; < 50 indica comprometimento."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

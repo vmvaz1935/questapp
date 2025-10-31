@@ -1,0 +1,50 @@
+{
+  "name": "Foot and Ankle Ability Measure",
+  "acronym": "FAAM",
+  "domain": "Função do pé e tornozelo",
+  "instructions": {
+    "text": "Marque sua dificuldade na ÚLTIMA SEMANA. 4 = nenhuma dificuldade; 3 = pouca; 2 = moderada; 1 = muita; 0 = incapaz/não consegue realizar.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"ADL1","text":"Caminhar em superfície plana","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL2","text":"Caminhar em superfície irregular","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL3","text":"Subir escadas","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL4","text":"Descer escadas","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL5","text":"Ficar de pé","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL6","text":"Ficar de pé por longos períodos","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL7","text":"Caminhar por longas distâncias","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL8","text":"Subir rampa","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL9","text":"Descer rampa","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL10","text":"Realizar atividades domésticas usuais","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL11","text":"Realizar atividades de trabalho","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL12","text":"Sair para compras","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL13","text":"Sair de casa/entrar em casa","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL14","text":"Colocar meias/sapatos","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL15","text":"Levantar-se da cama","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL16","text":"Agachar-se/ajoelhar-se","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"ADL17","text":"Entrar e sair do carro","domain":"ADL","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+
+    {"id":"SPORT1","text":"Correr","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT2","text":"Saltar","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT3","text":"Parar e mudar de direção rapidamente","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT4","text":"Ajoelhar-se/agachar profundamente","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT5","text":"Cortar/girar (pivotar) durante esporte","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT6","text":"Saltar e aterrissar com impacto","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT7","text":"Acelerar em corrida","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"SPORT8","text":"Decelerar rapidamente","domain":"Esporte","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"ADL","items":["ADL1","ADL2","ADL3","ADL4","ADL5","ADL6","ADL7","ADL8","ADL9","ADL10","ADL11","ADL12","ADL13","ADL14","ADL15","ADL16","ADL17"],"formula":"(soma/68)*100"},
+      {"name":"Esporte","items":["SPORT1","SPORT2","SPORT3","SPORT4","SPORT5","SPORT6","SPORT7","SPORT8"],"formula":"(soma/32)*100"}
+    ],
+    "total_formula": "Não aplicável (interpretar por subescala)",
+    "missing_data_rule": "Até 2 itens ausentes por subescala; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = melhor função. Referência: ADL/Esporte > 80% sugere boa função; MCID ~8 (ADL) e ~9 (Esporte) pontos brutos."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

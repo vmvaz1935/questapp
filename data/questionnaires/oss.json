@@ -1,0 +1,35 @@
+{
+  "name": "Oxford Shoulder Score",
+  "acronym": "OSS",
+  "domain": "Função e dor do ombro",
+  "instructions": {
+    "text": "Marque a opção que melhor descreve sua situação na ÚLTIMA SEMANA (0 a 4).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Dor no ombro nas últimas 24 horas","domain":"Dor","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q2","text":"Dor ao dormir","domain":"Dor","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q3","text":"Conseguir vestir uma camisa/blusa","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q4","text":"Conseguir pentear o cabelo","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q5","text":"Conseguir alcançar uma prateleira alta","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q6","text":"Conseguir carregar uma sacola","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q7","text":"Conseguir lavar as costas","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q8","text":"Conseguir fazer tarefas domésticas","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q9","text":"Conseguir dirigir","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q10","text":"Conseguir carregar objetos pesados","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q11","text":"Conseguir realizar atividades recreativas","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false},
+    {"id":"Q12","text":"Conseguir realizar tarefas acima da cabeça","domain":"Função","options":[{"label":"4","score":4},{"label":"3","score":3},{"label":"2","score":2},{"label":"1","score":1},{"label":"0","score":0}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12"],"formula":"Soma (0-48)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 48) * 100",
+    "missing_data_rule": "Permitir 1 item ausente; imputar média dos respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "0–100% (normalizado). Referência (bruto): 0–19 ruim, 20–29 razoável, 30–39 bom, 40–48 excelente."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

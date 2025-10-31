@@ -1,0 +1,50 @@
+{
+  "name": "Western Ontario and McMaster Universities Osteoarthritis Index",
+  "acronym": "WOMAC",
+  "domain": "Osteoartrite de joelho ou quadril",
+  "instructions": {
+    "text": "Responda sobre a ÚLTIMA SEMANA. Marque uma opção por pergunta (0 = nenhum, 4 = extremo).",
+    "reproduction_permitted": false
+  },
+  "items": [
+    {"id":"P1","text":"Dor — Item 1","domain":"Dor","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"P2","text":"Dor — Item 2","domain":"Dor","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"P3","text":"Dor — Item 3","domain":"Dor","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"P4","text":"Dor — Item 4","domain":"Dor","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"P5","text":"Dor — Item 5","domain":"Dor","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"S1","text":"Rigidez — Manhã","domain":"Rigidez","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"S2","text":"Rigidez — Restante do dia","domain":"Rigidez","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    
+    {"id":"F1","text":"Função — Item 1","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F2","text":"Função — Item 2","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F3","text":"Função — Item 3","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F4","text":"Função — Item 4","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F5","text":"Função — Item 5","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F6","text":"Função — Item 6","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F7","text":"Função — Item 7","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F8","text":"Função — Item 8","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F9","text":"Função — Item 9","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F10","text":"Função — Item 10","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F11","text":"Função — Item 11","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F12","text":"Função — Item 12","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F13","text":"Função — Item 13","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F14","text":"Função — Item 14","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F15","text":"Função — Item 15","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F16","text":"Função — Item 16","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false},
+    {"id":"F17","text":"Função — Item 17","domain":"Função Física","options":[{"label":"Nenhum","score":0},{"label":"Leve","score":1},{"label":"Moderado","score":2},{"label":"Severo","score":3},{"label":"Extremo","score":4}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Dor","items":["P1","P2","P3","P4","P5"],"formula":"Soma (0-20)"},
+      {"name":"Rigidez","items":["S1","S2"],"formula":"Soma (0-8)"},
+      {"name":"Função Física","items":["F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","F16","F17"],"formula":"Soma (0-68)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 96) * 100",
+    "missing_data_rule": "Até 2 itens ausentes por domínio; imputar média do domínio.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = pior dor/rigidez/limitação (0–100%). Referência: < 20 leve, 20–40 moderado, > 40 severo em OA (varia por estudo)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

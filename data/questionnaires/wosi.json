@@ -1,0 +1,50 @@
+{
+  "name": "Western Ontario Shoulder Instability Index",
+  "acronym": "WOSI",
+  "domain": "Instabilidade do ombro",
+  "instructions": {
+    "text": "Avalie cada item de 0 (sem problema) a 10 (pior possível) na ÚLTIMA SEMANA.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Dor no ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q2","text":"Rigidez do ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q3","text":"Dor com movimentos acima da cabeça","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q4","text":"Dor ao dormir por causa do ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q5","text":"Cansaço/fadiga do ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q6","text":"Estalos/ruídos no ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q7","text":"Sensação de fraqueza do ombro","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q8","text":"Desconforto após atividade física","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q9","text":"Limitação de amplitude de movimento","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q10","text":"Sensação de instabilidade (sair do lugar)","domain":"Sintomas físicos","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+
+    {"id":"Q11","text":"Dificuldade em praticar esportes","domain":"Esporte/Trabalho/Recreação","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q12","text":"Dificuldade em trabalhos manuais acima da cabeça","domain":"Esporte/Trabalho/Recreação","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q13","text":"Dificuldade em levantar/carry objetos no trabalho","domain":"Esporte/Trabalho/Recreação","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q14","text":"Evita atividades recreativas por causa do ombro","domain":"Esporte/Trabalho/Recreação","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+
+    {"id":"Q15","text":"Dificuldade para vestir-se (camisa/casaco)","domain":"Estilo de vida","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q16","text":"Dificuldade para lavar/pentear o cabelo","domain":"Estilo de vida","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q17","text":"Dificuldade para alcançar prateleiras altas no dia a dia","domain":"Estilo de vida","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q18","text":"Evita tarefas domésticas por causa do ombro","domain":"Estilo de vida","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+
+    {"id":"Q19","text":"Preocupação/medo de o ombro sair do lugar","domain":"Emoções","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q20","text":"Frustração/irritação por causa do ombro","domain":"Emoções","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q21","text":"Confiança geral no ombro nas atividades diárias","domain":"Emoções","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Sintomas físicos (10)","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],"formula":"Soma (0-100)"},
+      {"name":"Esporte/Trabalho/Recreação (4)","items":["Q11","Q12","Q13","Q14"],"formula":"Soma (0-40)"},
+      {"name":"Estilo de vida (4)","items":["Q15","Q16","Q17","Q18"],"formula":"Soma (0-40)"},
+      {"name":"Emoções (3)","items":["Q19","Q20","Q21"],"formula":"Soma (0-30)"}
+    ],
+    "total_formula": "Total bruto (0-210) e % = (210 - total) / 210 × 100 (maior = melhor)",
+    "missing_data_rule": "Recomenda-se respostas completas; se faltar, ajustar divisor.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Total bruto 0–210 (menor = melhor); % = (210 - total) / 210 × 100. Referência: assintomáticos tipicamente > 80–90% (melhor); valores baixos indicam importante impacto."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

@@ -1,0 +1,71 @@
+{
+  "name": "Hip disability and Osteoarthritis Outcome Score",
+  "acronym": "HOOS",
+  "domain": "Disfunção do quadril e osteoartrite",
+  "instructions": {
+    "text": "Este questionário pergunta sobre seu quadril. Responda com base na ÚLTIMA SEMANA.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"S1","text":"Seu quadril esteve inchado?","domain":"Sintomas","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"Sempre","score":4}],"reverse_scored":false},
+    {"id":"S2","text":"Rigidez ao acordar (quadril)","domain":"Sintomas","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"S3","text":"Rigidez após ficar sentado/deitado","domain":"Sintomas","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"S4","text":"Clique/estalido no quadril","domain":"Sintomas","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"Sempre","score":4}],"reverse_scored":false},
+    {"id":"S5","text":"Amplitude de movimento dificultada","domain":"Sintomas","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+
+    {"id":"P1","text":"Dor ao andar em superfície plana","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P2","text":"Dor ao subir/descer escadas","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P3","text":"Dor ao deitar sobre o quadril afetado","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P4","text":"Dor ao ficar em pé","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P5","text":"Dor ao dobrar o quadril","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P6","text":"Dor ao estender o quadril","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P7","text":"Dor à noite","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P8","text":"Dor ao sentar/ficar deitado","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P9","text":"Dor ao girar sobre a perna de apoio","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+    {"id":"P10","text":"Dor geral do quadril","domain":"Dor","options":[{"label":"Nenhuma","score":0},{"label":"Leve","score":1},{"label":"Moderada","score":2},{"label":"Severa","score":3},{"label":"Extrema","score":4}],"reverse_scored":false},
+
+    {"id":"A1","text":"Subir escadas","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A2","text":"Descer escadas","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A3","text":"Levantar-se de uma cadeira","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A4","text":"Ficar em pé","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A5","text":"Abaixar-se/pegar algo no chão","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A6","text":"Caminhar em superfície plana","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A7","text":"Entrar e sair do carro/ônibus","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A8","text":"Ir às compras","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A9","text":"Calçar meias","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A10","text":"Levantar-se da cama","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A11","text":"Tarefas domésticas pesadas","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A12","text":"Tarefas domésticas leves","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A13","text":"Atividades de lazer/usuais","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A14","text":"Sentar-se","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A15","text":"Levantar-se do vaso sanitário","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A16","text":"Virar-se na cama","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"A17","text":"Correr pequenas distâncias (se aplicável)","domain":"AVD","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+
+    {"id":"SP1","text":"Realizar agachamento profundo","domain":"Esporte/Lazer","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"SP2","text":"Correr","domain":"Esporte/Lazer","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"SP3","text":"Pular e aterrissar","domain":"Esporte/Lazer","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+    {"id":"SP4","text":"Girar rapidamente","domain":"Esporte/Lazer","options":[{"label":"Nenhuma dificuldade","score":0},{"label":"Leve dificuldade","score":1},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":3},{"label":"Incapaz","score":4}],"reverse_scored":false},
+
+    {"id":"QOL1","text":"Frequência de consciência do problema no quadril","domain":"Qualidade de Vida","options":[{"label":"Nunca","score":0},{"label":"Raramente","score":1},{"label":"Às vezes","score":2},{"label":"Frequentemente","score":3},{"label":"O tempo todo","score":4}],"reverse_scored":false},
+    {"id":"QOL2","text":"Mudança de estilo de vida por causa do quadril","domain":"Qualidade de Vida","options":[{"label":"De modo nenhum","score":0},{"label":"Levemente","score":1},{"label":"Moderadamente","score":2},{"label":"Muito","score":3},{"label":"Extremamente","score":4}],"reverse_scored":false},
+    {"id":"QOL3","text":"Preocupação com a falta de confiança no quadril","domain":"Qualidade de Vida","options":[{"label":"De modo nenhum","score":0},{"label":"Levemente","score":1},{"label":"Moderadamente","score":2},{"label":"Muito","score":3},{"label":"Extremamente","score":4}],"reverse_scored":false},
+    {"id":"QOL4","text":"Dificuldades gerais causadas pelo quadril","domain":"Qualidade de Vida","options":[{"label":"De modo nenhum","score":0},{"label":"Levemente","score":1},{"label":"Moderadamente","score":2},{"label":"Muito","score":3},{"label":"Extremamente","score":4}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Sintomas","items":["S1","S2","S3","S4","S5"],"formula":"100 - [(soma * 100) / (4 * 5)]"},
+      {"name":"Dor","items":["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10"],"formula":"100 - [(soma * 100) / (4 * 10)]"},
+      {"name":"AVD","items":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17"],"formula":"100 - [(soma * 100) / (4 * 17)]"},
+      {"name":"Esporte/Lazer","items":["SP1","SP2","SP3","SP4"],"formula":"100 - [(soma * 100) / (4 * 4)]"},
+      {"name":"Qualidade de Vida","items":["QOL1","QOL2","QOL3","QOL4"],"formula":"100 - [(soma * 100) / (4 * 4)]"}
+    ],
+    "total_formula": "Não recomendado (interpretar por subescala)",
+    "missing_data_rule": "Até 2 itens ausentes por subescala; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Subescalas (0–100): maior = melhor. Referência: assintomáticos geralmente > 80–90; < 50 indica comprometimento."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

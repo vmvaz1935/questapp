@@ -1,0 +1,53 @@
+{
+  "name": "Disabilities of the Arm, Shoulder and Hand",
+  "acronym": "DASH",
+  "domain": "Função de membro superior",
+  "instructions": {
+    "text": "Marque o grau de dificuldade nos ÚLTIMOS 7 DIAS (1 = nenhuma dificuldade, 5 = incapaz).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Abrir um frasco novo/firmemente fechado","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q2","text":"Fazer tarefas pesadas em casa","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q3","text":"Carregar uma bolsa ou maleta","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q4","text":"Lavar as costas","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q5","text":"Usar uma faca para cortar alimentos","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q6","text":"Atividades recreativas que exigem força (ex.: tênis, carpintaria pesada)","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q7","text":"Atividades recreativas que exigem impacto (ex.: martelar, lançamentos)","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q8","text":"Transportar um objeto pesado (mais de 10 kg)","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q9","text":"Trocar uma lâmpada acima da cabeça","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q10","text":"Lavar ou secar o cabelo","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q11","text":"Usar transporte público","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q12","text":"Escrever","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q13","text":"Virar uma chave","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q14","text":"Segurar um copo","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q15","text":"Cortar alimentos com uma tesoura","domain":"Função","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q16","text":"Atividades sociais por dor no braço/ombro/mão","domain":"Sintomas","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q17","text":"Trabalho por dor no braço/ombro/mão","domain":"Sintomas","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q18","text":"Dormir por dor no braço/ombro/mão","domain":"Sintomas","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q19","text":"Fraqueza no braço/ombro/mão","domain":"Sintomas","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q20","text":"Rigidez no braço/ombro/mão","domain":"Sintomas","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q21","text":"Dor ao realizar atividades específicas","domain":"Dor","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Pior possível","score":5}],"reverse_scored":false},
+    {"id":"Q22","text":"Dor no repouso","domain":"Dor","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Pior possível","score":5}],"reverse_scored":false},
+    {"id":"Q23","text":"Formigamento (parestesia)","domain":"Sintomas","options":[{"label":"1 = Nenhum","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extremo","score":5}],"reverse_scored":false},
+    {"id":"Q24","text":"Dificuldade com ritmo de vida e trabalho","domain":"Impacto","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q25","text":"Dificuldade com atividades sociais e família","domain":"Impacto","options":[{"label":"1 = Nenhuma","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Extrema","score":5}],"reverse_scored":false},
+    {"id":"Q26","text":"Seus sintomas mudaram nos últimos 7 dias?","domain":"Sintomas","options":[{"label":"1 = Melhoraram muito","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5 = Pioraram muito","score":5}],"reverse_scored":false},
+    {"id":"Q27","text":"Dificuldade em atividades sexuais (se aplicável)","domain":"Impacto","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q28","text":"Dificuldade em praticar hobbies","domain":"Impacto","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q29","text":"Dificuldade com atividades de trabalho","domain":"Impacto","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q30","text":"Dificuldade em atividades sociais fora de casa","domain":"Impacto","options":[{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20","Q21","Q22","Q23","Q24","Q25","Q26","Q27","Q28","Q29","Q30"],"formula":"[(soma - 30)/120] * 100"}
+    ],
+    "total_formula": "[(Soma de todos os itens - 30) / 120] * 100",
+    "missing_data_rule": "Permitir até 3 itens ausentes; imputar média dos respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = maior incapacidade (0–100%). Referência: população saudável ~10–15; MCID ~10 pontos."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

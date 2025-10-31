@@ -1,0 +1,34 @@
+{
+  "name": "AOFAS Ankle-Hindfoot Scale",
+  "acronym": "AOFAS",
+  "domain": "Tornozelo e retropé (dor, função, alinhamento)",
+  "instructions": {
+    "text": "Preencha considerando sua condição atual. Alguns itens podem requerer avaliação do clínico.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Pain","text":"Dor","domain":"Dor","options":[{"label":"Nenhuma","score":40},{"label":"Leve, ocasional","score":30},{"label":"Moderada, diária","score":20},{"label":"Severa, quase sempre","score":0}],"reverse_scored":false},
+    {"id":"Activity","text":"Limitação de atividade e necessidade de suporte","domain":"Função","options":[{"label":"Sem limitação, sem suporte","score":10},{"label":"Limitação leve, atividades recreativas não competitivas","score":7},{"label":"Limitação moderada, uso de suporte ocasional","score":4},{"label":"Severa, dependente de suporte","score":0}],"reverse_scored":false},
+    {"id":"Distance","text":"Distância máxima de caminhada","domain":"Função","options":[{"label":"Mais de 6 quarteirões","score":5},{"label":"4–6 quarteirões","score":4},{"label":"1–3 quarteirões","score":2},{"label":"Menos de 1 quarteirão","score":0}],"reverse_scored":false},
+    {"id":"Surface","text":"Caminhar em superfícies irregulares","domain":"Função","options":[{"label":"Sem dificuldade","score":5},{"label":"Alguma dificuldade","score":3},{"label":"Grande dificuldade","score":0}],"reverse_scored":false},
+    {"id":"Gait","text":"Anormalidade da marcha","domain":"Função","options":[{"label":"Normal","score":8},{"label":"Leve anormalidade","score":4},{"label":"Marcha severamente alterada","score":0}],"reverse_scored":false},
+    {"id":"MotionSag","text":"ADM sagital (flexão plantar/dorsiflexão)","domain":"Função","options":[{"label":"> 30°","score":8},{"label":"15–29°","score":4},{"label":"< 15°","score":0}],"reverse_scored":false},
+    {"id":"MotionHind","text":"ADM retropé (inversão/eversão)","domain":"Função","options":[{"label":"> 75% do normal","score":6},{"label":"25–74% do normal","score":3},{"label":"< 25% do normal","score":0}],"reverse_scored":false},
+    {"id":"Stability","text":"Estabilidade do tornozelo/retropé","domain":"Função","options":[{"label":"Estável","score":8},{"label":"Instabilidade ocasional","score":4},{"label":"Instável","score":0}],"reverse_scored":false},
+    {"id":"Alignment","text":"Alinhamento","domain":"Alinhamento","options":[{"label":"Bom, plantígrado, bem alinhado","score":10},{"label":"Plantígrado, alinhamento moderado","score":5},{"label":"Mau alinhamento, sintomático","score":0}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Dor","items":["Pain"],"formula":"Soma"},
+      {"name":"Função","items":["Activity","Distance","Surface","Gait","MotionSag","MotionHind","Stability"],"formula":"Soma"},
+      {"name":"Alinhamento","items":["Alignment"],"formula":"Soma"}
+    ],
+    "total_formula": "(Soma de todos os itens / 100) * 100",
+    "missing_data_rule": "Recomenda-se avaliação completa; se faltar 1 item de função, ajustar interpretação.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = melhor (Dor 40, Função 50, Alinhamento 10). Referência: 90–100 excelente, 80–89 bom, 70–79 regular, < 70 ruim."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

@@ -1,0 +1,123 @@
+{
+  "name": "Lysholm Knee Scale",
+  "acronym": "Lysholm",
+  "domain": "Função do joelho",
+  "instructions": {
+    "text": "Responda com base em suas experiências recentes com o joelho.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {
+      "id": "Q1",
+      "text": "Mancar",
+      "domain": "Sintomas",
+      "options": [
+        { "label": "Nunca", "score": 5 },
+        { "label": "Leve ou periodicamente", "score": 3 },
+        { "label": "Intenso e constantemente", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q2",
+      "text": "Apoio",
+      "domain": "Função",
+      "options": [
+        { "label": "Nenhum", "score": 5 },
+        { "label": "Bengala ou muleta", "score": 2 },
+        { "label": "Impossível", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q3",
+      "text": "Travamento",
+      "domain": "Sintomas",
+      "options": [
+        { "label": "Nenhum travamento ou sensação de travamento", "score": 15 },
+        { "label": "Tem sensação, mas sem travamento", "score": 10 },
+        { "label": "Travamento ocasional", "score": 6 },
+        { "label": "Frequente", "score": 2 },
+        { "label": "Articulação travada no exame", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q4",
+      "text": "Instabilidade",
+      "domain": "Sintomas",
+      "options": [
+        { "label": "Nunca falseia", "score": 25 },
+        { "label": "Raramente, durante atividades atléticas ou outros exercícios pesados", "score": 20 },
+        { "label": "Frequentemente durante atividades atléticas ou outros exercícios pesados (ou incapaz de participação)", "score": 15 },
+        { "label": "Ocasionalmente em atividades diárias", "score": 10 },
+        { "label": "Frequentemente em atividades diárias", "score": 5 },
+        { "label": "Em cada passo", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q5",
+      "text": "Dor",
+      "domain": "Sintomas",
+      "options": [
+        { "label": "Nenhuma", "score": 25 },
+        { "label": "Inconstante ou leve durante exercícios pesados", "score": 20 },
+        { "label": "Marcada durante exercícios pesados", "score": 15 },
+        { "label": "Marcada durante ou após caminhar mais de 2 Km", "score": 10 },
+        { "label": "Marcada durante ou após caminhar menos de 2 Km", "score": 5 },
+        { "label": "Constante", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q6",
+      "text": "Inchaço",
+      "domain": "Sintomas",
+      "options": [
+        { "label": "Nenhum", "score": 10 },
+        { "label": "Com exercícios pesados", "score": 6 },
+        { "label": "Com exercícios comuns", "score": 2 },
+        { "label": "Constante", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q7",
+      "text": "Subindo escadas",
+      "domain": "Função",
+      "options": [
+        { "label": "Nenhum problema", "score": 10 },
+        { "label": "Levemente prejudicado", "score": 6 },
+        { "label": "Um degrau cada vez", "score": 2 },
+        { "label": "Impossível", "score": 0 }
+      ],
+      "reverse_scored": false
+    },
+    {
+      "id": "Q8",
+      "text": "Agachamento",
+      "domain": "Função",
+      "options": [
+        { "label": "Nenhum problema", "score": 5 },
+        { "label": "Levemente prejudicado", "score": 4 },
+        { "label": "Não além de 90 graus", "score": 2 },
+        { "label": "Impossível", "score": 0 }
+      ],
+      "reverse_scored": false
+    }
+  ],
+  "scoring": {
+    "domains": [
+      { "name": "Sintomas", "items": ["Q1", "Q3", "Q4", "Q5", "Q6"], "formula": "Soma dos scores" },
+      { "name": "Função", "items": ["Q2", "Q7", "Q8"], "formula": "Soma dos scores" }
+    ],
+    "total_formula": "(Soma de todos os itens / 100) * 100",
+    "missing_data_rule": "Recomenda-se responder todos os itens.",
+    "range": { "min": 0, "max": 100 },
+    "interpretation": "Maior pontuação = melhor função do joelho. 95-100 excelente; 84-94 bom; 65-83 regular; <65 ruim."
+  },
+  "source": { "filename": "questionarios.md" }
+}
+
+

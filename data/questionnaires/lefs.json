@@ -1,0 +1,43 @@
+{
+  "name": "Lower Extremity Functional Scale",
+  "acronym": "LEFS",
+  "domain": "Função de extremidade inferior",
+  "instructions": {
+    "text": "Para cada atividade, marque a dificuldade na ÚLTIMA SEMANA (0 = extrema dificuldade/incapaz, 4 = nenhuma dificuldade).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Caminhar entre cômodos","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q2","text":"Caminhar 2 a 3 quarteirões","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q3","text":"Caminhar mais de 1 km","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q4","text":"Subir ou descer 10 escadas","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q5","text":"Ficar sentado por 1 hora","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q6","text":"Levantar-se de uma cadeira baixa","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q7","text":"Ficar em pé por 1 hora","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q8","text":"Correr em terreno plano","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q9","text":"Trabalho pesado (ex.: jardinagem, limpeza pesada)","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q10","text":"Atividades recreativas/sportes (impacto moderado)","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q11","text":"Virar-se na cama","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q12","text":"Agachar-se","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q13","text":"Ajoelhar-se","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q14","text":"Entrar e sair do banho","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q15","text":"Andar em subida/declive","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q16","text":"Levantar-se do chão","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q17","text":"Entrar e sair do carro","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q18","text":"Correr para pegar um ônibus/compromisso","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q19","text":"Calçar meias/vestir calças","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false},
+    {"id":"Q20","text":"Atividades de lazer (baixa demanda)","domain":"Função","options":[{"label":"Nenhuma dificuldade","score":4},{"label":"Pouca dificuldade","score":3},{"label":"Dificuldade moderada","score":2},{"label":"Muita dificuldade","score":1},{"label":"Extrema dificuldade/incapaz","score":0}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Função","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20"],"formula":"Soma (0-80)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 80) * 100",
+    "missing_data_rule": "Permitir até 4 itens ausentes; imputar média dos respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = melhor função (0–100%). Referência: ≥ 80% próximo do normal; MCID ≈ 9 pontos (na escala 0–80)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

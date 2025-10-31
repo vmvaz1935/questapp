@@ -1,0 +1,33 @@
+{
+  "name": "Oswestry Disability Index",
+  "acronym": "ODI",
+  "domain": "Incapacidade lombar",
+  "instructions": {
+    "text": "Escolha UMA opção por seção (0 a 5) que melhor descreve como você está hoje.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Dor — intensidade","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q2","text":"Cuidado pessoal","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q3","text":"Levantar","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q4","text":"Caminhar","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q5","text":"Sentar","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q6","text":"Ficar em pé","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q7","text":"Dormir","domain":"Sintomas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q8","text":"Vida sexual (se aplicável)","domain":"Impacto","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q9","text":"Vida social","domain":"Impacto","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false},
+    {"id":"Q10","text":"Viagem","domain":"Impacto","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],"formula":"(soma/50)*100"}
+    ],
+    "total_formula": "(Soma de todos os itens / 50) * 100 (0-100; maior = pior)",
+    "missing_data_rule": "Permitir até 1 seção ausente; ajustar divisor para 45.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "0–20 mínima, 21–40 moderada, 41–60 severa, 61–80 muito severa, 81–100 incapacitado."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

@@ -1,0 +1,41 @@
+{
+  "name": "Patient-Rated Tennis Elbow Evaluation",
+  "acronym": "PRTEE",
+  "domain": "Epicondilite lateral (dor e função)",
+  "instructions": {
+    "text": "Classifique a dor e a dificuldade no cotovelo afetado na última semana (0 = melhor, 10 = pior).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Dor ao descansar","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q2","text":"Dor com movimento repetitivo do braço","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q3","text":"Dor ao carregar algo pesado","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q4","text":"Pior dor sentida","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q5","text":"Frequência da dor","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+
+    {"id":"Q6","text":"Torcer uma toalha molhada","domain":"Função — Atividades Específicas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q7","text":"Girar a maçaneta de uma porta","domain":"Função — Atividades Específicas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q8","text":"Carregar um saco de compras","domain":"Função — Atividades Específicas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q9","text":"Levantar uma xícara para beber","domain":"Função — Atividades Específicas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q10","text":"Abrir uma jarra","domain":"Função — Atividades Específicas","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+
+    {"id":"Q11","text":"Trabalho doméstico","domain":"Função — Atividades Usuais","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q12","text":"Trabalho/ocupação","domain":"Função — Atividades Usuais","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q13","text":"Atividades recreativas","domain":"Função — Atividades Usuais","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q14","text":"Atividades sociais","domain":"Função — Atividades Usuais","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q15","text":"Outras atividades diárias","domain":"Função — Atividades Usuais","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Dor (0-50)", "items":["Q1","Q2","Q3","Q4","Q5"], "formula":"Soma (0-50)"},
+      {"name":"Função (0-50)", "items":["Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15"], "formula":"Soma/2 (0-50)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 100) * 100",
+    "missing_data_rule": "Recomenda-se respostas completas; em falta mínima, imputar média do domínio.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = pior dor/incapacidade (0–100%). Valores normativos: indivíduos assintomáticos tipicamente < 10–15; mudanças clinicamente importantes ~9 pontos."
+  },
+  "source": { "filename": "questionarios.md" }
+}
+
+

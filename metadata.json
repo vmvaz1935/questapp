@@ -1,0 +1,5 @@
+{
+  "name": "MD-para-App: Clinical Questionnaires",
+  "description": "An AI-powered application to transform clinical questionnaires from Markdown files into interactive web forms. Admins upload a Markdown file, AI extracts the structure into JSON, and after human verification, the questionnaire is published for users to fill out.",
+  "requestFramePermissions": []
+}

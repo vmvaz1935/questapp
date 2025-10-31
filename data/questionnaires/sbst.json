@@ -1,0 +1,32 @@
+{
+  "name": "STarT Back Screening Tool",
+  "acronym": "SBST",
+  "domain": "Estratificação de risco em dor lombar",
+  "instructions": {
+    "text": "Marque sua concordância para cada afirmação (0 = não; 1 = sim).",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Minha dor nas costas se espalha para a perna","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q2","text":"Tenho dor no ombro/pescoço também","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q3","text":"Tenho problemas para andar em casa","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q4","text":"Tenho dificuldade para me vestir","domain":"Função","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q5","text":"Tenho muita preocupação com minha dor","domain":"Psicológico","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q6","text":"Tenho sensação de catastrofização (não vai melhorar)","domain":"Psicológico","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q7","text":"Sinto-me tenso e ansioso","domain":"Psicológico","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q8","text":"Tenho dor intensa (acima do usual)","domain":"Sintomas","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false},
+    {"id":"Q9","text":"Minha dor interfere muito nas minhas atividades normais","domain":"Impacto","options":[{"label":"Não","score":0},{"label":"Sim","score":1}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total (0-9)","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9"],"formula":"Soma (0-9)"}
+    ],
+    "total_formula": "Soma (0-9). Subescala psicossocial: Q5–Q9 (0-5). Classificação: baixo (Total ≤3), médio (Total ≥4 e Psico ≤3), alto (Psico ≥4).",
+    "missing_data_rule": "Recomenda-se respostas completas; se 1 item faltar, não classificar risco.",
+    "range": {"min": 0, "max": 9},
+    "interpretation": "Estratifica risco para orientar manejo (baixo/médio/alto)."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

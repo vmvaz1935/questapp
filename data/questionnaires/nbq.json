@@ -1,0 +1,30 @@
+{
+  "name": "Neck Bournemouth Questionnaire",
+  "acronym": "NBQ",
+  "domain": "Dor cervical (multidimensional)",
+  "instructions": {
+    "text": "Marque de 0 a 10 para cada item (0 = melhor; 10 = pior), considerando a ÚLTIMA SEMANA.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"Q1","text":"Intensidade da dor no pescoço","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q2","text":"Atividades da vida diária (impacto da dor)","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q3","text":"Capacidade de cuidar de si mesmo","domain":"Função","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q4","text":"Trabalho e atividades sociais","domain":"Impacto","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q5","text":"Ansiedade relacionada à dor","domain":"Psicológico","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q6","text":"Depressão/baixo humor relacionado à dor","domain":"Psicológico","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"Q7","text":"Controle sobre a dor (crenças)","domain":"Crenças","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7"],"formula":"Soma (0-70)"}
+    ],
+    "total_formula": "(Soma de todos os itens / 70) * 100",
+    "missing_data_rule": "Permitir 1 item ausente; imputar média dos respondidos.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = maior impacto multidimensional (0–100%). Referência: > 40% indica impacto elevado."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

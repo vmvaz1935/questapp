@@ -1,0 +1,37 @@
+{
+  "name": "Shoulder Pain and Disability Index",
+  "acronym": "SPADI",
+  "domain": "Dor e incapacidade do ombro",
+  "instructions": {
+    "text": "Responda pensando na ÚLTIMA SEMANA. Itens 1–5 (dor) e 6–13 (incapacidade), 0 = nenhuma, 10 = pior/incapaz.",
+    "reproduction_permitted": true
+  },
+  "items": [
+    {"id":"P1","text":"Dor no ombro em repouso","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"P2","text":"Dor ao levantar algo","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"P3","text":"Dor ao levar a mão à cabeça","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"P4","text":"Dor durante a noite","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"P5","text":"Dor total no ombro","domain":"Dor","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D1","text":"Lavar o cabelo","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D2","text":"Vestir uma camisa/blusa","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D3","text":"Colocar algo em uma prateleira alta","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D4","text":"Carregar objeto de 10 lb (4,5 kg)","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D5","text":"Levar a mão às costas","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D6","text":"Lançar uma bola acima da cabeça","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D7","text":"Dormir devido ao ombro","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false},
+    {"id":"D8","text":"Trabalho devido ao ombro","domain":"Incapacidade","options":[{"label":"0","score":0},{"label":"1","score":1},{"label":"2","score":2},{"label":"3","score":3},{"label":"4","score":4},{"label":"5","score":5},{"label":"6","score":6},{"label":"7","score":7},{"label":"8","score":8},{"label":"9","score":9},{"label":"10","score":10}],"reverse_scored":false}
+  ],
+  "scoring": {
+    "domains": [
+      {"name":"Dor (0-50)","items":["P1","P2","P3","P4","P5"],"formula":"(soma/50)*100"},
+      {"name":"Incapacidade (0-80)","items":["D1","D2","D3","D4","D5","D6","D7","D8"],"formula":"(soma/80)*100"}
+    ],
+    "total_formula": "(Soma de todos os itens / 130) * 100",
+    "missing_data_rule": "Permitir até 1 item ausente por subescala; imputar média.",
+    "range": {"min": 0, "max": 100},
+    "interpretation": "Maior = pior dor/incapacidade (0–100%). Referência: assintomáticos geralmente < 10; MCID ~8–13."
+  },
+  "source": {"filename": "questionarios.md"}
+}
+
+

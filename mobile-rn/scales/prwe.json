@@ -1,0 +1,24 @@
+{
+  "name": "Patient-Rated Wrist Evaluation",
+  "acronym": "PRWE",
+  "instructions": {"text": "Avalie a dor e a dificuldade no punho na última semana (0 = melhor, 10 = pior)."},
+  "items": [
+    {"id":"Q1","text":"Dor ao descansar"},
+    {"id":"Q2","text":"Dor com movimento repetitivo"},
+    {"id":"Q3","text":"Dor ao levantar objeto pesado"},
+    {"id":"Q4","text":"Pior dor sentida"},
+    {"id":"Q5","text":"Frequência da dor"},
+    {"id":"Q6","text":"Girar a maçaneta de uma porta"},
+    {"id":"Q7","text":"Cortar carne"},
+    {"id":"Q8","text":"Abrir uma jarra"},
+    {"id":"Q9","text":"Carregar um saco de compras"},
+    {"id":"Q10","text":"Usar uma chave"},
+    {"id":"Q11","text":"Trabalho"},
+    {"id":"Q12","text":"Higiene pessoal"},
+    {"id":"Q13","text":"Atividades recreativas"},
+    {"id":"Q14","text":"Atividades sociais"},
+    {"id":"Q15","text":"Outras atividades diárias"}
+  ]
+}
+
+
