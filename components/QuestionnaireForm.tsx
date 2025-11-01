@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Questionnaire, Item } from '../types';
+import { Questionnaire, Item, Patient } from '../types';
 import ScoreDisplay from './ScoreDisplay';
 
 interface QuestionnaireFormProps {
   questionnaire: Questionnaire;
+  patient?: Patient | null;
   onSaved?: (payload: { questionnaireId: string; totalScore: number; isPercent: boolean; answers: { itemId: string; itemText: string; optionLabel?: string; score: number }[] }) => void;
 }
 
-const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, onSaved }) => {
+const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, patient, onSaved }) => {
   const [answers, setAnswers] = useState<{ [itemId: string]: number }>({});
   const [scoreData, setScoreData] = useState<{ totalScore: number; domainScores: { [key: string]: number } } | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -70,14 +71,43 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, on
   const visibleItems = questionnaire.items;
 
   // Agrupar itens por domínio para melhor organização visual
+  // Garantir que os itens estejam ordenados pela ordem numérica que aparecem no questionário
   const itemsByDomain = useMemo(() => {
     const grouped: { [domain: string]: Item[] } = {};
-    questionnaire.items.forEach(item => {
+    
+    // Iterar pelos itens na ordem original do questionário
+    questionnaire.items.forEach((item, originalIndex) => {
       const domain = item.domain || 'Outros';
       if (!grouped[domain]) grouped[domain] = [];
+      
+      // Adicionar item com seu índice original para manter ordem
       grouped[domain].push(item);
     });
-    return grouped;
+    
+    // Ordenar itens dentro de cada domínio pela ordem original no questionário
+    Object.keys(grouped).forEach(domain => {
+      grouped[domain].sort((a, b) => {
+        const indexA = questionnaire.items.findIndex(item => item.id === a.id);
+        const indexB = questionnaire.items.findIndex(item => item.id === b.id);
+        return indexA - indexB;
+      });
+    });
+    
+    // Ordenar domínios pela ordem do primeiro item de cada domínio
+    const sortedDomains: { [domain: string]: Item[] } = {};
+    const domainOrder = Object.keys(grouped).sort((domainA, domainB) => {
+      const firstItemA = grouped[domainA][0];
+      const firstItemB = grouped[domainB][0];
+      const indexA = questionnaire.items.findIndex(item => item.id === firstItemA.id);
+      const indexB = questionnaire.items.findIndex(item => item.id === firstItemB.id);
+      return indexA - indexB;
+    });
+    
+    domainOrder.forEach(domain => {
+      sortedDomains[domain] = grouped[domain];
+    });
+    
+    return sortedDomains;
   }, [questionnaire.items]);
 
   const handleAnswerChange = (itemId: string, score: number) => {
@@ -267,6 +297,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, on
           scoring={questionnaire.scoring}
           questionnaire={questionnaire}
           answers={answersArrayForDisplay}
+          patient={patient}
         />
       );
     } catch (error) {

@@ -1,6 +1,6 @@
 
 import React, { useMemo } from 'react';
-import { Scoring, Questionnaire } from '../types';
+import { Scoring, Questionnaire, Patient } from '../types';
 import { analyzeResults } from '../utils/resultAnalysis';
 import CollapsibleTabs from './CollapsibleTabs';
 
@@ -12,9 +12,10 @@ interface ScoreDisplayProps {
   scoring: Scoring;
   questionnaire: Questionnaire;
   answers: Array<{ itemId: string; itemText: string; optionLabel?: string; score: number }>;
+  patient?: Patient | null;
 }
 
-const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ scoreData, scoring, questionnaire, answers }) => {
+const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ scoreData, scoring, questionnaire, answers, patient }) => {
   const analysis = useMemo(() => {
     try {
       if (!questionnaire || !answers || answers.length === 0) {
@@ -30,6 +31,33 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ scoreData, scoring, questio
   return (
     <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 md:p-8 mt-8 animate-fade-in">
       <h2 className="text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-4">Seu Resultado</h2>
+      
+      {/* Informações do Paciente */}
+      {patient && (
+        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 mb-6 border-l-4 border-blue-500">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Informações do Paciente</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-700 dark:text-gray-300">
+            <div>
+              <span className="font-medium">Nome:</span> {patient.nome}
+            </div>
+            <div>
+              <span className="font-medium">Idade:</span> {patient.idade} anos
+            </div>
+            <div>
+              <span className="font-medium">Sexo:</span> {patient.sexo}
+            </div>
+            {patient.ladoAcometido && patient.ladoAcometido !== 'Não se aplica' && (
+              <div>
+                <span className="font-medium">Lado Acometido:</span> {patient.ladoAcometido}
+              </div>
+            )}
+            <div className="md:col-span-2">
+              <span className="font-medium">Diagnóstico:</span> {patient.diagnostico || '-'}
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="text-center mb-6">
         <p className="text-lg text-gray-600 dark:text-gray-300">Pontuação Total Final</p>
         <p className="text-7xl font-extrabold text-gray-800 dark:text-white my-2">

@@ -91,36 +91,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
-// Route components that need questionnaires
-const RoutesWithQuestionnaires: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnaires }) => (
-  <>
-    <Route path="/patients" element={
-      <ProtectedRoute>
-        <ProfessionalView questionnaires={questionnaires} />
-      </ProtectedRoute>
-    } />
-    <Route path="/questionnaires" element={
-      <ProtectedRoute>
-        <QuestionnairesView questionnaires={questionnaires} />
-      </ProtectedRoute>
-    } />
-    <Route path="/report" element={
-      <ProtectedRoute>
-        <ReportView questionnaires={questionnaires} />
-      </ProtectedRoute>
-    } />
-    <Route path="/comparison" element={
-      <ProtectedRoute>
-        <ComparisonView questionnaires={questionnaires} />
-      </ProtectedRoute>
-    } />
-    <Route path="/validate" element={
-      <ProtectedRoute>
-        <ValidateView />
-      </ProtectedRoute>
-    } />
-  </>
-);
+// Removed RoutesWithQuestionnaires - routes are now inline
 
 const InnerApp: React.FC = () => {
   const { professionalId, setProfessionalId } = useAuth();
@@ -203,7 +174,31 @@ const InnerApp: React.FC = () => {
               <PrivacyPolicy onAccept={() => window.history.back()} />
             </ProtectedRoute>
           } />
-          <RoutesWithQuestionnaires questionnaires={questionnaires} />
+          <Route path="/patients" element={
+            <ProtectedRoute>
+              <ProfessionalView questionnaires={questionnaires} />
+            </ProtectedRoute>
+          } />
+          <Route path="/questionnaires" element={
+            <ProtectedRoute>
+              <QuestionnairesView questionnaires={questionnaires} />
+            </ProtectedRoute>
+          } />
+          <Route path="/report" element={
+            <ProtectedRoute>
+              <ReportView questionnaires={questionnaires} />
+            </ProtectedRoute>
+          } />
+          <Route path="/comparison" element={
+            <ProtectedRoute>
+              <ComparisonView questionnaires={questionnaires} />
+            </ProtectedRoute>
+          } />
+          <Route path="/validate" element={
+            <ProtectedRoute>
+              <ValidateView />
+            </ProtectedRoute>
+          } />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

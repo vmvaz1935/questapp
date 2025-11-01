@@ -63,6 +63,45 @@ npm run test:ui
 npm run test:coverage
 ```
 
+## 🚀 Deploy Rápido
+
+### Opção 1: Vercel (Recomendado) ⭐
+1. Acesse: https://vercel.com
+2. Faça login com GitHub
+3. Clique em "Add New Project"
+4. Selecione seu repositório
+5. Configure:
+   - Framework: **Vite**
+   - Build: `npm run build`
+   - Output: `dist`
+6. Clique em "Deploy"
+7. ✅ Pronto! Seu site estará online em minutos
+
+**Ou use CLI:**
+```bash
+npm i -g vercel
+vercel
+```
+
+### Opção 2: Netlify (Ótimo para PWA)
+1. Acesse: https://netlify.com
+2. Faça login com GitHub
+3. "Add new site" > "Import an existing project"
+4. Selecione repositório
+5. Configure:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+6. Deploy! ✅
+
+### Opção 3: GitHub Pages (Gratuito)
+1. No GitHub: Settings > Pages
+2. Selecione branch `main`
+3. Deploy via Actions (automatizado pelo workflow)
+
+**📖 Guia completo:** Ver `docs/DEPLOYMENT.md`
+
+---
+
 ## 📝 Scripts Disponíveis
 
 ```bash

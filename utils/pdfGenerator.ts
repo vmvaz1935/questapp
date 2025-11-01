@@ -183,38 +183,39 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
 
   const pageWidth = 210; // A4 width in mm
   const pageHeight = 297; // A4 height in mm
-  const margin = 15;
+  const margin = 20; // Aumentado margem para melhor legibilidade
   const contentWidth = pageWidth - 2 * margin;
   let yPosition = margin;
 
   // === CABEÇALHO ===
   doc.setFillColor(239, 246, 255); // Azul claro
-  doc.rect(0, 0, pageWidth, 35, 'F');
+  doc.rect(0, 0, pageWidth, 45, 'F'); // Aumentado altura do cabeçalho
 
   // Logo/Nome do App
-  doc.setFontSize(24);
+  doc.setFontSize(26);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(29, 78, 216); // Azul escuro
-  // Usar função helper para texto UTF-8
-  doc.text(ensureUTF8('FisioQ'), margin, yPosition + 15);
+  doc.text(ensureUTF8('FisioQ'), margin, yPosition + 18);
   
   // Badge Beta
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
   doc.setFillColor(254, 243, 199); // Laranja claro
   doc.setTextColor(234, 88, 12); // Laranja
-  const betaWidth = doc.getTextWidth('Beta');
-  doc.roundedRect(margin + 35, yPosition + 8, betaWidth + 4, 6, 3, 3, 'F');
-  doc.text('Beta', margin + 37, yPosition + 12);
+  const betaText = 'Beta';
+  const betaWidth = doc.getTextWidth(betaText) + 4;
+  doc.roundedRect(margin + 38, yPosition + 11, betaWidth, 7, 3, 3, 'F');
+  doc.text(betaText, margin + 40, yPosition + 15);
 
   // Subtítulo
-  doc.setFontSize(12);
+  doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(100, 116, 139);
-  doc.text(ensureUTF8('Questionários Clínicos'), margin, yPosition + 22);
+  doc.text(ensureUTF8('Questionários Clínicos'), margin, yPosition + 28);
 
   // Data de geração
-  doc.setFontSize(9);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'normal');
   doc.setTextColor(107, 114, 128);
   const date = new Date().toLocaleDateString('pt-BR', {
     day: '2-digit',
@@ -223,70 +224,96 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
     hour: '2-digit',
     minute: '2-digit'
   });
-  doc.text(ensureUTF8(`Gerado em: ${date}`), pageWidth - margin, yPosition + 25, { align: 'right' });
+  doc.text(ensureUTF8(`Gerado em: ${date}`), pageWidth - margin, yPosition + 32, { align: 'right' });
 
-  yPosition = 40;
+  // Linha separadora abaixo do cabeçalho
+  doc.setDrawColor(59, 130, 246);
+  doc.setLineWidth(0.5);
+  doc.line(margin, 45, pageWidth - margin, 45);
+
+  yPosition = 52;
 
   // === DADOS DO PACIENTE ===
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(17, 24, 39);
   doc.text(ensureUTF8('DADOS DO PACIENTE'), margin, yPosition);
 
+  yPosition += 10;
+
+  // Retângulo de fundo para dados do paciente com borda melhor
+  const patientDataHeight = 38;
+  doc.setFillColor(249, 250, 251);
+  doc.setDrawColor(203, 213, 225);
+  doc.setLineWidth(0.8);
+  doc.roundedRect(margin, yPosition, contentWidth, patientDataHeight, 2, 2, 'FD');
+
   yPosition += 8;
 
-  // Retângulo de fundo para dados do paciente
-  const patientDataHeight = 35;
-  doc.setFillColor(249, 250, 251);
-  doc.rect(margin, yPosition, contentWidth, patientDataHeight, 'F');
-  doc.setDrawColor(229, 231, 235);
-  doc.rect(margin, yPosition, contentWidth, patientDataHeight, 'S');
+  // Primeira linha: Nome (destaque)
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(17, 24, 39);
+  doc.text(ensureUTF8('Nome:'), margin + 5, yPosition);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(51, 65, 85);
+  const patientName = ensureUTF8(patient.nome || '-');
+  const nameLines = doc.splitTextToSize(patientName, contentWidth - 35);
+  doc.text(nameLines, margin + 22, yPosition);
+  const nameHeight = nameLines.length > 1 ? nameLines.length * 4.5 : 5;
+  yPosition += nameHeight + 2;
+
+  // Segunda linha: Idade e Sexo (lado a lado)
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(17, 24, 39);
+  doc.text(ensureUTF8('Idade:'), margin + 5, yPosition);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(51, 65, 85);
+  doc.text(ensureUTF8(`${patient.idade || '-'} anos`), margin + 22, yPosition);
+
+  doc.setFont('helvetica', 'bold');
+  doc.text(ensureUTF8('Sexo:'), margin + 65, yPosition);
+  doc.setFont('helvetica', 'normal');
+  doc.text(ensureUTF8(patient.sexo || '-'), margin + 78, yPosition);
 
   yPosition += 7;
 
-  doc.setFontSize(11);
+  // Terceira linha: Diagnóstico
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(17, 24, 39);
-  doc.text(ensureUTF8('Nome:'), margin + 3, yPosition);
+  doc.text(ensureUTF8('Diagnóstico:'), margin + 5, yPosition);
   doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(patient.nome || '-'), margin + 20, yPosition);
+  doc.setTextColor(51, 65, 85);
+  const diagnostico = ensureUTF8(patient.diagnostico || '-');
+  const diagLines = doc.splitTextToSize(diagnostico, contentWidth - 45);
+  doc.text(diagLines, margin + 35, yPosition);
+  const diagHeight = diagLines.length > 1 ? diagLines.length * 4.5 : 5;
+  yPosition += diagHeight + 2;
 
-  yPosition += 6;
-  doc.setFont('helvetica', 'bold');
-  doc.text(ensureUTF8('Idade:'), margin + 3, yPosition);
-  doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(`${patient.idade || '-'} anos`), margin + 20, yPosition);
-
-  doc.setFont('helvetica', 'bold');
-  doc.text(ensureUTF8('Sexo:'), margin + 60, yPosition);
-  doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(patient.sexo || '-'), margin + 75, yPosition);
-
-  yPosition += 6;
-  doc.setFont('helvetica', 'bold');
-  doc.text(ensureUTF8('Diagnóstico:'), margin + 3, yPosition);
-  doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(patient.diagnostico || '-'), margin + 30, yPosition);
-
+  // Quarta linha: Lado acometido (se aplicável)
   if (patient.ladoAcometido && patient.ladoAcometido !== 'Não se aplica') {
     doc.setFont('helvetica', 'bold');
-    doc.text(ensureUTF8('Lado acometido:'), margin + 120, yPosition);
+    doc.text(ensureUTF8('Lado acometido:'), margin + 5, yPosition);
     doc.setFont('helvetica', 'normal');
-    doc.text(ensureUTF8(patient.ladoAcometido), margin + 155, yPosition);
+    doc.text(ensureUTF8(patient.ladoAcometido), margin + 42, yPosition);
+    yPosition += 6;
   }
 
-  yPosition += 6;
+  // Quinta linha: Fisioterapeuta e Médico
   doc.setFont('helvetica', 'bold');
-  doc.text(ensureUTF8('Fisioterapeuta:'), margin + 3, yPosition);
+  doc.text(ensureUTF8('Fisioterapeuta:'), margin + 5, yPosition);
   doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(patient.fisioterapeuta || '-'), margin + 40, yPosition);
+  doc.text(ensureUTF8(patient.fisioterapeuta || '-'), margin + 42, yPosition);
 
-  doc.setFont('helvetica', 'bold');
-  doc.text(ensureUTF8('Médico:'), margin + 110, yPosition);
-  doc.setFont('helvetica', 'normal');
-  doc.text(ensureUTF8(patient.medico || '-'), margin + 130, yPosition);
+  if (patient.medico) {
+    doc.setFont('helvetica', 'bold');
+    doc.text(ensureUTF8('Médico:'), margin + 110, yPosition);
+    doc.setFont('helvetica', 'normal');
+    doc.text(ensureUTF8(patient.medico), margin + 128, yPosition);
+  }
 
-  yPosition += 15;
+  yPosition += 12;
 
   // === RESULTADOS DOS QUESTIONÁRIOS ===
   doc.setFontSize(16);
@@ -337,69 +364,79 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
 
     yPosition += 8;
 
-    // Box do resultado
-    const resultBoxHeight = 50;
+    // Box do resultado com melhor formatação
+    const resultBoxHeight = 55;
     doc.setFillColor(255, 255, 255);
-    doc.rect(margin, yPosition, contentWidth, resultBoxHeight, 'F');
-    doc.setDrawColor(229, 231, 235);
-    doc.setLineWidth(0.5);
-    doc.rect(margin, yPosition, contentWidth, resultBoxHeight, 'S');
+    doc.setDrawColor(203, 213, 225);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(margin, yPosition, contentWidth, resultBoxHeight, 3, 3, 'FD');
 
-    // Gráfico de pizza (lado direito)
-    const chartX = pageWidth - margin - 25;
+    // Gráfico de pizza (lado direito) - maior e melhor posicionado
+    const chartX = pageWidth - margin - 30;
     const chartY = yPosition + resultBoxHeight / 2;
-    drawDonutChart(doc, chartX, chartY, 12, percentage, 'Resultado');
+    drawDonutChart(doc, chartX, chartY, 14, percentage, 'Resultado');
 
-    // Pontuação total (lado esquerdo)
-    const scoreX = margin + 5;
-    const scoreY = yPosition + 15;
+    // Pontuação total (lado esquerdo) - melhor formatada
+    const scoreX = margin + 8;
+    const scoreY = yPosition + 18;
     
-    doc.setFontSize(14);
+    doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(17, 24, 39);
+    doc.setTextColor(75, 85, 99);
     doc.text(ensureUTF8('Pontuação Total:'), scoreX, scoreY);
 
-    doc.setFontSize(16);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
     doc.setTextColor(29, 78, 216);
     const scoreText = `${result.totalScore.toFixed(2)}${result.isPercent ? '%' : ''}`;
-    doc.text(scoreText, scoreX, scoreY + 8);
+    doc.text(scoreText, scoreX, scoreY + 10);
 
     if (!result.isPercent && percentage > 0) {
-      doc.setFontSize(10);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
       doc.setTextColor(107, 114, 128);
-      doc.text(`(${percentage.toFixed(1)}%)`, scoreX + 35, scoreY + 8);
+      doc.text(`(${percentage.toFixed(1)}% do máximo)`, scoreX, scoreY + 18);
     }
 
-    // Domínios (se disponíveis)
+    // Domínios (se disponíveis) - melhor formatado
     if (result.domainScores && Object.keys(result.domainScores).length > 0) {
-      let domainsY = scoreY + 12;
+      let domainsY = scoreY + 28;
+      
+      // Linha separadora sutil
+      doc.setDrawColor(229, 231, 235);
+      doc.setLineWidth(0.3);
+      doc.line(margin + 8, domainsY - 2, margin + contentWidth - 40, domainsY - 2);
+      
       doc.setFontSize(9);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(75, 85, 99);
-      doc.text(ensureUTF8('Domínios:'), scoreX, domainsY);
+      doc.text(ensureUTF8('Pontuação por Domínio:'), scoreX, domainsY + 2);
 
-      domainsY += 5;
+      domainsY += 6;
       let domainX = scoreX;
       const domains = Object.entries(result.domainScores);
+      const maxDomainsPerLine = 2; // 2 domínios por linha para melhor legibilidade
+      let domainCount = 0;
+      
       domains.forEach(([domain, score], idx) => {
         if (yPosition + resultBoxHeight > pageHeight - 15) {
-          // Não adicionar domínios se não houver espaço
           return;
         }
         
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.setTextColor(107, 114, 128);
-        const domainText = `${domain}: ${Number(score).toFixed(2)}`;
+        const domainText = ensureUTF8(`${domain}: ${Number(score).toFixed(2)}`);
         
-        // Quebrar linha se necessário
-        if (domainX + 70 > pageWidth - margin - 35) {
+        // Quebrar linha a cada 2 domínios
+        if (domainCount > 0 && domainCount % maxDomainsPerLine === 0) {
           domainX = scoreX;
           domainsY += 5;
         }
         
-        doc.text(ensureUTF8(domainText), domainX, domainsY);
-        domainX += 70;
+        doc.text(domainText, domainX, domainsY);
+        domainX += 85; // Espaçamento maior entre domínios
+        domainCount++;
       });
     }
 
@@ -411,87 +448,120 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
       
       if (analysis.positive.length > 0 || analysis.negative.length > 0) {
         // Verificar se precisa de nova página
-        if (yPosition > pageHeight - 60) {
+        if (yPosition > pageHeight - 70) {
           doc.addPage();
           yPosition = margin;
         }
 
-        doc.setFontSize(11);
+        // Espaçamento antes da seção
+        yPosition += 3;
+
+        doc.setFontSize(12);
         doc.setFont('helvetica', 'bold');
         doc.setTextColor(17, 24, 39);
         doc.text(ensureUTF8('ANÁLISE DE RESULTADOS'), margin, yPosition);
-        yPosition += 8;
+        
+        // Linha separadora
+        doc.setDrawColor(203, 213, 225);
+        doc.setLineWidth(0.5);
+        doc.line(margin, yPosition + 3, pageWidth - margin, yPosition + 3);
+        
+        yPosition += 10;
 
         // Pontos Positivos
         if (analysis.positive.length > 0) {
           const maxPositivePoints = Math.min(analysis.positive.length, 8);
-          let estimatedHeight = maxPositivePoints * 5 + 10;
           
-          // Box para pontos positivos
+          // Calcular altura real baseado no texto
+          let totalHeight = 15; // Header
+          analysis.positive.slice(0, maxPositivePoints).forEach((point: string) => {
+            const pointText = ensureUTF8(`• ${point}`);
+            const pointLines = doc.splitTextToSize(pointText, contentWidth - 12);
+            totalHeight += pointLines.length * 4.5 + 2;
+          });
+          totalHeight += 3; // Padding bottom
+          
+          // Box para pontos positivos com bordas arredondadas
           doc.setFillColor(240, 253, 244); // Verde claro
-          doc.rect(margin, yPosition, contentWidth, estimatedHeight, 'F');
           doc.setDrawColor(34, 197, 94); // Verde
-          doc.setLineWidth(0.5);
-          doc.rect(margin, yPosition, contentWidth, estimatedHeight, 'S');
+          doc.setLineWidth(0.8);
+          doc.roundedRect(margin, yPosition, contentWidth, totalHeight, 3, 3, 'FD');
           
           doc.setFontSize(10);
           doc.setFont('helvetica', 'bold');
           doc.setTextColor(22, 163, 74); // Verde escuro
-          doc.text(ensureUTF8('✓ Pontos Pertinentes Positivos'), margin + 3, yPosition + 6);
+          doc.text(ensureUTF8('✓ Pontos Pertinentes Positivos'), margin + 5, yPosition + 8);
           
-          let posY = yPosition + 10;
+          // Linha separadora sutil
+          doc.setDrawColor(134, 239, 172);
+          doc.setLineWidth(0.3);
+          doc.line(margin + 3, yPosition + 12, pageWidth - margin - 3, yPosition + 12);
+          
+          let posY = yPosition + 16;
           analysis.positive.slice(0, maxPositivePoints).forEach((point: string) => {
-            if (posY > yPosition + estimatedHeight - 3) return;
+            if (posY > yPosition + totalHeight - 3) return;
             
             doc.setFontSize(9);
             doc.setFont('helvetica', 'normal');
-            doc.setTextColor(75, 85, 99);
+            doc.setTextColor(51, 65, 85);
             const pointText = ensureUTF8(`• ${point}`);
-            const pointLines = doc.splitTextToSize(pointText, contentWidth - 10);
-            doc.text(pointLines, margin + 5, posY);
-            posY += pointLines.length * 4 + 1;
+            const pointLines = doc.splitTextToSize(pointText, contentWidth - 12);
+            doc.text(pointLines, margin + 7, posY);
+            posY += pointLines.length * 4.5 + 2;
           });
           
-          yPosition += estimatedHeight + 5;
+          yPosition += totalHeight + 8;
         }
 
         // Pontos Negativos
         if (analysis.negative.length > 0) {
           // Verificar se precisa de nova página
-          if (yPosition > pageHeight - 60) {
+          if (yPosition > pageHeight - 70) {
             doc.addPage();
             yPosition = margin;
           }
 
           const maxNegativePoints = Math.min(analysis.negative.length, 8);
-          let estimatedHeight = maxNegativePoints * 5 + 10;
           
-          // Box para pontos negativos
+          // Calcular altura real baseado no texto
+          let totalHeight = 15; // Header
+          analysis.negative.slice(0, maxNegativePoints).forEach((point: string) => {
+            const pointText = ensureUTF8(`• ${point}`);
+            const pointLines = doc.splitTextToSize(pointText, contentWidth - 12);
+            totalHeight += pointLines.length * 4.5 + 2;
+          });
+          totalHeight += 3; // Padding bottom
+          
+          // Box para pontos negativos com bordas arredondadas
           doc.setFillColor(254, 242, 242); // Vermelho claro
-          doc.rect(margin, yPosition, contentWidth, estimatedHeight, 'F');
           doc.setDrawColor(239, 68, 68); // Vermelho
-          doc.setLineWidth(0.5);
-          doc.rect(margin, yPosition, contentWidth, estimatedHeight, 'S');
+          doc.setLineWidth(0.8);
+          doc.roundedRect(margin, yPosition, contentWidth, totalHeight, 3, 3, 'FD');
           
           doc.setFontSize(10);
           doc.setFont('helvetica', 'bold');
           doc.setTextColor(220, 38, 38); // Vermelho escuro
-          doc.text(ensureUTF8('⚠ Pontos Pertinentes Negativos'), margin + 3, yPosition + 6);
+          doc.text(ensureUTF8('⚠ Pontos Pertinentes Negativos'), margin + 5, yPosition + 8);
           
-          let negY = yPosition + 10;
+          // Linha separadora sutil
+          doc.setDrawColor(252, 165, 165);
+          doc.setLineWidth(0.3);
+          doc.line(margin + 3, yPosition + 12, pageWidth - margin - 3, yPosition + 12);
+          
+          let negY = yPosition + 16;
           analysis.negative.slice(0, maxNegativePoints).forEach((point: string) => {
-            if (negY > yPosition + estimatedHeight - 3) return;
+            if (negY > yPosition + totalHeight - 3) return;
             
             doc.setFontSize(9);
             doc.setFont('helvetica', 'normal');
-            doc.setTextColor(75, 85, 99);
+            doc.setTextColor(51, 65, 85);
             const pointText = ensureUTF8(`• ${point}`);
-            const pointLines = doc.splitTextToSize(pointText, contentWidth - 10);
-            doc.text(pointLines, margin + 5, negY);
-            negY += pointLines.length * 4 + 1;
+            const pointLines = doc.splitTextToSize(pointText, contentWidth - 12);
+            doc.text(pointLines, margin + 7, negY);
+            negY += pointLines.length * 4.5 + 2;
           });
           
-          yPosition += estimatedHeight + 5;
+          yPosition += totalHeight + 8;
         }
 
         yPosition += 5;
@@ -504,32 +574,35 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
     // Interpretação
     if (questionnaire.scoring?.interpretation) {
       // Verificar se precisa de nova página
-      if (yPosition > pageHeight - 40) {
+      if (yPosition > pageHeight - 50) {
         doc.addPage();
         yPosition = margin;
       }
 
-      doc.setFontSize(10);
+      yPosition += 3;
+
+      doc.setFontSize(11);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(29, 78, 216);
       doc.text(ensureUTF8('Interpretação:'), margin, yPosition);
       
-      yPosition += 6;
+      yPosition += 7;
       
-      // Box para interpretação
+      // Box para interpretação com bordas arredondadas
+      const interpText = ensureUTF8(questionnaire.scoring.interpretation);
+      const interpLines = doc.splitTextToSize(interpText, contentWidth - 12);
+      const interpHeight = interpLines.length * 4.5 + 8;
+      
       doc.setFillColor(239, 246, 255); // Azul muito claro
       doc.setDrawColor(59, 130, 246); // Azul
-      doc.setLineWidth(0.3);
-      const interpText = ensureUTF8(questionnaire.scoring.interpretation);
-      const interpLines = doc.splitTextToSize(interpText, contentWidth - 10);
-      const interpHeight = interpLines.length * 4 + 6;
-      doc.rect(margin, yPosition - 2, contentWidth, interpHeight, 'FD');
+      doc.setLineWidth(0.6);
+      doc.roundedRect(margin, yPosition - 2, contentWidth, interpHeight, 3, 3, 'FD');
       
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      doc.setTextColor(75, 85, 99);
-      doc.text(interpLines, margin + 3, yPosition + 2);
-      yPosition += interpHeight + 5;
+      doc.setTextColor(51, 65, 85);
+      doc.text(interpLines, margin + 5, yPosition + 3);
+      yPosition += interpHeight + 8;
     }
 
     // Informações sobre o questionário (metadata) - resumido

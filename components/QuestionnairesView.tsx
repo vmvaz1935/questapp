@@ -110,7 +110,11 @@ const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
           </div>
           <button onClick={() => setActiveQ(null)} className="text-sm px-3 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600">Voltar</button>
         </div>
-        <QuestionnaireForm questionnaire={activeQ} onSaved={(data)=>handleSaved({ ...data, patientId: selectedPatientId, questionnaireId: activeQ.id })} />
+        <QuestionnaireForm 
+          questionnaire={activeQ} 
+          patient={patient || null}
+          onSaved={(data)=>handleSaved({ ...data, patientId: selectedPatientId, questionnaireId: activeQ.id })} 
+        />
       </div>
     );
   }
