@@ -1,17 +1,16 @@
 import React from 'react';
-import { 
-  HiOutlineSparkles,  // Coluna - símbolo de energia/força
-  HiOutlineAcademicCap, // Ombro - representação de força/suporte
-  HiOutlineBeaker,    // Cotovelo - representação técnica
-  HiOutlineCube,      // Punho/Mão - estrutura sólida
-  HiOutlineCubeTransparent, // Mão - estrutura delicada
-  HiOutlineBolt,     // Membro inferior - movimento/power
-  HiOutlineFire,      // Joelho - energia/movimento
-  HiOutlineHeart,     // Quadril - central/core
-  HiOutlineGlobeAlt,  // Tornozelo/Pé - conexão com solo
-  HiOutlineExclamationTriangle, // OA - atenção/cuidado
-  HiOutlineUser      // Outros - genérico
-} from 'react-icons/hi2';
+import {
+  // Ícones anatômicos específicos da biblioteca Gi (Game Icons)
+  GiBoneKnife,       // Coluna vertebral - osso/espinha
+  GiShoulderBag,     // Ombro - bolsa de ombro
+  GiElbowPad,        // Cotovelo - proteção de cotovelo
+  GiHand,            // Mão/Punho - mão
+  GiLegArmor,        // Joelho - proteção de joelho
+  GiLeg,             // Membro inferior - perna
+  GiPerson,          // Quadril/Outros - representação de pessoa/torso
+  GiBarefoot,        // Tornozelo/Pé - pé descalço
+  GiBrokenBone       // OA/Problemas - osso quebrado
+} from 'react-icons/gi';
 
 const color = (name: string) => ({
   'Coluna': '#10B981',
@@ -27,19 +26,19 @@ const color = (name: string) => ({
   'Outros': '#6B7280'
 }[name] || '#6B7280');
 
-// Mapeamento de categorias para ícones modernos
+// Mapeamento de categorias para ícones anatômicos específicos
 const IconComponents: Record<string, React.ComponentType<any>> = {
-  'Coluna': HiOutlineSparkles,           // Energia e vitalidade da coluna
-  'Ombro': HiOutlineAcademicCap,          // Força e suporte do ombro
-  'Cotovelo': HiOutlineBeaker,            // Precisão técnica do cotovelo
-  'Punho': HiOutlineCube,                  // Estrutura sólida do punho
-  'Mão': HiOutlineCubeTransparent,         // Precisão e delicadeza da mão
-  'Membro inferior (geral)': HiOutlineBolt, // Movimento e potência
-  'Joelho': HiOutlineFire,                 // Energia e flexibilidade do joelho
-  'Quadril': HiOutlineHeart,              // Centro/core do corpo
-  'Tornozelo/Pé': HiOutlineGlobeAlt,      // Base e conexão
-  'Joelho/Quadril (OA)': HiOutlineExclamationTriangle, // Atenção/cuidado para OA
-  'Outros': HiOutlineUser                  // Ícone genérico
+  'Coluna': GiBoneKnife,                   // Ícone de coluna vertebral (osso/espinha)
+  'Ombro': GiShoulderBag,                  // Ícone de ombro
+  'Cotovelo': GiElbowPad,                  // Ícone de cotovelo
+  'Punho': GiHand,                         // Ícone de punho (mão)
+  'Mão': GiHand,                           // Ícone de mão
+  'Membro inferior (geral)': GiLeg,       // Ícone de perna/membro inferior
+  'Joelho': GiLegArmor,                    // Ícone de joelho (perneira)
+  'Quadril': GiPerson,                     // Ícone de quadril (representação de pessoa/torso)
+  'Tornozelo/Pé': GiBarefoot,             // Ícone de pé/tornozelo (pé descalço)
+  'Joelho/Quadril (OA)': GiBrokenBone,    // Ícone para OA (osso quebrado)
+  'Outros': GiPerson                       // Ícone genérico de pessoa
 };
 
 const BodySticker: React.FC<{ category: string; size?: number }>= ({ category, size=40 }) => {
@@ -62,10 +61,10 @@ const BodySticker: React.FC<{ category: string; size?: number }>= ({ category, s
     >
       {IconComponent && (
         <IconComponent 
-          size={Math.floor(size * 0.55)} 
+          size={Math.floor(size * 0.65)} 
           style={{ 
             color: '#fff',
-            strokeWidth: 2
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
           }} 
         />
       )}
