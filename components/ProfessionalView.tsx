@@ -92,62 +92,63 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
   };
 
   return (
-    <div className="max-w-5xl mx-auto py-8 px-4">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white flex items-center justify-center gap-3">
-          FisioQ <span className="text-lg font-normal text-orange-600 bg-orange-100 dark:bg-orange-900/30 dark:text-orange-400 px-3 py-1 rounded-full">Beta</span>
+    <div className="max-w-5xl mx-auto py-4 sm:py-8 px-4 sm:px-6">
+      <div className="text-center mb-6 sm:mb-12">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+          <span>FisioQ</span>
+          <span className="text-sm sm:text-lg font-normal text-orange-600 bg-orange-100 dark:bg-orange-900/30 dark:text-orange-400 px-2 sm:px-3 py-1 rounded-full">Beta</span>
         </h1>
-        <p className="mt-2 text-base text-gray-500 dark:text-gray-400">Cadastre pacientes e acompanhe escalas clínicas.</p>
+        <p className="mt-2 text-sm sm:text-base text-gray-500 dark:text-gray-400">Cadastre pacientes e acompanhe escalas clínicas.</p>
         
         {/* Plano e uso */}
-        <div className="mt-4 flex items-center justify-center gap-4 flex-wrap">
-          <div className={`px-4 py-2 rounded-lg font-semibold ${
+        <div className="mt-4 flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
+          <div className={`px-3 sm:px-4 py-2 rounded-lg font-semibold text-sm sm:text-base min-h-[44px] flex items-center ${
             plan === 'pro' 
               ? 'bg-blue-600 text-white' 
               : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
           }`}>
             Plano: {plan === 'pro' ? 'Pro' : 'Gratuito'}
           </div>
-          <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <span className="text-sm text-gray-700 dark:text-gray-300">
+          <div className="px-3 sm:px-4 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 min-h-[44px] flex items-center">
+            <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
               Pacientes: {patients.length} / {maxPatients === null ? '∞' : maxPatients}
             </span>
           </div>
           {plan === 'free' && (
             <button
               onClick={() => setShowPaymentModal(true)}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 sm:px-5 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg font-semibold text-sm sm:text-base transition-colors min-h-[44px] flex items-center"
             >
               Upgrade para Pro
             </button>
           )}
         </div>
         
-        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500 max-w-2xl mx-auto">
-          <p className="text-sm text-gray-700 dark:text-gray-300">
+        <div className="mt-4 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500 max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
             🔒 <strong>Confidencialidade:</strong> Todos os dados são armazenados localmente no seu navegador. 
             É sua responsabilidade manter o dispositivo seguro e obter consentimento dos pacientes conforme a LGPD.
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Cadastro de Paciente */}
-        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Cadastrar Paciente</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 sm:p-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Cadastrar Paciente</h2>
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Nome completo</label>
-              <input value={form.nome || ''} onChange={e=>handleChange('nome', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700" required/>
+              <label className="block text-sm font-medium mb-1.5">Nome completo</label>
+              <input value={form.nome || ''} onChange={e=>handleChange('nome', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base" required/>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Idade</label>
-                <input type="number" min={0} value={form.idade ?? ''} onChange={e=>handleChange('idade', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700" required/>
+                <label className="block text-sm font-medium mb-1.5">Idade</label>
+                <input type="number" min={0} value={form.idade ?? ''} onChange={e=>handleChange('idade', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base" required/>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Sexo</label>
-                <select value={form.sexo} onChange={e=>handleChange('sexo', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700">
+                <label className="block text-sm font-medium mb-1.5">Sexo</label>
+                <select value={form.sexo} onChange={e=>handleChange('sexo', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base">
                   <option>Masculino</option>
                   <option>Feminino</option>
                   <option>Outro</option>
@@ -156,13 +157,13 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Diagnóstico</label>
-              <input value={form.diagnostico || ''} onChange={e=>handleChange('diagnostico', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700" required/>
+              <label className="block text-sm font-medium mb-1.5">Diagnóstico</label>
+              <input value={form.diagnostico || ''} onChange={e=>handleChange('diagnostico', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base" required/>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Lado acometido</label>
-                <select value={form.ladoAcometido} onChange={e=>handleChange('ladoAcometido', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700">
+                <label className="block text-sm font-medium mb-1.5">Lado acometido</label>
+                <select value={form.ladoAcometido} onChange={e=>handleChange('ladoAcometido', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base">
                   <option>Não se aplica</option>
                   <option>Direito</option>
                   <option>Esquerdo</option>
@@ -170,35 +171,35 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Fisioterapeuta</label>
-                <input value={form.fisioterapeuta || ''} onChange={e=>handleChange('fisioterapeuta', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700"/>
+                <label className="block text-sm font-medium mb-1.5">Fisioterapeuta</label>
+                <input value={form.fisioterapeuta || ''} onChange={e=>handleChange('fisioterapeuta', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base"/>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Médico</label>
-              <input value={form.medico || ''} onChange={e=>handleChange('medico', e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 dark:bg-gray-700"/>
+              <label className="block text-sm font-medium mb-1.5">Médico</label>
+              <input value={form.medico || ''} onChange={e=>handleChange('medico', e.target.value)} className="w-full rounded-lg border border-gray-300 p-3 dark:bg-gray-700 min-h-[44px] text-base"/>
             </div>
-            <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 rounded-lg p-3">Salvar Paciente</button>
+            <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg p-3 sm:p-4 min-h-[44px] text-base sm:text-lg font-semibold transition-colors">Salvar Paciente</button>
           </form>
         </div>
 
         {/* Lista de Pacientes */}
-        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Pacientes Cadastrados</h2>
+        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 sm:p-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Pacientes Cadastrados</h2>
           {patients.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400">Nenhum paciente ainda.</p>
+            <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">Nenhum paciente ainda.</p>
           ) : (
             <ul className="space-y-3">
               {patients.map(p => (
-                <li key={p.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 flex items-start justify-between">
-                  <div>
-                    <p className="font-semibold">{p.nome} <span className="text-gray-500 font-normal">({p.idade} anos • {p.sexo})</span></p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Diag.: {p.diagnostico} {p.ladoAcometido && `• Lado: ${p.ladoAcometido}`}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Fisio: {p.fisioterapeuta || '-'} • Médico: {p.medico || '-'}</p>
+                <li key={p.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm sm:text-base break-words">{p.nome} <span className="text-gray-500 font-normal">({p.idade} anos • {p.sexo})</span></p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1 break-words">Diag.: {p.diagnostico} {p.ladoAcometido && `• Lado: ${p.ladoAcometido}`}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1 break-words">Fisio: {p.fisioterapeuta || '-'} • Médico: {p.medico || '-'}</p>
                   </div>
                   <button
                     onClick={()=> setPatients(prev => prev.filter(x => x.id !== p.id))}
-                    className="text-red-600 hover:text-red-700 text-sm"
+                    className="text-red-600 hover:text-red-700 active:text-red-800 text-sm sm:text-base font-medium px-3 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors flex-shrink-0"
                     aria-label={`Excluir paciente ${p.nome}`}>
                     Excluir
                   </button>
@@ -210,8 +211,8 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
       </div>
 
       {/* Questionários disponíveis por categoria */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mt-8">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Questionários por parte do corpo</h2>
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 sm:p-6 mt-6 sm:mt-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Questionários por parte do corpo</h2>
         {questionnaires.length === 0 ? (
           <p className="text-gray-500 dark:text-gray-400">Nenhum questionário publicado.</p>
         ) : (

@@ -322,20 +322,20 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
   return (
     <div className="mt-6 animate-fade-in">
       {/* Barra de progresso */}
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 mb-4">
-        <div className="flex items-center justify-between mb-2">
-          <p className="text-sm text-gray-600 dark:text-gray-300">Progresso: {answeredCount}/{totalItems} ({progressPct}%)</p>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Todas as perguntas</p>
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-3 sm:p-4 mb-4">
+        <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Progresso: {answeredCount}/{totalItems} ({progressPct}%)</p>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Todas as perguntas</p>
         </div>
-        <div className="w-full h-2 rounded bg-gray-200 dark:bg-gray-700 overflow-hidden">
-          <div className="h-2 bg-blue-600" style={{ width: `${progressPct}%` }} />
+        <div className="w-full h-2 sm:h-3 rounded bg-gray-200 dark:bg-gray-700 overflow-hidden">
+          <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${progressPct}%` }} />
         </div>
       </div>
       {/* Cabeçalho do questionário */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-6 border-l-4 border-blue-600">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{questionnaire.name} ({questionnaire.acronym})</h2>
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-4">
-          <p className="text-gray-700 dark:text-gray-300 font-medium leading-relaxed">{questionnaire.instructions.text}</p>
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border-l-4 border-blue-600">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">{questionnaire.name} ({questionnaire.acronym})</h2>
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 sm:p-4 mt-3 sm:mt-4">
+          <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium leading-relaxed">{questionnaire.instructions.text}</p>
         </div>
       </div>
       
@@ -365,64 +365,66 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                   : answers[item.id] !== undefined;
                 
                 return (
-                  <div key={item.id} className={`bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 transition-all ${isAnswered ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-300'}`}>
-                    <p className="text-base font-semibold text-gray-800 dark:text-white mb-4 leading-relaxed">
-                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold mr-3">
+                  <div key={item.id} className={`bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 sm:p-6 transition-all ${isAnswered ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-300'}`}>
+                    <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-white mb-3 sm:mb-4 leading-relaxed">
+                      <span className="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-600 text-white text-xs sm:text-sm font-bold mr-2 sm:mr-3 flex-shrink-0">
                         {index + 1}
                       </span>
                       {item.text}
                     </p>
                     
                     {item.format === 'table' && item.subitems ? (
-                      <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="bg-gray-50 dark:bg-gray-900">
-                              <th className="border border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Atividade</th>
-                              {item.subitems[0]?.options.map((opt, optIdx) => (
-                                <th key={optIdx} className="border border-gray-300 dark:border-gray-700 p-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300">
-                                  <div>{opt.label}</div>
-                                  <div className="text-gray-500 dark:text-gray-400 mt-1">({opt.score})</div>
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {item.subitems.map((subitem) => {
-                              const subIsAnswered = answers[subitem.id] !== undefined;
-                              return (
-                                <tr key={subitem.id} className={`hover:bg-gray-50 dark:hover:bg-gray-900/50 ${subIsAnswered ? 'bg-blue-50/30 dark:bg-blue-900/20' : ''}`}>
-                                  <td className="border border-gray-300 dark:border-gray-700 p-3 text-sm font-medium text-gray-800 dark:text-white">
-                                    {subitem.text}
-                                  </td>
-                                  {subitem.options.map((option) => {
-                                    const isSelected = answers[subitem.id] === option.score;
-                                    return (
-                                      <td key={option.score} className="border border-gray-300 dark:border-gray-700 p-2 text-center">
-                                        <label className={`flex items-center justify-center p-2 rounded cursor-pointer transition-all ${
-                                          isSelected
-                                            ? 'bg-blue-600 text-white shadow-md'
-                                            : 'bg-gray-50 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900/30'
-                                        }`}>
-                                          <input
-                                            type="radio"
-                                            name={subitem.id}
-                                            value={option.score}
-                                            checked={isSelected}
-                                            onChange={() => handleAnswerChange(subitem.id, option.score)}
-                                            className="sr-only"
-                                            aria-label={`${subitem.text}: ${option.label}`}
-                                          />
-                                          <span className="text-sm font-medium">{option.label}</span>
-                                        </label>
-                                      </td>
-                                    );
-                                  })}
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
+                      <div className="overflow-x-auto -mx-6 sm:mx-0 pb-2">
+                        <div className="min-w-full inline-block align-middle">
+                          <table className="w-full border-collapse text-sm sm:text-base">
+                            <thead>
+                              <tr className="bg-gray-50 dark:bg-gray-900">
+                                <th className="border border-gray-300 dark:border-gray-700 p-2 sm:p-3 text-left text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 sticky left-0 bg-gray-50 dark:bg-gray-900 z-10">Atividade</th>
+                                {item.subitems[0]?.options.map((opt, optIdx) => (
+                                  <th key={optIdx} className="border border-gray-300 dark:border-gray-700 p-2 sm:p-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 min-w-[80px] sm:min-w-[100px]">
+                                    <div className="break-words">{opt.label}</div>
+                                    <div className="text-gray-500 dark:text-gray-400 mt-1">({opt.score})</div>
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {item.subitems.map((subitem) => {
+                                const subIsAnswered = answers[subitem.id] !== undefined;
+                                return (
+                                  <tr key={subitem.id} className={`hover:bg-gray-50 dark:hover:bg-gray-900/50 ${subIsAnswered ? 'bg-blue-50/30 dark:bg-blue-900/20' : ''}`}>
+                                    <td className="border border-gray-300 dark:border-gray-700 p-2 sm:p-3 text-xs sm:text-sm font-medium text-gray-800 dark:text-white sticky left-0 bg-white dark:bg-gray-800 z-10 max-w-[200px] sm:max-w-none">
+                                      {subitem.text}
+                                    </td>
+                                    {subitem.options.map((option) => {
+                                      const isSelected = answers[subitem.id] === option.score;
+                                      return (
+                                        <td key={option.score} className="border border-gray-300 dark:border-gray-700 p-1 sm:p-2 text-center">
+                                          <label className={`flex items-center justify-center p-2 sm:p-3 rounded cursor-pointer transition-all min-h-[44px] min-w-[44px] ${
+                                            isSelected
+                                              ? 'bg-blue-600 text-white shadow-md'
+                                              : 'bg-gray-50 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 active:bg-blue-200 dark:active:bg-blue-900/50'
+                                          }`}>
+                                            <input
+                                              type="radio"
+                                              name={subitem.id}
+                                              value={option.score}
+                                              checked={isSelected}
+                                              onChange={() => handleAnswerChange(subitem.id, option.score)}
+                                              className="sr-only"
+                                              aria-label={`${subitem.text}: ${option.label}`}
+                                            />
+                                            <span className="text-xs sm:text-sm font-medium">{option.label}</span>
+                                          </label>
+                                        </td>
+                                      );
+                                    })}
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     ) : item.format === 'dual_scale' && item.subitems ? (
                       <div className="space-y-6">
@@ -451,13 +453,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                         type="button"
                                         onClick={() => handleAnswerChange(subitem.id, option.score)}
                                         disabled={subitem.not_scored}
-                                        className={`flex-1 h-10 rounded-lg border-2 transition-all ${
+                                        className={`flex-1 min-h-[44px] rounded-lg border-2 transition-all text-sm sm:text-base ${
                                           isSelected
                                             ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                                            : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400'
+                                            : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400 active:bg-blue-50 dark:active:bg-blue-900/30'
                                         } ${subitem.not_scored ? 'opacity-75 cursor-default' : 'cursor-pointer'}`}
                                       >
-                                        <span className="text-sm font-medium">{option.label}</span>
+                                        <span className="text-sm sm:text-base font-medium px-2 break-words">{option.label}</span>
                                       </button>
                                     );
                                   })}
@@ -508,7 +510,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                           return (
                             <label
                               key={option.label}
-                              className={`flex items-center p-4 rounded-lg border-2 transition-all cursor-pointer ${
+                              className={`flex items-center p-3 sm:p-4 rounded-lg border-2 transition-all cursor-pointer min-h-[44px] active:bg-blue-100 dark:active:bg-blue-900/40 ${
                                 isSelected
                                   ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500 shadow-md'
                                   : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20'
@@ -520,9 +522,9 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                 value={option.score}
                                 checked={isSelected}
                                 onChange={() => handleAnswerChange(item.id, option.score)}
-                                className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex-shrink-0"
                               />
-                              <span className={`ml-4 text-base flex-1 ${isSelected ? 'font-semibold text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'}`}>
+                              <span className={`ml-3 sm:ml-4 text-sm sm:text-base flex-1 ${isSelected ? 'font-semibold text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'}`}>
                                 {option.label}
                               </span>
                             </label>
@@ -537,13 +539,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
           );
         })}
         
-        <div className="sticky bottom-4 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 border-t-4 border-blue-600 mt-8">
+        <div className="sticky bottom-0 sm:bottom-4 left-0 right-0 bg-white dark:bg-gray-800 shadow-xl rounded-t-lg sm:rounded-lg p-4 sm:p-6 border-t-4 border-blue-600 mt-8 mx-0 sm:mx-auto z-50">
           <button
             type="submit"
             disabled={!currentPageValid}
-            className={`w-full text-white font-semibold rounded-lg text-lg px-6 py-4 text-center shadow-lg transform transition-all ${
+            className={`w-full text-white font-semibold rounded-lg text-base sm:text-lg px-6 py-4 sm:py-5 text-center shadow-lg transform transition-all min-h-[44px] ${
               currentPageValid
-                ? 'bg-blue-600 hover:bg-blue-700 hover:scale-[1.02] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700'
+                ? 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700'
                 : 'bg-gray-400 cursor-not-allowed'
             }`}
           >

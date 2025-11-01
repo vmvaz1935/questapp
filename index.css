@@ -54,3 +54,90 @@
   }
 }
 
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Better text sizing on mobile */
+  body {
+    font-size: 16px; /* Prevents iOS zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Improve touch targets */
+  button, a, input[type="radio"], input[type="checkbox"], select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better scrolling on tables */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  
+  /* Prevent text from being too small */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Better spacing for mobile */
+  .space-y-2 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Fix for iOS safe areas */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Improve readability on tablets */
+  body {
+    font-size: 17px;
+  }
+}
+
+/* Better focus indicators for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  *:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+  
+  button:active, a:active, label:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Better input experience on mobile */
+input, textarea, select {
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+@media (max-width: 640px) {
+  input, textarea, select {
+    font-size: 16px;
+  }
+}
+
