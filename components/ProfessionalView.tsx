@@ -11,7 +11,7 @@ interface ProfessionalViewProps {
   questionnaires: Questionnaire[];
 }
 
-const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) => {
+const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
   const { professionalId, isGoogleAuth } = useAuth();
   const storageKey = professionalId ? `patients_${professionalId}` : 'patients';
   const [patients, setPatients] = useLocalStorage<Patient[]>(storageKey, []);
@@ -208,88 +208,6 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
             </ul>
           )}
         </div>
-      </div>
-
-      {/* Questionários disponíveis por categoria */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 sm:p-6 mt-6 sm:mt-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">Questionários por parte do corpo</h2>
-        {questionnaires.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">Nenhum questionário publicado.</p>
-        ) : (
-          (() => {
-            const getCategory = (q: Questionnaire): string => {
-              const a = q.acronym?.toUpperCase?.() || '';
-              const n = q.name?.toLowerCase?.() || '';
-              if (['ODI','RMDQ','QBPDS','SBST','NBQ','NDI','CPG','TSK-11'].includes(a)) return 'Coluna';
-              if (['KOOS','LYSHOLM','IKDC','ACL-RSI'].includes(a)) return 'Joelho';
-              if (['HOOS','HAGOS','IHOT-12','IHOT'].includes(a)) return 'Quadril';
-              if (['AOFAS','FAAM','FAOS'].includes(a)) return 'Tornozelo/Pé';
-              if (['LEFS'].includes(a)) return 'Membro inferior (geral)';
-              if (['WOMAC'].includes(a)) return 'Joelho/Quadril (OA)';
-              // Classificação específica para membro superior
-              if (['SPADI','OSS','WOSI'].includes(a)) return 'Ombro';
-              if (['PRTEE'].includes(a)) return 'Cotovelo';
-              if (['PRWE'].includes(a)) return 'Punho';
-              if (['MHQ'].includes(a)) return 'Mão';
-              // DASH é geral e se aplica aos 3 - será duplicado abaixo
-              if (['DASH'].includes(a)) return 'DASH_GERAL'; // Marcador especial
-              // Fallback por palavras-chave
-              if (n.includes('joelho')) return 'Joelho';
-              if (n.includes('quadril') || n.includes('virilha')) return 'Quadril';
-              if (n.includes('tornozelo') || n.includes('pé')) return 'Tornozelo/Pé';
-              if (n.includes('ombro')) return 'Ombro';
-              if (n.includes('cotovelo')) return 'Cotovelo';
-              if (n.includes('punho')) return 'Punho';
-              if (n.includes('mão') || n.includes('mao')) return 'Mão';
-              if (n.includes('coluna') || n.includes('cervical') || n.includes('lombar')) return 'Coluna';
-              return 'Outros';
-            };
-            
-            // Classificar questionários e duplicar DASH nas categorias de membro superior
-            const classified: Record<string, Questionnaire[]> = {};
-            questionnaires.forEach(q => {
-              const cat = getCategory(q);
-              if (cat === 'DASH_GERAL') {
-                // DASH se aplica a Ombro, Cotovelo, Punho e Mão
-                ['Ombro', 'Cotovelo', 'Punho', 'Mão'].forEach(c => {
-                  if (!classified[c]) classified[c] = [];
-                  classified[c].push(q);
-                });
-              } else {
-                if (!classified[cat]) classified[cat] = [];
-                classified[cat].push(q);
-              }
-            });
-            
-            const groups = classified;
-            const order = ['Coluna','Ombro','Cotovelo','Punho','Mão','Membro inferior (geral)','Joelho','Quadril','Tornozelo/Pé','Joelho/Quadril (OA)','Outros'];
-            const cats = Object.keys(groups).sort((a,b)=> {
-              const idxA = order.indexOf(a);
-              const idxB = order.indexOf(b);
-              if (idxA === -1 && idxB === -1) return 0;
-              if (idxA === -1) return 1;
-              if (idxB === -1) return -1;
-              return idxA - idxB;
-            });
-            return (
-              <div className="space-y-6">
-                {cats.map(cat => (
-                  <div key={cat}>
-                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{cat}</h3>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {groups[cat].map(q => (
-                        <li key={q.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3">
-                          <p className="font-semibold">{q.name} ({q.acronym})</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">{q.domain}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            );
-          })()
-        )}
       </div>
       
       <PaymentModal

@@ -176,7 +176,7 @@ const InnerApp: React.FC = () => {
           } />
           <Route path="/patients" element={
             <ProtectedRoute>
-              <ProfessionalView questionnaires={questionnaires} />
+              <ProfessionalView />
             </ProtectedRoute>
           } />
           <Route path="/questionnaires" element={
