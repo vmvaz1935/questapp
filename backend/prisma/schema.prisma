@@ -1,0 +1,293 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// PROFESSIONALS (Usuários/Fisioterapeutas)
+// ============================================
+
+model Professional {
+  id                String      @id @default(cuid())
+  email             String      @unique
+  passwordHash      String?
+  name              String
+  cpf               String?     @unique
+  phone             String?
+  specialties       String[]    @default([])
+  bio               String?
+  profileImageUrl   String?
+  
+  // Google OAuth
+  googleId          String?     @unique
+  googleEmail       String?
+  isGoogleAuth      Boolean     @default(false)
+  
+  // Plano SIMPLIFICADO (FREE, PRO)
+  planType          PlanType    @default(FREE)
+  planStartDate     DateTime?
+  planEndDate       DateTime?
+  
+  // Limites
+  maxPatients       Int?        // null = ilimitado
+  maxQuestionnaires Int?        // null = ilimitado
+  storageLimit      BigInt      @default(1000000000) // 1GB padrão
+  
+  // Status
+  isActive          Boolean     @default(true)
+  emailVerified     Boolean     @default(false)
+  emailVerifiedAt   DateTime?
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  lastLoginAt       DateTime?
+  
+  // Relações
+  patients          Patient[]
+  results           Result[]
+  consents          Consent[]
+  auditLogs         AuditLog[]
+  refreshTokens     RefreshToken[]
+  syncLogs          SyncLog[]
+  
+  @@index([email])
+  @@index([planType])
+  @@index([createdAt])
+}
+
+enum PlanType {
+  FREE
+  PRO
+}
+
+// ============================================
+// PATIENTS (Pacientes)
+// ============================================
+
+model Patient {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  // Campos alinhados com frontend
+  name              String      // "nome" no frontend
+  age               Int         // "idade" no frontend
+  gender            String      // "sexo" no frontend: "Masculino" | "Feminino" | "Outro" | "Prefiro não informar"
+  diagnosis         String      // "diagnostico" no frontend
+  sidedAffected     String?     // "ladoAcometido" no frontend: "Direito" | "Esquerdo" | "Bilateral" | "Não se aplica"
+  referringDoctor   String?     // "medico" no frontend
+  physiotherapist   String?     // "fisioterapeuta" no frontend
+  
+  notes             String?
+  
+  // Status
+  isActive          Boolean     @default(true)
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  // Relações
+  results           Result[]
+  
+  @@unique([professionalId, id])
+  @@index([professionalId])
+  @@index([createdAt])
+}
+
+// ============================================
+// QUESTIONNAIRES (Questionários)
+// ============================================
+
+model Questionnaire {
+  id                String      @id @default(cuid())
+  acronym           String      @unique
+  name              String
+  domain            String      // "Joelho", "Ombro", "Coluna cervical", etc.
+  
+  // Estrutura completa alinhada com types.ts
+  items             Json        // Item[] - Estrutura completa do questionário
+  scoring           Json        // Scoring - Fórmulas de scoring
+  instructions      Json        // { text: string, reproduction_permitted: boolean }
+  metadata          Json?       // QuestionnaireMetadata - Metadados adicionais
+  source            Json?       // { filename: string }
+  
+  // Status
+  isActive          Boolean     @default(true)
+  isPublished       Boolean     @default(false) // Questionários customizados
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  @@index([acronym])
+  @@index([domain])
+  @@index([isActive])
+}
+
+// ============================================
+// RESULTS (Resultados)
+// ============================================
+
+model Result {
+  id                String      @id @default(cuid())
+  patientId         String
+  patient           Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  questionnaireId   String      // ID do questionário (ex: "ikdc", "koos")
+  questionnaireName String      // Nome do questionário
+  questionnaireAcronym String?  // Sigla do questionário
+  
+  // Respostas e Scoring - ESTRUTURA ALINHADA COM FRONTEND
+  responses         Json        // { "Q1": 1, "Q2": 2, ... } ou { "itemId": "Q1", "score": 1, ... }
+  scores            Json        // { 
+                                //   "total": 56.4,
+                                //   "isPercent": true,
+                                //   "domains": { "domain1": 45.5, "domain2": 67.2 }
+                                // }
+  interpretation    String?     // Interpretação do resultado
+  
+  // Status
+  isComplete        Boolean     @default(true)
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  @@unique([patientId, questionnaireId, createdAt]) // Permite múltiplos resultados ao longo do tempo
+  @@index([patientId])
+  @@index([professionalId])
+  @@index([questionnaireId])
+  @@index([createdAt])
+}
+
+// ============================================
+// CONSENTS (Consentimentos LGPD)
+// ============================================
+
+model Consent {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  consentType       String      // "DATA_PROCESSING", "DATA_SHARING", etc.
+  status            String      // "ACCEPTED", "REJECTED", "PENDING"
+  ipAddress         String?
+  userAgent         String?
+  
+  // Dados do consentimento
+  data              Json?
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  @@index([professionalId])
+  @@index([consentType])
+  @@index([createdAt])
+}
+
+// ============================================
+// REFRESH TOKENS
+// ============================================
+
+model RefreshToken {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  token             String      @unique
+  expiresAt         DateTime
+  isRevoked         Boolean     @default(false)
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+// ============================================
+// SYNC LOGS (Para sincronização offline-first)
+// ============================================
+
+model SyncLog {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  // Dados de sincronização
+  entityType        String      // "PATIENT", "RESULT", "CONSENT"
+  entityId          String
+  operation         String      // "CREATE", "UPDATE", "DELETE"
+  localTimestamp    DateTime    // Timestamp local (IndexedDB)
+  serverTimestamp   DateTime?   // Timestamp do servidor
+  
+  // Dados
+  data              Json        // Dados completos da entidade
+  changes           Json?       // Mudanças incrementais (opcional)
+  
+  // Status
+  status            SyncStatus  @default(PENDING)
+  retryCount        Int         @default(0)
+  errorMessage      String?
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  syncedAt          DateTime?
+  
+  @@index([professionalId])
+  @@index([status])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+enum SyncStatus {
+  PENDING
+  SYNCED
+  FAILED
+  CONFLICT
+}
+
+// ============================================
+// AUDIT LOGS
+// ============================================
+
+model AuditLog {
+  id                String      @id @default(cuid())
+  professionalId    String?
+  professional      Professional? @relation(fields: [professionalId], references: [id], onDelete: SetNull)
+  
+  action            String      // "CREATE", "UPDATE", "DELETE", "LOGIN", "LOGOUT"
+  entityType        String?     // "PATIENT", "RESULT", etc.
+  entityId          String?
+  
+  // Dados
+  data              Json?
+  changes           Json?
+  
+  // Metadata
+  ipAddress         String?
+  userAgent         String?
+  
+  // Auditoria
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([action])
+  @@index([entityType])
+  @@index([createdAt])
+}
+
