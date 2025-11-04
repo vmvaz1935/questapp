@@ -103,7 +103,8 @@ const BodySticker: React.FC<{ category: string; size?: number }>= ({ category, s
             width: `${size * 0.75}px`,
             height: `${size * 0.75}px`,
             objectFit: 'contain',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+            filter: 'brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+            mixBlendMode: 'normal',
             display: 'block',
             pointerEvents: 'none'
           }}
