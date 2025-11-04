@@ -96,15 +96,14 @@ const BodySticker: React.FC<{ category: string; size?: number }>= ({ category, s
             setImageError(true);
           }}
           onLoad={() => {
-            // Debug: verificar se a imagem carregou
             console.log(`Imagem carregada: ${imagePath}`);
           }}
           style={{
             width: `${size * 0.75}px`,
             height: `${size * 0.75}px`,
             objectFit: 'contain',
-            filter: 'brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
-            mixBlendMode: 'normal',
+            mixBlendMode: 'multiply',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
             display: 'block',
             pointerEvents: 'none'
           }}
