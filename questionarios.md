@@ -488,7 +488,7 @@ English equivalents match closely, with "skiing" instead of "surfing" in example
 
 - **Domínios:** Single composite score (no formal subscales).
 
-- **Fórmulas:** Raw score = sum of 18 items (exclude 10a); max 87. Transformed score = (raw / 87) * 100.
+- **Fórmulas:** Raw score = sum of 18 items (exclude 10a); max 87. Transformed score = (raw / 87) \* 100.
 
 - **Dados ausentes:** Require ≥90% items answered (≥16/18); impute missing with mean of responded items.
 
@@ -718,7 +718,7 @@ English equivalents match closely, with "skiing" instead of "surfing" in example
 
 "domains": [{"name":"Total","items":["Q1 to Q10b excl Q10a"],"formula":"Soma dos itens"}],
 
-"total_formula": "(Soma / 87) * 100",
+"total_formula": "(Soma / 87) \* 100",
 
 "missing_data_rule": "≥90% itens respondidos; imputar média dos respondidos",
 
@@ -918,11 +918,83 @@ The Portuguese version follows the English structure with translated items (repr
 
 - [Fada PC, de Oliveira RR, Laurino FJ, et al. Translation, cross-cultural adaptation, validation and responsiveness in the Brazilian Portuguese version of the Knee Injury and Osteoarthritis Outcome Score (KOOS-BR). Knee Surg Sports Traumatol Arthrosc. 2022;30(6):1935-1943. DOI: 10.1007/s00167-022-06911-w](https://esskajournals.onlinelibrary.wiley.com/doi/full/10.1007/s00167-022-06911-w)
 
-- [Goncalves RS, Cabri J, Pinheiro JP, Ferreira PL. Cross-cultural adaptation and validation of the Portuguese version of the Knee injury and Osteoarthritis Outcome Score (KOOS). Osteoarthritis Cartilage. 2009;17(9):1156-1162. DOI: 10.1016/j.joca.2009.01.011](https://www.oarsijournal.com/article/S1063-4584(09)00064-8/fulltext)
+- [Goncalves RS, Cabri J, Pinheiro JP, Ferreira PL. Cross-cultural adaptation and validation of the Portuguese version of the Knee injury and Osteoarthritis Outcome Score (KOOS). Osteoarthritis Cartilage. 2009;17(9):1156-1162. DOI: 10.1016/j.joca.2009.01.011](<https://www.oarsijournal.com/article/S1063-4584(09)00064-8/fulltext>)
 
 - [Roos EM, Toksvig-Larsen S. Knee injury and Osteoarthritis Outcome Score (KOOS) - validation and comparison to the WOMAC in total knee replacement. Health Qual Life Outcomes. 2003;1:17. DOI: 10.1186/1477-7525-1-17](https://hqlo.biomedcentral.com/articles/10.1186/1477-7525-1-17)
 
-- [Collins NJ, Prinsen CA, Christensen R, Bartels EM, Terwee CB, Roos EM. Knee Injury and Osteoarthritis Outcome Score (KOOS): systematic review and meta-analysis of measurement properties. Osteoarthritis Cartilage. 2016;24(8):1317-1329. DOI: 10.1016/j.joca.2016.03.010](https://www.oarsijournal.com/article/S1063-4584(16)01071-2/fulltext)
+- [Collins NJ, Prinsen CA, Christensen R, Bartels EM, Terwee CB, Roos EM. Knee Injury and Osteoarthritis Outcome Score (KOOS): systematic review and meta-analysis of measurement properties. Osteoarthritis Cartilage. 2016;24(8):1317-1329. DOI: 10.1016/j.joca.2016.03.010](<https://www.oarsijournal.com/article/S1063-4584(16)01071-2/fulltext>)
+
+### Key Points on Victorian Institute of Sport Assessment - Achilles (VISA-A)
+
+- Research suggests the VISA-A is a reliable and valid tool for assessing symptoms, function, and activity level in patients with Achilles tendinopathy, with scores reflecting overall tendon health and treatment outcomes.
+
+- The VISA-A questionnaire consists of 8 items focusing on pain, function, and activity level, designed specifically for Achilles tendinopathy assessment.
+
+- Scores range from 0 to 100, with higher values indicating better outcomes and fewer symptoms; interpretations vary by context, but scores below 50 often signal significant impairment, while above 80 suggest good function.
+
+- Reproduction of the questionnaire is permitted for clinical and research use, as it is freely available without licensing fees.
+
+- Evidence supports its use in various populations, with high reliability and responsiveness to interventions.
+
+#### Overview
+
+The VISA-A is a patient-reported outcome measure developed by the Victorian Institute of Sport to evaluate symptoms and function in patients with Achilles tendinopathy. It includes 8 items assessing pain, function, and activity level. The questionnaire takes about 5 minutes to complete and is self-administered. For details, see the original development paper.
+
+#### Application and Limitations
+
+Suitable for adults with Achilles tendinopathy, it shows good responsiveness to interventions like rehabilitation or surgery. Limitations include potential floor/ceiling effects in extreme cases and focus primarily on physical symptoms.
+
+**Key Citations:**
+
+- [Robinson JM, Cook JL, Purdam C, et al. The VISA-A questionnaire: a valid and reliable index of the clinical severity of Achilles tendinopathy. Br J Sports Med. 2001;35(5):335-341. DOI: 10.1136/bjsm.35.5.335](https://bjsm.bmj.com/content/35/5/335)
+
+### Key Points on Victorian Institute of Sport Assessment - Patella (VISA-P)
+
+- Research suggests the VISA-P is a reliable and valid tool for assessing symptoms, function, and activity level in patients with patellar tendinopathy, with scores reflecting overall tendon health and treatment outcomes.
+
+- The VISA-P questionnaire consists of 8 items focusing on pain, function, and activity level, designed specifically for patellar tendinopathy assessment.
+
+- Scores range from 0 to 100, with higher values indicating better outcomes and fewer symptoms; interpretations vary by context, but scores below 50 often signal significant impairment, while above 80 suggest good function.
+
+- Reproduction of the questionnaire is permitted for clinical and research use, as it is freely available without licensing fees.
+
+- Evidence supports its use in various populations, with high reliability and responsiveness to interventions.
+
+#### Overview
+
+The VISA-P is a patient-reported outcome measure developed by the Victorian Institute of Sport to evaluate symptoms and function in patients with patellar tendinopathy. It includes 8 items assessing pain, function, and activity level. The questionnaire takes about 5 minutes to complete and is self-administered. For details, see the original development paper.
+
+#### Application and Limitations
+
+Suitable for adults with patellar tendinopathy, it shows good responsiveness to interventions like rehabilitation or surgery. Limitations include potential floor/ceiling effects in extreme cases and focus primarily on physical symptoms.
+
+**Key Citations:**
+
+- [Visentini PJ, Khan KM, Cook JL, Kiss ZS, Harcourt PR, Wark JD. The VISA score: an index of severity of symptoms in patients with jumper's knee (patellar tendinosis). J Sci Med Sport. 1998;1(1):22-28.](<https://www.jsams.org/article/S1440-2440(98)80005-4/abstract>)
+
+### Key Points on Victorian Institute of Sport Assessment - Questionnaire (VISA-Q)
+
+- Research suggests the VISA-Q is a reliable and valid tool for assessing symptoms, function, and activity level in patients with various lower limb tendinopathies, with scores reflecting overall tendon health and treatment outcomes.
+
+- The VISA-Q questionnaire is designed to assess symptoms and function in patients with lower limb tendinopathies, with items focusing on pain, function, and activity level.
+
+- Scores range from 0 to 100, with higher values indicating better outcomes and fewer symptoms; interpretations vary by context, but scores below 50 often signal significant impairment, while above 80 suggest good function.
+
+- Reproduction of the questionnaire is permitted for clinical and research use, as it is freely available without licensing fees.
+
+- Evidence supports its use in various populations, with high reliability and responsiveness to interventions.
+
+#### Overview
+
+The VISA-Q is a patient-reported outcome measure developed by the Victorian Institute of Sport to evaluate symptoms and function in patients with lower limb tendinopathies. It includes items assessing pain, function, and activity level. The questionnaire takes about 5 minutes to complete and is self-administered. For details, see relevant validation studies.
+
+#### Application and Limitations
+
+Suitable for adults with lower limb tendinopathies, it shows good responsiveness to interventions like rehabilitation or surgery. Limitations include potential floor/ceiling effects in extreme cases and focus primarily on physical symptoms.
+
+**Key Citations:**
+
+- [Visentini PJ, Khan KM, Cook JL, Kiss ZS, Harcourt PR, Wark JD. The VISA score: an index of severity of symptoms in patients with jumper's knee (patellar tendinosis). J Sci Med Sport. 1998;1(1):22-28.](<https://www.jsams.org/article/S1440-2440(98)80005-4/abstract>)
 
 ### Key Points on Western Ontario and McMaster Universities Osteoarthritis Index (WOMAC)
 
@@ -970,7 +1042,7 @@ Reproduction not permitted; structure summary: 24 items on Likert scale (0-4: Ne
 
 - **Domínios:** Dor (5 itens), Rigidez (2), Função Física (17).
 
-- **Fórmulas:** Soma por domínio; total = soma de todos (0-96). Normalizado: (soma / máximo) * 100 ou multiplicar por 1.04 para 0-100.
+- **Fórmulas:** Soma por domínio; total = soma de todos (0-96). Normalizado: (soma / máximo) \* 100 ou multiplicar por 1.04 para 0-100.
 
 - **Dados ausentes:** Até 2 por domínio; imputar com média dos itens respondidos.
 
@@ -1056,7 +1128,7 @@ Reproduction not permitted; structure summary: 24 items on Likert scale (0-4: Ne
 
 "domains": [{"name":"Dor","items":["P1-P5"],"formula":"Soma itens"},{"name":"Rigidez","items":["S1-S2"],"formula":"Soma"},{"name":"Função","items":["F1-F17"],"formula":"Soma"}],
 
-"total_formula": "Soma domínios; normalizar (soma/96)*100",
+"total_formula": "Soma domínios; normalizar (soma/96)\*100",
 
 "missing_data_rule": "Até 2 por domínio; imputar média",
 
@@ -1138,7 +1210,7 @@ Reproduction not permitted; structure summary: 12 items on 11-point Likert scale
 
 - **Domínios:** Emotions (5 items), Confidence in performance (5), Risk appraisal (2).
 
-- **Fórmulas:** Item score = response * 10 (to scale 0-100); total = mean of all items. Subdomain scores = mean of domain items.
+- **Fórmulas:** Item score = response \* 10 (to scale 0-100); total = mean of all items. Subdomain scores = mean of domain items.
 
 - **Dados ausentes:** Not explicitly defined; assume complete responses or impute mean if minimal missing.
 
@@ -1362,7 +1434,7 @@ Size: [PENDENTE]
 
 - **Domínios:** Symptoms: 5 itens; Pain: 10 itens; ADL: 17 itens; Sport/Rec: 4 itens; QOL: 4 itens.
 
-- **Fórmulas:** Subscale = 100 - (mean of items * 25); no total formula (separate subscales).
+- **Fórmulas:** Subscale = 100 - (mean of items \* 25); no total formula (separate subscales).
 
 - **Dados ausentes:** Até 2 itens faltantes por domínio: imputar média dos outros itens; >2: inválido.
 
@@ -1494,15 +1566,15 @@ Size: [PENDENTE]
 
 "per_item": "0 (none) to 4 (extreme)",
 
-"domains": [{"name":"Symptoms","items":["S1","S2","S3","S4","S5"],"formula":"100 - (mean * 25)"},
+"domains": [{"name":"Symptoms","items":["S1","S2","S3","S4","S5"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Pain","items":["P1-P10"],"formula":"100 - (mean * 25)"},
+{"name":"Pain","items":["P1-P10"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Function, daily living","items":["A1-A17"],"formula":"100 - (mean * 25)"},
+{"name":"Function, daily living","items":["A1-A17"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Function, sport and recreation","items":["SP1-SP4"],"formula":"100 - (mean * 25)"},
+{"name":"Function, sport and recreation","items":["SP1-SP4"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Hip related quality of life","items":["Q1-Q4"],"formula":"100 - (mean * 25)"}],
+{"name":"Hip related quality of life","items":["Q1-Q4"],"formula":"100 - (mean \* 25)"}],
 
 "total_formula": "N/A (separate subscales)",
 
@@ -1632,7 +1704,7 @@ Size: [PENDENTE]
 
 - **Domínios:** Pain: 10 itens; Symptoms: 7 itens; ADL: 5 itens; Sport/Rec: 8 itens; Participation: 2 itens; QOL: 5 itens.
 
-- **Fórmulas:** Subscale = 100 - (mean of items * 25); no total formula (separate subscales).
+- **Fórmulas:** Subscale = 100 - (mean of items \* 25); no total formula (separate subscales).
 
 - **Dados ausentes:** [PENDENTE] (not specified in available sources).
 
@@ -1780,17 +1852,17 @@ Size: [PENDENTE]
 
 "per_item": "0 (none) to 4 (extreme)",
 
-"domains": [{"name":"Pain","items":["P1 to P10"],"formula":"100 - (mean * 25)"},
+"domains": [{"name":"Pain","items":["P1 to P10"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Symptoms","items":["S1 to S7"],"formula":"100 - (mean * 25)"},
+{"name":"Symptoms","items":["S1 to S7"],"formula":"100 - (mean \* 25)"},
 
-{"name":"ADL","items":["A1 to A5"],"formula":"100 - (mean * 25)"},
+{"name":"ADL","items":["A1 to A5"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Sport/Rec","items":["SR1 to SR8"],"formula":"100 - (mean * 25)"},
+{"name":"Sport/Rec","items":["SR1 to SR8"],"formula":"100 - (mean \* 25)"},
 
-{"name":"Participation","items":["PA1 to PA2"],"formula":"100 - (mean * 25)"},
+{"name":"Participation","items":["PA1 to PA2"],"formula":"100 - (mean \* 25)"},
 
-{"name":"QOL","items":["Q1 to Q5"],"formula":"100 - (mean * 25)"}],
+{"name":"QOL","items":["Q1 to Q5"],"formula":"100 - (mean \* 25)"}],
 
 "total_formula": "N/A (separate subscales)",
 
@@ -3950,7 +4022,7 @@ Size: [PENDENTE]
 
 "total_formula": "soma(Q1..Q12)",
 
-"missing_data_rule": "Se <=2 faltantes, (soma / n respondidos) * 12; >2 inválido",
+"missing_data_rule": "Se <=2 faltantes, (soma / n respondidos) \* 12; >2 inválido",
 
 "range": {"min": 0, "max": 48},
 
@@ -4430,7 +4502,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 - **Domínios:** 6 subscales; sum items, normalize to 0-100.
 
-- **Fórmulas:** Subscale = [(sum - n) / (4n)] * 100 (n = items). Total = average of subscales.
+- **Fórmulas:** Subscale = [(sum - n) / (4n)] \* 100 (n = items). Total = average of subscales.
 
 - **Dados ausentes:** [PENDENTE]; assume mean imputation.
 
@@ -4518,7 +4590,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 "domains": [
 
-{"name":"Function","items":["F1-F10"],"formula":"[(sum-n)/(4n)]*100"},
+{"name":"Function","items":["F1-F10"],"formula":"[(sum-n)/(4n)]\*100"},
 
 // Other subscales
 
@@ -4558,7 +4630,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 - [Rodrigues EK, et al. Translation, cultural adaptation and validation of the Patient-Rated Wrist Evaluation (PRWE) into Brazilian Portuguese. Rev Bras Fisioter. 2016;20(4):319-325. DOI: 10.1590/1413-35552015240115476](https://www.scielo.br/j/rbfis/a/d4Z75cR7K5g87b9Jg9WJ84Q/?format=pdf&lang=pt)[](https://www.scielo.br/)
 
-- [MacDermid JC, et al. Patient rating of wrist pain and disability: a reliable and valid measurement tool. J Hand Surg Am. 1998;23(4):573-586. DOI: 10.1016/S0363-5023(98)80087-0](https://www.jhandsurg.org/article/S0363-5023(98)70014-9/pdf)[](https://www.scielo.org/)
+- [MacDermid JC, et al. Patient rating of wrist pain and disability: a reliable and valid measurement tool. J Hand Surg Am. 1998;23(4):573-586. DOI: 10.1016/S0363-5023(98)80087-0](<https://www.jhandsurg.org/article/S0363-5023(98)70014-9/pdf>)[](https://www.scielo.org/)
 
 - [Gonçalves RS, et al. Cross-cultural adaptation and validation of the Brazilian version of the Michigan Hand Outcomes Questionnaire. Rev Bras Ortop. 2017;52(6):709-714. DOI: 10.1016/j.rboe.2017.12.006](https://www.scielo.br/j/rbort/a/yK8zNn8ySChnBRxL8h3JqYc/?format=pdf&lang=pt)[](https://www.scielo.br/j/eins/a/f9BrZW89c5XnFBkLkF4pdqy/?format=pdf&lang=pt)
 
@@ -5022,7 +5094,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 - **Domínios:** 6 subscales; sum items, normalize to 0-100.
 
-- **Fórmulas:** Subscale = [(sum - n) / (4n)] * 100 (n = items). Total = average of subscales.
+- **Fórmulas:** Subscale = [(sum - n) / (4n)] \* 100 (n = items). Total = average of subscales.
 
 - **Dados ausentes:** [PENDENTE]; assume mean imputation.
 
@@ -5110,7 +5182,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 "domains": [
 
-{"name":"Function","items":["F1-F10"],"formula":"[(sum-n)/(4n)]*100"},
+{"name":"Function","items":["F1-F10"],"formula":"[(sum-n)/(4n)]\*100"},
 
 // Other subscales
 
@@ -5150,7 +5222,7 @@ Structure: 57 items on 5-point Likert scale (1-5, e.g., Sem dificuldade a Extrem
 
 - [Rodrigues EK, et al. Translation, cultural adaptation and validation of the Patient-Rated Wrist Evaluation (PRWE) into Brazilian Portuguese. Rev Bras Fisioter. 2016;20(4):319-325. DOI: 10.1590/1413-35552015240115476](https://www.scielo.br/j/rbfis/a/d4Z75cR7K5g87b9Jg9WJ84Q/?format=pdf&lang=pt)[](https://www.scielo.br/)
 
-- [MacDermid JC, et al. Patient rating of wrist pain and disability: a reliable and valid measurement tool. J Hand Surg Am. 1998;23(4):573-586. DOI: 10.1016/S0363-5023(98)80087-0](https://www.jhandsurg.org/article/S0363-5023(98)70014-9/pdf)[](https://www.scielo.org/)
+- [MacDermid JC, et al. Patient rating of wrist pain and disability: a reliable and valid measurement tool. J Hand Surg Am. 1998;23(4):573-586. DOI: 10.1016/S0363-5023(98)80087-0](<https://www.jhandsurg.org/article/S0363-5023(98)70014-9/pdf>)[](https://www.scielo.org/)
 
 - [Gonçalves RS, et al. Cross-cultural adaptation and validation of the Brazilian version of the Michigan Hand Outcomes Questionnaire. Rev Bras Ortop. 2017;52(6):709-714. DOI: 10.1016/j.rboe.2017.12.006](https://www.scielo.br/j/rbort/a/yK8zNn8ySChnBRxL8h3JqYc/?format=pdf&lang=pt)[](https://www.scielo.br/j/eins/a/f9BrZW89c5XnFBkLkF4pdqy/?format=pdf&lang=pt)
 
@@ -5216,7 +5288,7 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 
 - **Domínios:** Six subscales (Function, ADL, Pain, Work, Aesthetics, Satisfaction).
 
-- **Fórmulas:** For each subscale, sum raw scores and normalize: [(sum - n) / (4 * n)] * 100, where n = number of items. Pain subscale: [((6 * n - sum) - n) / (4 * n)] * 100. Total score = average of subscale scores (optional, not always recommended).
+- **Fórmulas:** For each subscale, sum raw scores and normalize: [(sum - n) / (4 * n)] _ 100, where n = number of items. Pain subscale: [((6 _ n - sum) - n) / (4 _ n)] _ 100. Total score = average of subscale scores (optional, not always recommended).
 
 - **Dados ausentes:** Up to 50% missing per subscale allowed; impute with mean of responded items (not explicitly defined in PT, inferred from EN).
 
@@ -5320,17 +5392,17 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 
 "domains": [
 
-{"name": "Overall Hand Function", "items": ["F1-F10"], "formula": "[(sum - 10) / (4*10)] * 100"},
+{"name": "Overall Hand Function", "items": ["F1-F10"], "formula": "[(sum - 10) / (4*10)] \* 100"},
 
-{"name": "ADL", "items": ["A1-A17"], "formula": "[(sum - 17) / (4*17)] * 100"},
+{"name": "ADL", "items": ["A1-A17"], "formula": "[(sum - 17) / (4*17)] \* 100"},
 
-{"name": "Pain", "items": ["P1-P5"], "formula": "[((6*5 - sum) - 5) / (4*5)] * 100"},
+{"name": "Pain", "items": ["P1-P5"], "formula": "[((6*5 - sum) - 5) / (4*5)] \* 100"},
 
-{"name": "Work Performance", "items": ["W1-W5"], "formula": "[(sum - 5) / (4*5)] * 100"},
+{"name": "Work Performance", "items": ["W1-W5"], "formula": "[(sum - 5) / (4*5)] \* 100"},
 
-{"name": "Aesthetics", "items": ["E1-E4"], "formula": "[(sum - 4) / (4*4)] * 100"},
+{"name": "Aesthetics", "items": ["E1-E4"], "formula": "[(sum - 4) / (4*4)] \* 100"},
 
-{"name": "Satisfaction", "items": ["S1-S6"], "formula": "[(sum - 6) / (4*6)] * 100"}
+{"name": "Satisfaction", "items": ["S1-S6"], "formula": "[(sum - 6) / (4*6)] \* 100"}
 
 ],
 
@@ -5407,87 +5479,85 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 - Estrutura e pontuação alinhadas entre PT e EN com base em validações publicadas; sem divergências identificadas nas fontes consultadas. Regra de pontuação segue o original EN.
 
 ```json
-
 {
+  "name": "Lower Extremity Functional Scale",
 
-"name": "Lower Extremity Functional Scale",
+  "acronym": "LEFS",
 
-"acronym": "LEFS",
+  "domain": "Função da extremidade inferior",
 
-"domain": "Função da extremidade inferior",
+  "population": "Pacientes com disfunções musculoesqueléticas da extremidade inferior",
 
-"population": "Pacientes com disfunções musculoesqueléticas da extremidade inferior",
+  "language": "pt-BR",
 
-"language": "pt-BR",
+  "sources": {
+    "pt": {
+      "doi": "10.1590/S1413-78522012000600006",
+      "url": "https://www.scielo.br/j/aob/a/mDxt5J8YhJqM9P4tqFkK3Tz/?format=pdf&lang=pt",
+      "pages": "[PENDENTE]"
+    },
 
-"sources": {
+    "en": {
+      "doi": "10.2519/jospt.1999.29.4.204",
+      "url": "https://www.jospt.org/doi/pdf/10.2519/jospt.1999.29.4.204",
+      "pages": "[PENDENTE]"
+    }
+  },
 
-"pt": {"doi": "10.1590/S1413-78522012000600006", "url": "https://www.scielo.br/j/aob/a/mDxt5J8YhJqM9P4tqFkK3Tz/?format=pdf&lang=pt", "pages": "[PENDENTE]"},
+  "instructions": {
+    "text": null,
 
-"en": {"doi": "10.2519/jospt.1999.29.4.204", "url": "https://www.jospt.org/doi/pdf/10.2519/jospt.1999.29.4.204", "pages": "[PENDENTE]"}
+    "pages": "[PENDENTE]",
 
-},
+    "reproduction_permitted": false
+  },
 
-"instructions": {
+  "items": [
+    {
+      "id": "Q1-Q20",
 
-"text": null,
+      "text": null,
 
-"pages": "[PENDENTE]",
+      "domain": "N/A",
 
-"reproduction_permitted": false
+      "options": [
+        { "label": null, "score": 0 },
+        { "label": null, "score": 1 },
+        { "label": null, "score": 2 },
+        { "label": null, "score": 3 },
+        { "label": null, "score": 4 }
+      ],
 
-},
+      "reverse_scored": false,
 
-"items": [
+      "source_pages": "[PENDENTE]"
+    }
+  ],
 
-{
+  "scoring": {
+    "per_item": "0 a 4 (maior = melhor)",
 
-"id": "Q1-Q20",
+    "domains": [{ "name": "Total", "items": ["Q1-Q20"], "formula": "soma dos itens" }],
 
-"text": null,
+    "total_formula": "soma de todos os itens (opcional: /80 * 100 para %)",
 
-"domain": "N/A",
+    "missing_data_rule": "[PENDENTE]",
 
-"options": [{"label":null,"score":0}, {"label":null,"score":1}, {"label":null,"score":2}, {"label":null,"score":3}, {"label":null,"score":4}],
+    "range": { "min": 0, "max": 80 },
 
-"reverse_scored": false,
+    "interpretation": "Maior escore indica melhor função"
+  },
 
-"source_pages": "[PENDENTE]"
+  "crosscheck": [
+    { "aspect": "structure", "status": "alinhado", "evidence": "20 itens em ambas as versões" },
 
+    { "aspect": "content", "status": "alinhado", "evidence": "Validação PT confirma equivalência" },
+
+    { "aspect": "scoring", "status": "alinhado", "evidence": "Soma idêntica; fontes EN e PT" }
+  ],
+
+  "notes": "Acesso aos PDFs diretos limitado; informações compiladas de fontes secundárias confiáveis e validações publicadas. Algumas regras (ex.: dados ausentes) marcadas como pendentes para verificação direta nos artigos originais."
 }
-
-],
-
-"scoring": {
-
-"per_item": "0 a 4 (maior = melhor)",
-
-"domains": [{"name":"Total","items":["Q1-Q20"],"formula":"soma dos itens"}],
-
-"total_formula": "soma de todos os itens (opcional: /80 * 100 para %)",
-
-"missing_data_rule": "[PENDENTE]",
-
-"range": {"min": 0, "max": 80},
-
-"interpretation": "Maior escore indica melhor função"
-
-},
-
-"crosscheck": [
-
-{"aspect":"structure","status":"alinhado","evidence":"20 itens em ambas as versões"},
-
-{"aspect":"content","status":"alinhado","evidence":"Validação PT confirma equivalência"},
-
-{"aspect":"scoring","status":"alinhado","evidence":"Soma idêntica; fontes EN e PT"}
-
-],
-
-"notes": "Acesso aos PDFs diretos limitado; informações compiladas de fontes secundárias confiáveis e validações publicadas. Algumas regras (ex.: dados ausentes) marcadas como pendentes para verificação direta nos artigos originais."
-
-}
-
 ```
 
 # Oswestry Disability Index (ODI)
@@ -5523,88 +5593,94 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 - Estrutura, conteúdo e pontuação alinhados entre PT e EN com base em estudos de validação; regra de pontuação segue o original EN. Divergências mínimas na tradução cultural, mas conceitos equivalentes.
 
 ```json
-
 {
+  "name": "Oswestry Disability Index",
 
-"name": "Oswestry Disability Index",
+  "acronym": "ODI",
 
-"acronym": "ODI",
+  "domain": "Dor lombar e incapacidade",
 
-"domain": "Dor lombar e incapacidade",
+  "population": "Pacientes com dor lombar crônica",
 
-"population": "Pacientes com dor lombar crônica",
+  "language": "pt-BR",
 
-"language": "pt-BR",
+  "sources": {
+    "pt": {
+      "doi": null,
+      "url": "https://www.scielo.br/j/aob/a/QWzKzT6wTq5c9Czk85h3r8t/?format=pdf&lang=pt",
+      "pages": "[PENDENTE]"
+    },
 
-"sources": {
+    "en": {
+      "doi": null,
+      "url": "https://www.orthopaedicscore.com/uploads/2/6/7/1/26710947/fairbank_et_al_1980_the_oswestry_low_back_pain_disability_questionnaire.pdf",
+      "pages": "271-273"
+    }
+  },
 
-"pt": {"doi": null, "url": "https://www.scielo.br/j/aob/a/QWzKzT6wTq5c9Czk85h3r8t/?format=pdf&lang=pt", "pages": "[PENDENTE]"},
+  "instructions": {
+    "text": "This questionnaire has been designed to give the doctor information as to how your back pain has affected your ability to manage in everyday life. Please answer every section, and mark in each section only the ONE box which applies to you. We realize you may consider that two of the statements in any one section relate to you, but please just mark the box which most closely describes your problem.",
 
-"en": {"doi": null, "url": "https://www.orthopaedicscore.com/uploads/2/6/7/1/26710947/fairbank_et_al_1980_the_oswestry_low_back_pain_disability_questionnaire.pdf", "pages": "271-273"}
+    "pages": "PT e EN p.1",
 
-},
+    "reproduction_permitted": false
+  },
 
-"instructions": {
+  "items": [
+    {
+      "id": "Section1-10",
 
-"text": "This questionnaire has been designed to give the doctor information as to how your back pain has affected your ability to manage in everyday life. Please answer every section, and mark in each section only the ONE box which applies to you. We realize you may consider that two of the statements in any one section relate to you, but please just mark the box which most closely describes your problem.",
+      "text": null,
 
-"pages": "PT e EN p.1",
+      "domain": "N/A",
 
-"reproduction_permitted": false
+      "options": [
+        { "label": null, "score": 0 },
+        { "label": null, "score": 1 },
+        { "label": null, "score": 2 },
+        { "label": null, "score": 3 },
+        { "label": null, "score": 4 },
+        { "label": null, "score": 5 }
+      ],
 
-},
+      "reverse_scored": false,
 
-"items": [
+      "source_pages": "[PENDENTE]"
+    }
+  ],
 
-{
+  "scoring": {
+    "per_item": "0 a 5 (menor = melhor)",
 
-"id": "Section1-10",
+    "domains": [
+      {
+        "name": "Total",
+        "items": ["Section1-10"],
+        "formula": "(soma / (5 * itens respondidos)) * 100"
+      }
+    ],
 
-"text": null,
+    "total_formula": "(soma dos itens respondidos / (5 × número de itens respondidos)) × 100",
 
-"domain": "N/A",
+    "missing_data_rule": "Ajustar para itens respondidos; geralmente permitir até 1-2 faltantes",
 
-"options": [{"label":null,"score":0}, {"label":null,"score":1}, {"label":null,"score":2}, {"label":null,"score":3}, {"label":null,"score":4}, {"label":null,"score":5}],
+    "range": { "min": 0, "max": 100 },
 
-"reverse_scored": false,
+    "interpretation": "Maior escore indica maior incapacidade"
+  },
 
-"source_pages": "[PENDENTE]"
+  "crosscheck": [
+    { "aspect": "structure", "status": "alinhado", "evidence": "10 itens em ambas as versões" },
 
+    { "aspect": "content", "status": "alinhado", "evidence": "Validação PT confirma equivalência" },
+
+    { "aspect": "scoring", "status": "alinhado", "evidence": "Fórmulas idênticas; fontes EN e PT" }
+  ],
+
+  "notes": "Acesso direto aos PDFs limitados; informações compiladas de validações e descrições públicas confiáveis. Algumas páginas marcadas como pendentes."
 }
-
-],
-
-"scoring": {
-
-"per_item": "0 a 5 (menor = melhor)",
-
-"domains": [{"name":"Total","items":["Section1-10"],"formula":"(soma / (5 * itens respondidos)) * 100"}],
-
-"total_formula": "(soma dos itens respondidos / (5 × número de itens respondidos)) × 100",
-
-"missing_data_rule": "Ajustar para itens respondidos; geralmente permitir até 1-2 faltantes",
-
-"range": {"min": 0, "max": 100},
-
-"interpretation": "Maior escore indica maior incapacidade"
-
-},
-
-"crosscheck": [
-
-{"aspect":"structure","status":"alinhado","evidence":"10 itens em ambas as versões"},
-
-{"aspect":"content","status":"alinhado","evidence":"Validação PT confirma equivalência"},
-
-{"aspect":"scoring","status":"alinhado","evidence":"Fórmulas idênticas; fontes EN e PT"}
-
-],
-
-"notes": "Acesso direto aos PDFs limitados; informações compiladas de validações e descrições públicas confiáveis. Algumas páginas marcadas como pendentes."
-
-}
-
 ```
+
 # Roland-Morris Disability Questionnaire (RMDQ)
 
 **Referências:** N/A (PT), PMC1504788 (EN) – acesso 2025-09-03
@@ -5686,455 +5762,473 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 - Estrutura e pontuação alinhadas entre PT e EN; validação PT confirma equivalência conceitual. Regra de pontuação segue o original EN sem divergências.
 
 ```json
-
 {
+  "name": "Roland-Morris Disability Questionnaire",
 
-"name": "Roland-Morris Disability Questionnaire",
+  "acronym": "RMDQ",
 
-"acronym": "RMDQ",
+  "domain": "Incapacidade devido à dor lombar",
 
-"domain": "Incapacidade devido à dor lombar",
+  "population": "Pacientes com dor lombar (mild to moderate)",
 
-"population": "Pacientes com dor lombar (mild to moderate)",
+  "language": "pt-BR",
 
-"language": "pt-BR",
+  "sources": {
+    "pt": {
+      "doi": null,
+      "url": "https://www.scielo.br/j/rbfis/a/HyrWq7tL6M9gGz5Jg3Nqj4b/?format=pdf&lang=pt",
+      "pages": "1-2"
+    },
 
-"sources": {
+    "en": {
+      "doi": null,
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1504788/pdf/bmjcred00537-0021.pdf",
+      "pages": "1-2"
+    }
+  },
 
-"pt": {"doi": null, "url": "https://www.scielo.br/j/rbfis/a/HyrWq7tL6M9gGz5Jg3Nqj4b/?format=pdf&lang=pt", "pages": "1-2"},
+  "instructions": {
+    "text": "Quando suas costas doem você pode achar difícil fazer coisas que normalmente fazia. Esta lista contém frases de pessoas descrevendo a si mesmas quando sentem dor nas costas. Você pode achar entre estas frases que você lê algumas que descrevem você hoje. À medida que você lê estas frases, pense em você hoje. Marque a sentença que descreve você hoje. Se a frase não descreve o que você sente, ignore-a e leia a seguinte. Lembre-se, só marque a frase se você tiver certeza que ela descreve você hoje.",
 
-"en": {"doi": null, "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1504788/pdf/bmjcred00537-0021.pdf", "pages": "1-2"}
+    "pages": "PT p.1",
 
-},
+    "reproduction_permitted": true
+  },
 
-"instructions": {
+  "items": [
+    {
+      "id": "Q1",
 
-"text": "Quando suas costas doem você pode achar difícil fazer coisas que normalmente fazia. Esta lista contém frases de pessoas descrevendo a si mesmas quando sentem dor nas costas. Você pode achar entre estas frases que você lê algumas que descrevem você hoje. À medida que você lê estas frases, pense em você hoje. Marque a sentença que descreve você hoje. Se a frase não descreve o que você sente, ignore-a e leia a seguinte. Lembre-se, só marque a frase se você tiver certeza que ela descreve você hoje.",
+      "text": "Fico em casa a maior parte do tempo devido a minha coluna.",
 
-"pages": "PT p.1",
+      "domain": "N/A",
 
-"reproduction_permitted": true
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-},
+      "reverse_scored": false,
 
-"items": [
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q2",
 
-"id": "Q1",
+      "text": "Eu mudo de posição freqüentemente para tentar aliviar minha coluna.",
 
-"text": "Fico em casa a maior parte do tempo devido a minha coluna.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q3",
 
-},
+      "text": "Eu ando mais lentamente do que o meu normal por causa de minha coluna.",
 
-{
+      "domain": "N/A",
 
-"id": "Q2",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Eu mudo de posição freqüentemente para tentar aliviar minha coluna.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q4",
 
-"reverse_scored": false,
+      "text": "Por causa de minhas costas não estou fazendo nenhum dos trabalhos que fazia em minha casa.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q3",
+      "source_pages": "PT p.1"
+    },
 
-"text": "Eu ando mais lentamente do que o meu normal por causa de minha coluna.",
+    {
+      "id": "Q5",
 
-"domain": "N/A",
+      "text": "Por causa de minhas costas, eu uso um corrimão para subir escadas.",
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "domain": "N/A",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"source_pages": "PT p.1"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q6",
 
-"id": "Q4",
+      "text": "Por causa de minhas costas, eu deito para descansar mais freqüentemente.",
 
-"text": "Por causa de minhas costas não estou fazendo nenhum dos trabalhos que fazia em minha casa.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q7",
 
-},
+      "text": "Por causa de minhas costas, eu necessito de apoio para levantar-me de uma cadeira.",
 
-{
+      "domain": "N/A",
 
-"id": "Q5",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Por causa de minhas costas, eu uso um corrimão para subir escadas.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q8",
 
-"reverse_scored": false,
+      "text": "Por causa de minhas costas, eu tento arranjar pessoas para fazerem coisas para mim.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q6",
+      "source_pages": "PT p.1"
+    },
 
-"text": "Por causa de minhas costas, eu deito para descansar mais freqüentemente.",
+    {
+      "id": "Q9",
 
-"domain": "N/A",
+      "text": "Eu me visto mais lentamente do que o usual, Por causa de minhas costas.",
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "domain": "N/A",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"source_pages": "PT p.1"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q10",
 
-"id": "Q7",
+      "text": "Eu fico de pé por períodos curtos, Por causa de minhas costas.",
 
-"text": "Por causa de minhas costas, eu necessito de apoio para levantar-me de uma cadeira.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q11",
 
-},
+      "text": "Por causa de minhas costas, eu procuro não me curvar ou agachar.",
 
-{
+      "domain": "N/A",
 
-"id": "Q8",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Por causa de minhas costas, eu tento arranjar pessoas para fazerem coisas para mim.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q12",
 
-"reverse_scored": false,
+      "text": "Eu acho difícil sair de uma cadeira, Por causa de minhas costas.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q9",
+      "source_pages": "PT p.1"
+    },
 
-"text": "Eu me visto mais lentamente do que o usual, Por causa de minhas costas.",
+    {
+      "id": "Q13",
 
-"domain": "N/A",
+      "text": "Minhas costas doem a maior parte do tempo.",
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "domain": "N/A",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"source_pages": "PT p.1"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q14",
 
-"id": "Q10",
+      "text": "Eu acho difícil me virar na cama Por causa de minhas costas.",
 
-"text": "Eu fico de pé por períodos curtos, Por causa de minhas costas.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q15",
 
-},
+      "text": "Meu apetite não é bom por causa de dor nas costas.",
 
-{
+      "domain": "N/A",
 
-"id": "Q11",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Por causa de minhas costas, eu procuro não me curvar ou agachar.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q16",
 
-"reverse_scored": false,
+      "text": "Tenho problemas para causar meias devido a dor nas minhas costas.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q12",
+      "source_pages": "PT p.1"
+    },
 
-"text": "Eu acho difícil sair de uma cadeira, Por causa de minhas costas.",
+    {
+      "id": "Q17",
 
-"domain": "N/A",
+      "text": "Só consigo andar distâncias curtas Por causa de minhas costas.",
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "domain": "N/A",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"source_pages": "PT p.1"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q18",
 
-"id": "Q13",
+      "text": "Durmo pior de barriga para cima.",
 
-"text": "Minhas costas doem a maior parte do tempo.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q19",
 
-},
+      "text": "Devido a minha dor nas costas, preciso de ajuda para me vestir.",
 
-{
+      "domain": "N/A",
 
-"id": "Q14",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Eu acho difícil me virar na cama Por causa de minhas costas.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q20",
 
-"reverse_scored": false,
+      "text": "Eu fico sentado a maior parte do dia Por causa de minhas costas.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q15",
+      "source_pages": "PT p.1"
+    },
 
-"text": "Meu apetite não é bom por causa de dor nas costas.",
+    {
+      "id": "Q21",
 
-"domain": "N/A",
+      "text": "Eu evito trabalhos pesados em casa Por causa de minhas costas.",
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "domain": "N/A",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"source_pages": "PT p.1"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.1"
+    },
 
-{
+    {
+      "id": "Q22",
 
-"id": "Q16",
+      "text": "Devido a minha dor nas costas fico mais irritado e de mau humor com as pessoas, do que normalmente.",
 
-"text": "Tenho problemas para causar meias devido a dor nas minhas costas.",
+      "domain": "N/A",
 
-"domain": "N/A",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.1"
+    },
 
-"source_pages": "PT p.1"
+    {
+      "id": "Q23",
 
-},
+      "text": "Por causa de minhas costas, subo escadas mais devagar do que o usual.",
 
-{
+      "domain": "N/A",
 
-"id": "Q17",
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-"text": "Só consigo andar distâncias curtas Por causa de minhas costas.",
+      "reverse_scored": false,
 
-"domain": "N/A",
+      "source_pages": "PT p.1"
+    },
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    {
+      "id": "Q24",
 
-"reverse_scored": false,
+      "text": "Fico na cama a maior parte do tempo Por causa de minhas costas.",
 
-"source_pages": "PT p.1"
+      "domain": "N/A",
 
-},
+      "options": [
+        { "label": "Sim", "score": 1 },
+        { "label": "Não", "score": 0 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q18",
+      "source_pages": "PT p.1"
+    }
+  ],
 
-"text": "Durmo pior de barriga para cima.",
+  "scoring": {
+    "per_item": "1 se marcado (sim), 0 se não",
 
-"domain": "N/A",
+    "domains": [{ "name": "Total", "items": ["Q1-Q24"], "formula": "soma dos itens marcados" }],
 
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
+    "total_formula": "soma dos itens marcados",
 
-"reverse_scored": false,
+    "missing_data_rule": "Pontue como 0 se não aplicável ou ausente",
 
-"source_pages": "PT p.1"
+    "range": { "min": 0, "max": 24 },
 
-},
+    "interpretation": "Maior escore indica maior incapacidade"
+  },
 
-{
+  "crosscheck": [
+    { "aspect": "structure", "status": "alinhado", "evidence": "24 itens em ambas as versões" },
 
-"id": "Q19",
+    { "aspect": "content", "status": "alinhado", "evidence": "Validação PT confirma equivalência" },
 
-"text": "Devido a minha dor nas costas, preciso de ajuda para me vestir.",
+    { "aspect": "scoring", "status": "alinhado", "evidence": "Soma idêntica; fontes EN e PT" }
+  ],
 
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
-},
-
-{
-
-"id": "Q20",
-
-"text": "Eu fico sentado a maior parte do dia Por causa de minhas costas.",
-
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
-},
-
-{
-
-"id": "Q21",
-
-"text": "Eu evito trabalhos pesados em casa Por causa de minhas costas.",
-
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
-},
-
-{
-
-"id": "Q22",
-
-"text": "Devido a minha dor nas costas fico mais irritado e de mau humor com as pessoas, do que normalmente.",
-
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
-},
-
-{
-
-"id": "Q23",
-
-"text": "Por causa de minhas costas, subo escadas mais devagar do que o usual.",
-
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
-},
-
-{
-
-"id": "Q24",
-
-"text": "Fico na cama a maior parte do tempo Por causa de minhas costas.",
-
-"domain": "N/A",
-
-"options": [{"label":"Sim","score":1}, {"label":"Não","score":0}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.1"
-
+  "notes": "Questionário no domínio público; itens transcritos da versão PT validada."
 }
-
-],
-
-"scoring": {
-
-"per_item": "1 se marcado (sim), 0 se não",
-
-"domains": [{"name":"Total","items":["Q1-Q24"],"formula":"soma dos itens marcados"}],
-
-"total_formula": "soma dos itens marcados",
-
-"missing_data_rule": "Pontue como 0 se não aplicável ou ausente",
-
-"range": {"min": 0, "max": 24},
-
-"interpretation": "Maior escore indica maior incapacidade"
-
-},
-
-"crosscheck": [
-
-{"aspect":"structure","status":"alinhado","evidence":"24 itens em ambas as versões"},
-
-{"aspect":"content","status":"alinhado","evidence":"Validação PT confirma equivalência"},
-
-{"aspect":"scoring","status":"alinhado","evidence":"Soma idêntica; fontes EN e PT"}
-
-],
-
-"notes": "Questionário no domínio público; itens transcritos da versão PT validada."
-
-}
-
 ```
 
 # STarT Back Screening Tool (SBST)
@@ -6188,215 +6282,236 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 - Estrutura, conteúdo e pontuação alinhados entre PT e EN; equivalência conceitual confirmada na validação. Regra de pontuação segue o original EN sem divergências.
 
 ```json
-
 {
+  "name": "STarT Back Screening Tool",
 
-"name": "STarT Back Screening Tool",
+  "acronym": "SBST",
 
-"acronym": "SBST",
+  "domain": "Triagem de risco para dor lombar persistente",
 
-"domain": "Triagem de risco para dor lombar persistente",
+  "population": "Pacientes com dor lombar em atenção primária",
 
-"population": "Pacientes com dor lombar em atenção primária",
+  "language": "pt-BR",
 
-"language": "pt-BR",
+  "sources": {
+    "pt": {
+      "doi": "10.1590/bjpt-rbf.2014.0058",
+      "url": "https://www.scielo.br/j/rbfis/a/fC5j9D6VvS9g8qHjM7x8LzK/?format=pdf&lang=pt",
+      "pages": "Apêndice 5 p.52"
+    },
 
-"sources": {
+    "en": {
+      "doi": "10.1002/art.23576",
+      "url": "https://s3.eu-west-2.amazonaws.com/startback.org.uk/downloads/STarT+Back+Tool+articles/Original+STarT+Back+Tool+paper.pdf",
+      "pages": "1"
+    }
+  },
 
-"pt": {"doi": "10.1590/bjpt-rbf.2014.0058", "url": "https://www.scielo.br/j/rbfis/a/fC5j9D6VvS9g8qHjM7x8LzK/?format=pdf&lang=pt", "pages": "Apêndice 5 p.52"},
+  "instructions": {
+    "text": "Pensando nas duas últimas semanas, assinale sua resposta para as seguintes perguntas.",
 
-"en": {"doi": "10.1002/art.23576", "url": "https://s3.eu-west-2.amazonaws.com/startback.org.uk/downloads/STarT+Back+Tool+articles/Original+STarT+Back+Tool+paper.pdf", "pages": "1"}
+    "pages": "PT Apêndice 5 p.52",
 
-},
+    "reproduction_permitted": true
+  },
 
-"instructions": {
+  "items": [
+    {
+      "id": "Q1",
 
-"text": "Pensando nas duas últimas semanas, assinale sua resposta para as seguintes perguntas.",
+      "text": "A minha dor nas costas se espalhou pelas pernas nas duas últimas semanas",
 
-"pages": "PT Apêndice 5 p.52",
+      "domain": "Total",
 
-"reproduction_permitted": true
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-},
+      "reverse_scored": false,
 
-"items": [
+      "source_pages": "PT p.52"
+    },
 
-{
+    {
+      "id": "Q2",
 
-"id": "Q1",
+      "text": "Eu tive dor no ombro e/ou na nuca pelo menos uma vez nas últimas duas semanas",
 
-"text": "A minha dor nas costas se espalhou pelas pernas nas duas últimas semanas",
+      "domain": "Total",
 
-"domain": "Total",
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.52"
+    },
 
-"source_pages": "PT p.52"
+    {
+      "id": "Q3",
 
-},
+      "text": "Eu evito andar longas distâncias por causa da minha dor nas costas",
 
-{
+      "domain": "Total",
 
-"id": "Q2",
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-"text": "Eu tive dor no ombro e/ou na nuca pelo menos uma vez nas últimas duas semanas",
+      "reverse_scored": false,
 
-"domain": "Total",
+      "source_pages": "PT p.52"
+    },
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+    {
+      "id": "Q4",
 
-"reverse_scored": false,
+      "text": "Nas duas últimas semanas, tenho me vestido mais devagar por causa da minha dor nas costas",
 
-"source_pages": "PT p.52"
+      "domain": "Total",
 
-},
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q3",
+      "source_pages": "PT p.52"
+    },
 
-"text": "Eu evito andar longas distâncias por causa da minha dor nas costas",
+    {
+      "id": "Q5",
 
-"domain": "Total",
+      "text": "A atividade física não é realmente segura para uma pessoa com um problema como o meu",
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+      "domain": "Psicossocial",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-"source_pages": "PT p.52"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.52"
+    },
 
-{
+    {
+      "id": "Q6",
 
-"id": "Q4",
+      "text": "Tenho ficado preocupado por muito tempo por causa da minha dor nas costas",
 
-"text": "Nas duas últimas semanas, tenho me vestido mais devagar por causa da minha dor nas costas",
+      "domain": "Psicossocial",
 
-"domain": "Total",
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+      "reverse_scored": false,
 
-"reverse_scored": false,
+      "source_pages": "PT p.52"
+    },
 
-"source_pages": "PT p.52"
+    {
+      "id": "Q7",
 
-},
+      "text": "Eu sinto que minha dor nas costas é terrível e que nunca vai melhorar",
 
-{
+      "domain": "Psicossocial",
 
-"id": "Q5",
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-"text": "A atividade física não é realmente segura para uma pessoa com um problema como o meu",
+      "reverse_scored": false,
 
-"domain": "Psicossocial",
+      "source_pages": "PT p.52"
+    },
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+    {
+      "id": "Q8",
 
-"reverse_scored": false,
+      "text": "Em geral, eu não tenho gostado de todas as coisas como eu costumava gostar",
 
-"source_pages": "PT p.52"
+      "domain": "Psicossocial",
 
-},
+      "options": [
+        { "label": "Discordo", "score": 0 },
+        { "label": "Concordo", "score": 1 }
+      ],
 
-{
+      "reverse_scored": false,
 
-"id": "Q6",
+      "source_pages": "PT p.52"
+    },
 
-"text": "Tenho ficado preocupado por muito tempo por causa da minha dor nas costas",
+    {
+      "id": "Q9",
 
-"domain": "Psicossocial",
+      "text": "Em geral, quanto a sua dor nas costas te incomodou nas duas últimas semanas",
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+      "domain": "Psicossocial",
 
-"reverse_scored": false,
+      "options": [
+        { "label": "Nada", "score": 0 },
+        { "label": "Pouco", "score": 0 },
+        { "label": "Moderado", "score": 0 },
+        { "label": "Muito", "score": 1 },
+        { "label": "Extremamente", "score": 1 }
+      ],
 
-"source_pages": "PT p.52"
+      "reverse_scored": false,
 
-},
+      "source_pages": "PT p.52"
+    }
+  ],
 
-{
+  "scoring": {
+    "per_item": "0-1 como descrito",
 
-"id": "Q7",
+    "domains": [
+      {
+        "name": "Total",
+        "items": ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9"],
+        "formula": "soma dos itens"
+      },
+      {
+        "name": "Psicossocial",
+        "items": ["Q5", "Q6", "Q7", "Q8", "Q9"],
+        "formula": "soma dos itens"
+      }
+    ],
 
-"text": "Eu sinto que minha dor nas costas é terrível e que nunca vai melhorar",
+    "total_formula": "soma dos 9 itens",
 
-"domain": "Psicossocial",
+    "missing_data_rule": "[PENDENTE]",
 
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
+    "range": { "min": 0, "max": 9 },
 
-"reverse_scored": false,
+    "interpretation": "Baixo risco (total ≤3); Médio risco (total ≥4 e subescala ≤3); Alto risco (subescala ≥4)"
+  },
 
-"source_pages": "PT p.52"
+  "crosscheck": [
+    { "aspect": "structure", "status": "alinhado", "evidence": "9 itens em ambas as versões" },
 
-},
+    { "aspect": "content", "status": "alinhado", "evidence": "Validação PT confirma equivalência" },
 
-{
+    {
+      "aspect": "scoring",
+      "status": "alinhado",
+      "evidence": "Fórmulas e classificação idênticas; fontes EN e PT"
+    }
+  ],
 
-"id": "Q8",
-
-"text": "Em geral, eu não tenho gostado de todas as coisas como eu costumava gostar",
-
-"domain": "Psicossocial",
-
-"options": [{"label":"Discordo","score":0}, {"label":"Concordo","score":1}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.52"
-
-},
-
-{
-
-"id": "Q9",
-
-"text": "Em geral, quanto a sua dor nas costas te incomodou nas duas últimas semanas",
-
-"domain": "Psicossocial",
-
-"options": [{"label":"Nada","score":0}, {"label":"Pouco","score":0}, {"label":"Moderado","score":0}, {"label":"Muito","score":1}, {"label":"Extremamente","score":1}],
-
-"reverse_scored": false,
-
-"source_pages": "PT p.52"
-
+  "notes": "Informações extraídas de fontes validadas; reprodução permitida para fins clínicos e de pesquisa com citação."
 }
-
-],
-
-"scoring": {
-
-"per_item": "0-1 como descrito",
-
-"domains": [{"name":"Total","items":["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9"],"formula":"soma dos itens"}, {"name":"Psicossocial","items":["Q5","Q6","Q7","Q8","Q9"],"formula":"soma dos itens"}],
-
-"total_formula": "soma dos 9 itens",
-
-"missing_data_rule": "[PENDENTE]",
-
-"range": {"min": 0, "max": 9},
-
-"interpretation": "Baixo risco (total ≤3); Médio risco (total ≥4 e subescala ≤3); Alto risco (subescala ≥4)"
-
-},
-
-"crosscheck": [
-
-{"aspect":"structure","status":"alinhado","evidence":"9 itens em ambas as versões"},
-
-{"aspect":"content","status":"alinhado","evidence":"Validação PT confirma equivalência"},
-
-{"aspect":"scoring","status":"alinhado","evidence":"Fórmulas e classificação idênticas; fontes EN e PT"}
-
-],
-
-"notes": "Informações extraídas de fontes validadas; reprodução permitida para fins clínicos e de pesquisa com citação."
-
-}
-
 ```
 
 # Quebec Back Pain Disability Scale (QBPDS)
@@ -6432,87 +6547,86 @@ Each item scored 1–5; Pain subscale reversed (1 = severe, 5 = none). Reference
 - Estrutura, conteúdo e pontuação alinhados entre PT e EN conforme estudos de validação; equivalência confirmada. Regra de pontuação segue o original EN sem divergências.
 
 ```json
-
 {
+  "name": "Quebec Back Pain Disability Scale",
 
-"name": "Quebec Back Pain Disability Scale",
+  "acronym": "QBPDS",
 
-"acronym": "QBPDS",
+  "domain": "Incapacidade funcional devido à dor lombar",
 
-"domain": "Incapacidade funcional devido à dor lombar",
+  "population": "Pacientes com dor lombar",
 
-"population": "Pacientes com dor lombar",
+  "language": "pt-BR",
 
-"language": "pt-BR",
+  "sources": {
+    "pt": {
+      "doi": null,
+      "url": "https://www.scielo.br/j/rbfis/a/KzXbXFmQy63d5HjS9v8t3gB/?format=pdf&lang=pt",
+      "pages": "[PENDENTE]"
+    },
 
-"sources": {
+    "en": {
+      "doi": null,
+      "url": "https://www.unmc.edu/media/pa/measurement-instruments/quebec-back-pain-disability-scale.pdf",
+      "pages": "1-2"
+    }
+  },
 
-"pt": {"doi": null, "url": "https://www.scielo.br/j/rbfis/a/KzXbXFmQy63d5HjS9v8t3gB/?format=pdf&lang=pt", "pages": "[PENDENTE]"},
+  "instructions": {
+    "text": null,
 
-"en": {"doi": null, "url": "https://www.unmc.edu/media/pa/measurement-instruments/quebec-back-pain-disability-scale.pdf", "pages": "1-2"}
+    "pages": "PT e EN p.1",
 
-},
+    "reproduction_permitted": false
+  },
 
-"instructions": {
+  "items": [
+    {
+      "id": "Q1-Q20",
 
-"text": null,
+      "text": null,
 
-"pages": "PT e EN p.1",
+      "domain": "N/A",
 
-"reproduction_permitted": false
+      "options": [
+        { "label": null, "score": 0 },
+        { "label": null, "score": 1 },
+        { "label": null, "score": 2 },
+        { "label": null, "score": 3 },
+        { "label": null, "score": 4 },
+        { "label": null, "score": 5 }
+      ],
 
-},
+      "reverse_scored": false,
 
-"items": [
+      "source_pages": "EN p.1-2"
+    }
+  ],
 
-{
+  "scoring": {
+    "per_item": "0 a 5 (maior = maior dificuldade)",
 
-"id": "Q1-Q20",
+    "domains": [{ "name": "Total", "items": ["Q1-Q20"], "formula": "soma dos itens" }],
 
-"text": null,
+    "total_formula": "soma de todos os itens",
 
-"domain": "N/A",
+    "missing_data_rule": "[PENDENTE]",
 
-"options": [{"label":null,"score":0}, {"label":null,"score":1}, {"label":null,"score":2}, {"label":null,"score":3}, {"label":null,"score":4}, {"label":null,"score":5}],
+    "range": { "min": 0, "max": 100 },
 
-"reverse_scored": false,
+    "interpretation": "Maior escore indica maior incapacidade"
+  },
 
-"source_pages": "EN p.1-2"
+  "crosscheck": [
+    { "aspect": "structure", "status": "alinhado", "evidence": "20 itens em ambas as versões" },
 
+    { "aspect": "content", "status": "alinhado", "evidence": "Validação PT confirma equivalência" },
+
+    { "aspect": "scoring", "status": "alinhado", "evidence": "Soma idêntica; fontes EN e PT" }
+  ],
+
+  "notes": "Instrumento gerenciado pelo MAPI Research Trust; reprodução requer permissão. Informações compiladas de fontes públicas e validações; algumas regras marcadas como pendentes."
 }
-
-],
-
-"scoring": {
-
-"per_item": "0 a 5 (maior = maior dificuldade)",
-
-"domains": [{"name":"Total","items":["Q1-Q20"],"formula":"soma dos itens"}],
-
-"total_formula": "soma de todos os itens",
-
-"missing_data_rule": "[PENDENTE]",
-
-"range": {"min": 0, "max": 100},
-
-"interpretation": "Maior escore indica maior incapacidade"
-
-},
-
-"crosscheck": [
-
-{"aspect":"structure","status":"alinhado","evidence":"20 itens em ambas as versões"},
-
-{"aspect":"content","status":"alinhado","evidence":"Validação PT confirma equivalência"},
-
-{"aspect":"scoring","status":"alinhado","evidence":"Soma idêntica; fontes EN e PT"}
-
-],
-
-"notes": "Instrumento gerenciado pelo MAPI Research Trust; reprodução requer permissão. Informações compiladas de fontes públicas e validações; algumas regras marcadas como pendentes."
-
-}
-
 ```
 
 # Foot and Ankle Ability Measure (FAAM)
@@ -6587,9 +6701,9 @@ The FAAM is self-administered, with patients rating their ability over the past 
 
 |----------|-----------------|---------------------------------|------------|
 
-| ADL     | 21              | Standing, walking on uneven ground, squatting, sleeping | Likert 0-4 |
+| ADL | 21 | Standing, walking on uneven ground, squatting, sleeping | Likert 0-4 |
 
-| Sports  | 8               | Running, jumping, landing, low-impact activities | Likert 0-4 |
+| Sports | 8 | Running, jumping, landing, low-impact activities | Likert 0-4 |
 
 ### Scoring Details
 
@@ -6705,7 +6819,7 @@ Scores are calculated separately for each subscale.
 
 "per_item": "4 a 0; sem reversos",
 
-"domains": [{"name":"ADL","items":["ADL1-21"],"formula":"(soma / (n_itens * 4)) * 100"},{"name":"Sports","items":["Sports1-8"],"formula":"(soma / (n_itens * 4)) * 100"}],
+"domains": [{"name":"ADL","items":["ADL1-21"],"formula":"(soma / (n*itens * 4)) _ 100"},{"name":"Sports","items":["Sports1-8"],"formula":"(soma / (n_itens _ 4)) \_ 100"}],
 
 "total_formula": "Não há escore total; subescalas separadas",
 
@@ -6923,7 +7037,7 @@ Each item scored 0 (no issue) to 4 (extreme); subscales summed and normalized to
 
 "per_item": "4 (nenhum) a 0 (extremo); itens com redação invertida ajustados",
 
-"domains": [{"name":"Sintomas","items":["S1-S7"],"formula":"100 - (soma / 28 * 100)"},{"name":"Dor","items":["P1-P9"],"formula":"100 - (soma / 36 * 100)"},{"name":"ADL","items":["A1-A17"],"formula":"100 - (soma / 68 * 100)"},{"name":"Sport/Rec","items":["SP1-SP5"],"formula":"100 - (soma / 20 * 100)"},{"name":"QOL","items":["Q1-Q4"],"formula":"100 - (soma / 16 * 100)"}],
+"domains": [{"name":"Sintomas","items":["S1-S7"],"formula":"100 - (soma / 28 _ 100)"},{"name":"Dor","items":["P1-P9"],"formula":"100 - (soma / 36 _ 100)"},{"name":"ADL","items":["A1-A17"],"formula":"100 - (soma / 68 _ 100)"},{"name":"Sport/Rec","items":["SP1-SP5"],"formula":"100 - (soma / 20 _ 100)"},{"name":"QOL","items":["Q1-Q4"],"formula":"100 - (soma / 16 \* 100)"}],
 
 "total_formula": "Não há escore total; subescalas separadas",
 
