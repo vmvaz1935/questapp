@@ -28,6 +28,7 @@
   "dependencies": {
     "@google/genai": "^1.28.0",
     "@sentry/react": "^10.22.0",
+    "axios": "^1.13.1",
     "dexie": "^4.2.1",
     "dexie-react-hooks": "^4.2.0",
     "firebase": "^10.13.2",

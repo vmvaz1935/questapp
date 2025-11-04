@@ -8,6 +8,8 @@ import { migrateLocalStorage } from './utils/migrateLocalStorage';
 import { fixLocalStorageOnLoad } from './utils/fixLocalStorageOnLoad';
 import { Layout } from './components/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { BackendSyncService } from './services/backendSync';
+import { isBackendEnabled, isOnline } from './services/apiClient';
 import {
   LandingPage,
   Login,
@@ -98,6 +100,40 @@ const InnerApp: React.FC = () => {
   const [questionnaires, setQuestionnaires] = useLocalStorage<Questionnaire[]>('published_questionnaires', []);
   // Garantir que professionalId não seja null/undefined
   const planKey = professionalId ? `user_plan_${professionalId}` : 'user_plan_temp';
+
+  // Sincronização automática com backend
+  useEffect(() => {
+    if (!professionalId || !isBackendEnabled()) {
+      return;
+    }
+
+    // Sincronizar quando aplicação inicia
+    if (isOnline()) {
+      BackendSyncService.sync();
+      BackendSyncService.pullFromServer(professionalId);
+    }
+
+    // Sincronizar quando volta online
+    const handleOnline = () => {
+      console.log('Back online, syncing...');
+      BackendSyncService.sync();
+      BackendSyncService.pullFromServer(professionalId);
+    };
+
+    window.addEventListener('online', handleOnline);
+
+    // Sincronizar periodicamente (a cada 5 minutos)
+    const syncInterval = setInterval(() => {
+      if (isOnline()) {
+        BackendSyncService.sync();
+      }
+    }, 5 * 60 * 1000);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      clearInterval(syncInterval);
+    };
+  }, [professionalId]);
   const [userPlan, setUserPlan] = useLocalStorage<PlanType | null>(planKey, null);
 
   // Executar migração uma vez na inicialização

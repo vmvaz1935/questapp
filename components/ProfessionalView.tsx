@@ -6,35 +6,46 @@ import { useFirebaseSync } from '../hooks/useFirebaseSync';
 import { auth } from '../config/firebaseConfig';
 import { usePlanLimits } from '../hooks/usePlanLimits';
 import PaymentModal from './PaymentModal';
+import { useBackendPatients } from '../hooks/useBackendPatients';
+import { isBackendEnabled } from '../services/apiClient';
 
 interface ProfessionalViewProps {
   questionnaires: Questionnaire[];
 }
 
 const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
-  const { professionalId, isGoogleAuth } = useAuth();
+  const { professionalId, isGoogleAuth, accessToken } = useAuth();
   const storageKey = professionalId ? `patients_${professionalId}` : 'patients';
-  const [patients, setPatients] = useLocalStorage<Patient[]>(storageKey, []);
+  
+  // Usar backend se habilitado, senão usar localStorage
+  const backendPatients = useBackendPatients();
+  const [localPatients, setLocalPatients] = useLocalStorage<Patient[]>(storageKey, []);
+  
+  // Decidir qual fonte de dados usar
+  const useBackend = isBackendEnabled() && !!accessToken;
+  const patients = useBackend ? backendPatients.patients : localPatients;
+  const setPatients = useBackend ? undefined : setLocalPatients;
+  
   const { plan, maxPatients, canAddPatient } = usePlanLimits();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   
   // Obter UID do Firebase se autenticado com Google
   const firebaseUserId = isGoogleAuth && auth?.currentUser?.uid || null;
   
-  // Sincronizar com Firebase
+  // Sincronizar com Firebase (apenas se não usar backend)
   const { syncData } = useFirebaseSync({ 
     userId: firebaseUserId || professionalId, 
     isGoogleAuth 
   });
   
-  // Sincronizar pacientes quando mudarem (apenas se autenticado com Google)
+  // Sincronizar pacientes quando mudarem (apenas se autenticado com Google e não usar backend)
   useEffect(() => {
-    if (isGoogleAuth && firebaseUserId && patients.length > 0) {
+    if (!useBackend && isGoogleAuth && firebaseUserId && patients.length > 0) {
       syncData('patients', patients).catch(err => {
         console.error('Erro ao sincronizar pacientes:', err);
       });
     }
-  }, [patients, isGoogleAuth, firebaseUserId, syncData]);
+  }, [patients, isGoogleAuth, firebaseUserId, syncData, useBackend]);
 
   const [form, setForm] = useState<Partial<Patient>>({
     nome: '',
@@ -50,7 +61,7 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.nome || !form.idade || !form.sexo || !form.diagnostico) {
       alert('Preencha nome, idade, sexo e diagnóstico.');
@@ -70,8 +81,7 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
       return;
     }
     
-    const newPatient: Patient = {
-      id: `${Date.now()}`,
+    const newPatientData: Omit<Patient, 'id'> = {
       nome: form.nome as string,
       idade: Number(form.idade),
       sexo: form.sexo as Patient['sexo'],
@@ -80,8 +90,25 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
       fisioterapeuta: form.fisioterapeuta as string,
       medico: form.medico as string,
     };
-    setPatients(prev => [newPatient, ...prev]);
-    setForm({ nome: '', idade: undefined, sexo: 'Prefiro não informar', diagnostico: '', ladoAcometido: 'Não se aplica', fisioterapeuta: '', medico: '' });
+    
+    try {
+      if (useBackend && backendPatients.createPatient) {
+        // Usar backend
+        await backendPatients.createPatient(newPatientData);
+      } else if (setPatients) {
+        // Usar localStorage
+        const newPatient: Patient = {
+          id: `${Date.now()}`,
+          ...newPatientData,
+        };
+        setPatients(prev => [newPatient, ...prev]);
+      }
+      
+      setForm({ nome: '', idade: undefined, sexo: 'Prefiro não informar', diagnostico: '', ladoAcometido: 'Não se aplica', fisioterapeuta: '', medico: '' });
+    } catch (error: any) {
+      console.error('Erro ao criar paciente:', error);
+      alert(error.message || 'Erro ao criar paciente. Tente novamente.');
+    }
   };
 
   const handlePaymentSuccess = () => {
@@ -198,7 +225,18 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = () => {
                     <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1 break-words">Fisio: {p.fisioterapeuta || '-'} • Médico: {p.medico || '-'}</p>
                   </div>
                   <button
-                    onClick={()=> setPatients(prev => prev.filter(x => x.id !== p.id))}
+                    onClick={async () => {
+                      if (useBackend && backendPatients.deletePatient) {
+                        try {
+                          await backendPatients.deletePatient(p.id);
+                        } catch (error: any) {
+                          console.error('Erro ao deletar paciente:', error);
+                          alert(error.message || 'Erro ao deletar paciente. Tente novamente.');
+                        }
+                      } else if (setPatients) {
+                        setPatients(prev => prev.filter(x => x.id !== p.id));
+                      }
+                    }}
                     className="text-red-600 hover:text-red-700 active:text-red-800 text-sm sm:text-base font-medium px-3 py-2 min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors flex-shrink-0"
                     aria-label={`Excluir paciente ${p.nome}`}>
                     Excluir
