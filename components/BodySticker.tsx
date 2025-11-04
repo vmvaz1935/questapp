@@ -91,13 +91,21 @@ const BodySticker: React.FC<{ category: string; size?: number }>= ({ category, s
         <img 
           src={imagePath}
           alt={category}
-          onError={() => setImageError(true)}
+          onError={() => {
+            console.warn(`Imagem não encontrada: ${imagePath}`);
+            setImageError(true);
+          }}
+          onLoad={() => {
+            // Debug: verificar se a imagem carregou
+            console.log(`Imagem carregada: ${imagePath}`);
+          }}
           style={{
-            width: `${size * 0.7}px`,
-            height: `${size * 0.7}px`,
+            width: `${size * 0.75}px`,
+            height: `${size * 0.75}px`,
             objectFit: 'contain',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2)) brightness(0) invert(1)',
-            display: 'block'
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+            display: 'block',
+            pointerEvents: 'none'
           }}
         />
       ) : (
