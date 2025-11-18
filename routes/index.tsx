@@ -11,3 +11,12 @@ export const ValidateView = lazy(() => import('../components/ValidateView'));
 export const PrivacyPolicy = lazy(() => import('../components/PrivacyPolicy'));
 export const ConsentLGPD = lazy(() => import('../components/ConsentLGPD'));
 
+// New authentication components
+export const LoginForm = lazy(() => import('../src/components/auth/LoginForm').then(m => ({ default: m.LoginForm })));
+export const RegisterForm = lazy(() => import('../src/components/auth/RegisterForm').then(m => ({ default: m.RegisterForm })));
+export const TwoFactorVerify = lazy(() => import('../src/components/auth/TwoFactorVerify').then(m => ({ default: m.TwoFactorVerify })));
+export const TwoFactorSetup = lazy(() => import('../src/components/auth/TwoFactorSetup').then(m => ({ default: m.TwoFactorSetup })));
+export const PasswordReset = lazy(() => import('../src/components/auth/PasswordReset').then(m => ({ default: m.PasswordReset })));
+export const VerifyEmail = lazy(() => import('../src/components/auth/VerifyEmail').then(m => ({ default: m.VerifyEmail })));
+export const UserProfile = lazy(() => import('../src/components/auth/UserProfile').then(m => ({ default: m.UserProfile })));
+

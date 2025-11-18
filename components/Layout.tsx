@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import { useAuthStore } from '../src/stores/authStore';
 import { trackPageview, trackEvent, AnalyticsEvents } from '../utils/analytics';
 
 interface LayoutProps {
@@ -11,6 +12,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t } = useTranslation();
   const { professionalId, setProfessionalId } = useAuth();
+  const { professional, logout } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,6 +24,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const handleSignOut = async () => {
     // Track logout event
     trackEvent(AnalyticsEvents.LOGOUT);
+
+    // Usar novo sistema de logout
+    await logout();
 
     const isGoogleAuth = localStorage.getItem('is_google_auth') === 'true';
     localStorage.removeItem('current_professional_id');
@@ -42,7 +47,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
     
     setProfessionalId(null);
-    navigate('/');
+    navigate('/login');
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -104,6 +109,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   aria-current={isActive('/comparison') ? 'page' : undefined}
                 >
                   {t('navigation.comparison')}
+                </Link>
+                <Link
+                  to="/profile"
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                    isActive('/profile')
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  }`}
+                  aria-current={isActive('/profile') ? 'page' : undefined}
+                >
+                  👤 Perfil
                 </Link>
                 <button
                   onClick={() => navigate('/privacy')}

@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Professional {
+  id                String      @id @default(cuid())
+  name              String
+  email             String      @unique
+  passwordHash      String?     // null se usar OAuth
+  emailVerified     Boolean     @default(false)
+  emailVerifiedAt   DateTime?
+  
+  // 2FA
+  twoFactorEnabled  Boolean     @default(false)
+  twoFactorSecret   String?     // Criptografado
+  twoFactorBackupCodes String[] @default([]) // Códigos de backup
+  
+  // OAuth
+  googleId          String?     @unique
+  googleEmail       String?
+  
+  // Plano
+  planType          String      @default("FREE") // FREE, PRO
+  planSubscribedAt  DateTime?
+  
+  // Segurança
+  lastLoginAt       DateTime?
+  lastLoginIp       String?
+  loginAttempts     Int         @default(0)
+  lockUntil         DateTime?   // Bloqueado até quando
+  
+  // Timestamps
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  // Relações
+  refreshTokens     RefreshToken[]
+  passwordResets    PasswordReset[]
+  emailVerifications EmailVerification[]
+  loginLogs         LoginLog[]
+  
+  @@index([email])
+  @@index([googleId])
+}
+
+// Refresh Tokens
+model RefreshToken {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  token             String      @unique
+  expiresAt         DateTime
+  revokedAt         DateTime?
+  ipAddress         String?
+  userAgent         String?
+  
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([expiresAt])
+  @@index([token])
+}
+
+// Password Resets
+model PasswordReset {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  token             String      @unique
+  expiresAt         DateTime
+  usedAt            DateTime?
+  
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([expiresAt])
+  @@index([token])
+}
+
+// Email Verification Tokens
+model EmailVerification {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  token             String      @unique
+  expiresAt         DateTime
+  usedAt            DateTime?
+  
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([expiresAt])
+  @@index([token])
+}
+
+// Login Logs
+model LoginLog {
+  id                String      @id @default(cuid())
+  professionalId    String
+  professional      Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  
+  success           Boolean
+  method            String      // "EMAIL", "GOOGLE", "TOTP"
+  ipAddress         String?
+  userAgent         String?
+  errorMessage      String?
+  
+  createdAt         DateTime    @default(now())
+  
+  @@index([professionalId])
+  @@index([createdAt])
+}
+

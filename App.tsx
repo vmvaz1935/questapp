@@ -18,6 +18,13 @@ import {
   ValidateView,
   PrivacyPolicy,
   ConsentLGPD,
+  LoginForm,
+  RegisterForm,
+  TwoFactorVerify,
+  TwoFactorSetup,
+  PasswordReset,
+  VerifyEmail,
+  UserProfile,
 } from './routes';
 
 // Executar correção IMEDIATAMENTE ao carregar o módulo (antes de qualquer hook)
@@ -47,8 +54,13 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const [showConsent, setShowConsent] = useState(false);
 
   useEffect(() => {
-    if (!professionalId) {
-      navigate('/');
+    // Verificar autenticação usando o novo sistema
+    const accessToken = localStorage.getItem('accessToken');
+    const professional = localStorage.getItem('professional');
+    
+    // Se não há autenticação em nenhum sistema, redirecionar
+    if (!professionalId && !accessToken && !professional) {
+      navigate('/login');
       return;
     }
     
@@ -168,7 +180,24 @@ const InnerApp: React.FC = () => {
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="/" element={!professionalId ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/patients" replace />} />
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/verify-2fa" element={<TwoFactorVerify />} />
+          <Route path="/setup-2fa" element={
+            <ProtectedRoute>
+              <TwoFactorSetup />
+            </ProtectedRoute>
+          } />
+          <Route path="/forgot-password" element={<PasswordReset />} />
+          <Route path="/reset-password" element={<PasswordReset />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          } />
+          {/* Legacy login route - mantido para compatibilidade */}
+          <Route path="/login-old" element={<Login onLogin={handleLogin} />} />
           <Route path="/privacy" element={
             <ProtectedRoute>
               <PrivacyPolicy onAccept={() => window.history.back()} />
@@ -196,7 +225,7 @@ const InnerApp: React.FC = () => {
           } />
           <Route path="/validate" element={
             <ProtectedRoute>
-              <ValidateView />
+              <ValidateView questionnaires={questionnaires} />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />

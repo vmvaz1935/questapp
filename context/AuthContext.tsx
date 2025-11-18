@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useAuthStore } from '../stores/authStore';
 
 interface AuthState { 
   professionalId: string | null; 
@@ -15,15 +16,35 @@ const AuthContext = createContext<AuthState>({
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { professional, logout } = useAuthStore();
   const [professionalId, setProfessionalId] = useState<string | null>(null);
   const [isGoogleAuth, setIsGoogleAuth] = useState<boolean>(false);
   
+  // Sincronizar com Zustand store
+  useEffect(() => {
+    if (professional) {
+      setProfessionalId(professional.id);
+      // Verificar se é Google Auth (pode ser melhorado com flag no professional)
+      const savedIsGoogle = localStorage.getItem('is_google_auth') === 'true';
+      setIsGoogleAuth(savedIsGoogle);
+      localStorage.setItem('current_professional_id', professional.id);
+    } else {
+      setProfessionalId(null);
+      setIsGoogleAuth(false);
+      localStorage.removeItem('current_professional_id');
+      localStorage.removeItem('is_google_auth');
+    }
+  }, [professional]);
+  
+  // Carregar do localStorage na inicialização (compatibilidade)
   useEffect(() => { 
     const savedId = localStorage.getItem('current_professional_id');
     const savedIsGoogle = localStorage.getItem('is_google_auth') === 'true';
-    setProfessionalId(savedId);
-    setIsGoogleAuth(savedIsGoogle);
-  }, []);
+    if (savedId && !professional) {
+      setProfessionalId(savedId);
+      setIsGoogleAuth(savedIsGoogle);
+    }
+  }, [professional]);
   
   const handleSetProfessionalId = (id: string | null) => {
     setProfessionalId(id);
@@ -32,6 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } else {
       localStorage.removeItem('current_professional_id');
       localStorage.removeItem('is_google_auth');
+      logout();
     }
   };
   
