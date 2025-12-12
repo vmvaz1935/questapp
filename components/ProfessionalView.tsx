@@ -6,6 +6,8 @@ import { useFirebaseSync } from '../hooks/useFirebaseSync';
 import { auth } from '../config/firebaseConfig';
 import { usePlanLimits } from '../hooks/usePlanLimits';
 import PaymentModal from './PaymentModal';
+import SyncConflictModal from './SyncConflictModal';
+import { useLazyList } from '../hooks/useLazyList';
 
 interface ProfessionalViewProps {
   questionnaires: Questionnaire[];
@@ -22,9 +24,22 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
   const firebaseUserId = isGoogleAuth && auth?.currentUser?.uid || null;
   
   // Sincronizar com Firebase
-  const { syncData } = useFirebaseSync({ 
+  const { syncData, conflicts, resolveConflict, clearConflicts } = useFirebaseSync({ 
     userId: firebaseUserId || professionalId, 
     isGoogleAuth 
+  });
+
+  // Lazy loading para lista de pacientes (se houver muitos)
+  const {
+    displayedItems: displayedPatients,
+    hasMore: hasMorePatients,
+    isLoading: isLoadingPatients,
+    loadMore: loadMorePatients,
+    loadMoreRef: loadMorePatientsRef,
+  } = useLazyList({
+    items: patients,
+    initialPageSize: 20,
+    incrementSize: 20,
   });
   
   // Sincronizar pacientes quando mudarem (apenas se autenticado com Google)
@@ -205,6 +220,33 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
                 </li>
               ))}
             </ul>
+            {/* Lazy loading trigger */}
+            {hasMorePatients && (
+              <div ref={loadMorePatientsRef} className="mt-4 text-center">
+                {isLoadingPatients ? (
+                  <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Carregando mais pacientes...</span>
+                  </div>
+                ) : (
+                  <button
+                    onClick={loadMorePatients}
+                    className="px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                  >
+                    Carregar mais ({patients.length - displayedPatients.length} restantes)
+                  </button>
+                )}
+              </div>
+            )}
+            {displayedPatients.length < patients.length && (
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+                Mostrando {displayedPatients.length} de {patients.length} pacientes
+              </p>
+            )}
+          </>
           )}
         </div>
       </div>
@@ -296,6 +338,14 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
         onClose={() => setShowPaymentModal(false)}
         onSuccess={handlePaymentSuccess}
         planPrice={50}
+      />
+
+      {/* Modal de Conflitos de Sync */}
+      <SyncConflictModal
+        conflicts={conflicts}
+        isOpen={conflicts.length > 0}
+        onResolve={resolveConflict}
+        onCancel={clearConflicts}
       />
     </div>
   );

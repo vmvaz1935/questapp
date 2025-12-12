@@ -1,110 +1,187 @@
 /**
- * Analytics com Plausible (privacy-first)
- * Opt-in via variável de ambiente
+ * Serviço de analytics para rastreamento de eventos
+ * Implementa eventos críticos para análise de funis e comportamento do usuário
  */
 
-export interface PlausibleEvent {
-  name: string;
-  props?: Record<string, string | number>;
-  revenue?: { currency: string; amount: number };
+export type AnalyticsEvent =
+  | 'questionnaire_viewed'
+  | 'questionnaire_started'
+  | 'answer_changed'
+  | 'autosave_ok'
+  | 'autosave_error'
+  | 'questionnaire_completed'
+  | 'questionnaire_abandoned'
+  | 'questionnaire_draft_saved'
+  | 'pdf_generated'
+  | 'pdf_downloaded'
+  | 'sync_initiated'
+  | 'sync_progress'
+  | 'sync_success'
+  | 'sync_conflict'
+  | 'sync_error'
+  | 'login_started'
+  | 'login_success'
+  | 'login_error'
+  | '2fa_required'
+  | '2fa_verified'
+  | 'page_load'
+  | 'offline_detected'
+  | 'online_restored'
+  | 'questionnaire_exported';
+
+export interface AnalyticsProperties {
+  questionnaire_id?: string;
+  questionnaire_name?: string;
+  questionnaire_items_count?: number;
+  patient_id?: string;
+  patient_age?: number;
+  patient_sex?: string;
+  item_id?: string;
+  step_index?: number;
+  total_steps?: number;
+  time_spent_ms?: number;
+  total_time_ms?: number;
+  progress_pct?: number;
+  answers_count?: number;
+  score?: number;
+  offline?: boolean;
+  plan_type?: 'free' | 'pro';
+  device_type?: 'mobile' | 'tablet' | 'desktop';
+  browser?: string;
+  os?: string;
+  error_message?: string;
+  error_code?: string;
+  method?: 'email' | 'google';
+  user_id?: string;
+  data_type?: string;
+  items_synced?: number;
+  total_items?: number;
+  sync_duration_ms?: number;
+  conflict_count?: number;
+  retry_count?: number;
+  route?: string;
+  load_time_ms?: number;
+  offline_duration_ms?: number;
+  file_size_kb?: number;
+  generation_time_ms?: number;
+  last_item_id?: string;
+}
+
+// Armazenar eventos em memória (pode ser enviado para serviço externo depois)
+let eventQueue: Array<{ event: AnalyticsEvent; properties: AnalyticsProperties; timestamp: number }> = [];
+
+// Detectar tipo de dispositivo
+function getDeviceType(): 'mobile' | 'tablet' | 'desktop' {
+  if (typeof window === 'undefined') return 'desktop';
+  const width = window.innerWidth;
+  if (width < 768) return 'mobile';
+  if (width < 1024) return 'tablet';
+  return 'desktop';
+}
+
+// Detectar navegador
+function getBrowser(): string {
+  if (typeof window === 'undefined') return 'unknown';
+  const ua = navigator.userAgent;
+  if (ua.includes('Chrome')) return 'Chrome';
+  if (ua.includes('Firefox')) return 'Firefox';
+  if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
+  if (ua.includes('Edge')) return 'Edge';
+  return 'unknown';
+}
+
+// Detectar OS
+function getOS(): string {
+  if (typeof window === 'undefined') return 'unknown';
+  const ua = navigator.userAgent;
+  if (ua.includes('Windows')) return 'Windows';
+  if (ua.includes('Mac')) return 'macOS';
+  if (ua.includes('Linux')) return 'Linux';
+  if (ua.includes('Android')) return 'Android';
+  if (ua.includes('iOS') || ua.includes('iPhone') || ua.includes('iPad')) return 'iOS';
+  return 'unknown';
 }
 
 /**
- * Inicializa Plausible (se configurado)
+ * Rastreia um evento de analytics
  */
-export function initPlausible() {
-  const plausibleDomain = import.meta.env.VITE_PLAUSIBLE_DOMAIN;
-  const plausibleScript = import.meta.env.VITE_PLAUSIBLE_SCRIPT || 'https://plausible.io/js/script.js';
-
-  if (!plausibleDomain) {
-    console.log('[Analytics] Plausible não configurado (VITE_PLAUSIBLE_DOMAIN não definido)');
-    return;
-  }
-
-  // Adicionar script do Plausible
-  const script = document.createElement('script');
-  script.defer = true;
-  script.dataset.domain = plausibleDomain;
-  script.src = plausibleScript;
-  document.head.appendChild(script);
-
-  // Inicializar função global
-  (window as any).plausible =
-    (window as any).plausible ||
-    function (...args: any[]) {
-      ((window as any).plausible.q = (window as any).plausible.q || []).push(args);
+export function trackEvent(event: AnalyticsEvent, properties: AnalyticsProperties = {}): void {
+  try {
+    const timestamp = Date.now();
+    
+    // Adicionar propriedades padrão
+    const enrichedProperties: AnalyticsProperties = {
+      ...properties,
+      device_type: properties.device_type || getDeviceType(),
+      browser: properties.browser || getBrowser(),
+      os: properties.os || getOS(),
+      timestamp,
     };
 
-  console.log('[Analytics] Plausible inicializado:', plausibleDomain);
+    // Adicionar à fila
+    eventQueue.push({
+      event,
+      properties: enrichedProperties,
+      timestamp,
+    });
+
+    // Log no console em desenvolvimento
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Analytics]', event, enrichedProperties);
+    }
+
+    // Enviar para serviço externo (se configurado)
+    // Exemplo: sendToAnalyticsService(event, enrichedProperties);
+    
+    // Limitar tamanho da fila (manter últimos 100 eventos)
+    if (eventQueue.length > 100) {
+      eventQueue = eventQueue.slice(-100);
+    }
+  } catch (error) {
+    console.error('Erro ao rastrear evento de analytics:', error);
+  }
 }
 
 /**
- * Registra um evento no Plausible
+ * Obtém a fila de eventos (útil para debug ou envio em lote)
  */
-export function trackEvent(eventName: string, props?: Record<string, string | number>) {
-  if (typeof window === 'undefined' || !(window as any).plausible) {
-    return;
-  }
+export function getEventQueue(): Array<{ event: AnalyticsEvent; properties: AnalyticsProperties; timestamp: number }> {
+  return [...eventQueue];
+}
+
+/**
+ * Limpa a fila de eventos
+ */
+export function clearEventQueue(): void {
+  eventQueue = [];
+}
+
+/**
+ * Envia eventos em lote para serviço externo (implementar conforme necessário)
+ */
+export async function flushEvents(): Promise<void> {
+  if (eventQueue.length === 0) return;
 
   try {
-    (window as any).plausible(eventName, {
-      props: props || {},
-    });
+    // Aqui você pode implementar o envio para seu serviço de analytics
+    // Exemplo: await fetch('/api/analytics', { method: 'POST', body: JSON.stringify(eventQueue) });
+    
+    // Por enquanto, apenas limpa a fila após "enviar"
+    clearEventQueue();
   } catch (error) {
-    console.warn('[Analytics] Erro ao rastrear evento:', error);
+    console.error('Erro ao enviar eventos de analytics:', error);
   }
 }
 
-/**
- * Track pageview manualmente (se necessário)
- */
-export function trackPageview(path?: string) {
-  if (typeof window === 'undefined' || !(window as any).plausible) {
-    return;
-  }
+// Detectar quando o usuário está saindo e enviar eventos pendentes
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => {
+    flushEvents().catch(console.error);
+  });
 
-  try {
-    (window as any).plausible('pageview', {
-      u: path || window.location.pathname,
-    });
-  } catch (error) {
-    console.warn('[Analytics] Erro ao rastrear pageview:', error);
-  }
+  // Enviar eventos periodicamente (a cada 30 segundos)
+  setInterval(() => {
+    flushEvents().catch(console.error);
+  }, 30000);
 }
-
-/**
- * Eventos comuns do FisioQ
- */
-export const AnalyticsEvents = {
-  // Autenticação
-  LOGIN: 'login',
-  LOGOUT: 'logout',
-  SIGNUP: 'signup',
-  GOOGLE_LOGIN: 'google_login',
-
-  // Pacientes
-  PATIENT_CREATED: 'patient_created',
-  PATIENT_UPDATED: 'patient_updated',
-  PATIENT_DELETED: 'patient_deleted',
-
-  // Questionários
-  QUESTIONNAIRE_STARTED: 'questionnaire_started',
-  QUESTIONNAIRE_COMPLETED: 'questionnaire_completed',
-  QUESTIONNAIRE_EXPORTED: 'questionnaire_exported',
-  QUESTIONNAIRE_EXPORT_PDF: 'questionnaire_export_pdf',
-  QUESTIONNAIRE_EXPORT_CSV: 'questionnaire_export_csv',
-  QUESTIONNAIRE_EXPORT_JSON: 'questionnaire_export_json',
-
-  // Planos
-  PLAN_SELECTED: 'plan_selected',
-  PLAN_UPGRADED: 'plan_upgraded',
-  PAYMENT_SUCCESS: 'payment_success',
-  PAYMENT_FAILED: 'payment_failed',
-
-  // Navegação
-  NAVIGATION: 'navigation',
-  PRIVACY_VIEWED: 'privacy_viewed',
-  CONSENT_ACCEPTED: 'consent_accepted',
-  CONSENT_DECLINED: 'consent_declined',
-} as const;
 

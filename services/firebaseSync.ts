@@ -9,6 +9,31 @@ interface SyncData {
   profiles?: any[];
 }
 
+export interface VersionedData {
+  data: any;
+  timestamp: string;
+  hash: string;
+  version: number;
+}
+
+export interface ConflictData {
+  dataKey: string;
+  localVersion: VersionedData;
+  remoteVersion: VersionedData;
+}
+
+// Função helper para gerar hash simples dos dados
+function generateHash(data: any): string {
+  const str = JSON.stringify(data);
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return Math.abs(hash).toString(16);
+}
+
 /**
  * Salva dados no Firebase (coloca em segundo plano, não bloqueia)
  */
@@ -45,9 +70,25 @@ export async function saveToFirebase(
     const userDocRef = doc(db, 'users', userId);
     const userDoc = await getDoc(userDocRef);
     
+    const timestamp = new Date().toISOString();
+    const hash = generateHash(data);
+    
+    // Criar versão dos dados
+    const versionedData: VersionedData = {
+      data,
+      timestamp,
+      hash,
+      version: userDoc.exists() ? (userDoc.data().version || 0) + 1 : 1,
+    };
+    
     const updateData: any = {};
-    updateData[dataKey] = data;
-    updateData.lastUpdated = new Date().toISOString();
+    updateData[dataKey] = versionedData;
+    updateData[`${dataKey}_metadata`] = {
+      timestamp,
+      hash,
+      version: versionedData.version,
+    };
+    updateData.lastUpdated = timestamp;
 
     if (userDoc.exists()) {
       // Atualizar documento existente
@@ -56,7 +97,8 @@ export async function saveToFirebase(
       // Criar novo documento
       await setDoc(userDocRef, {
         userId,
-        createdAt: new Date().toISOString(),
+        createdAt: timestamp,
+        version: 1,
         ...updateData
       });
     }
@@ -101,8 +143,16 @@ export async function loadFromFirebase(
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
-      const data = userDoc.data();
-      return data[dataKey] || null;
+      const docData = userDoc.data();
+      const versionedData = docData[dataKey];
+      
+      // Se for dados versionados, retornar apenas os dados
+      if (versionedData && versionedData.data !== undefined) {
+        return versionedData;
+      }
+      
+      // Compatibilidade com dados antigos
+      return versionedData || null;
     }
   } catch (error) {
     // Firebase não instalado ou erro de conexão - retornar null
@@ -145,51 +195,209 @@ export async function syncAllData(userId: string): Promise<void> {
 }
 
 /**
- * Carrega todos os dados do usuário do Firebase para localStorage
+ * Detecta conflitos entre dados locais e remotos
  */
-export async function loadAllDataFromFirebase(userId: string): Promise<void> {
+export async function detectConflicts(userId: string): Promise<ConflictData[]> {
   if (!userId) {
-    return;
+    return [];
+  }
+
+  const conflicts: ConflictData[] = [];
+  const dataKeys = ['patients', 'results', 'questionnaires', 'profiles'];
+
+  try {
+    const [firebaseConfig, firebaseFirestore] = await Promise.all([
+      import('../config/firebaseConfig').catch(() => null),
+      import(/* @vite-ignore */ 'firebase/firestore').catch(() => null)
+    ]);
+
+    if (!firebaseConfig || !firebaseFirestore) {
+      return [];
+    }
+
+    const { db, isFirebaseConfigured } = firebaseConfig;
+    const { doc, getDoc } = firebaseFirestore;
+
+    if (!isFirebaseConfigured || !db) {
+      return [];
+    }
+
+    for (const dataKey of dataKeys) {
+      // Carregar versão remota
+      const remoteVersioned = await loadFromFirebase(userId, dataKey);
+      if (!remoteVersioned) continue;
+
+      // Carregar versão local
+      const storageKey = dataKey === 'questionnaires' 
+        ? 'published_questionnaires' 
+        : `${dataKey}_${userId}`;
+      const localData = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      
+      if (!localData || (Array.isArray(localData) && localData.length === 0)) {
+        continue;
+      }
+
+      const localTimestamp = localStorage.getItem(`${storageKey}_timestamp`) || new Date(0).toISOString();
+      const localHash = generateHash(localData);
+      const remoteHash = remoteVersioned.hash || generateHash(remoteVersioned.data || remoteVersioned);
+
+      // Detectar conflito: hashes diferentes e timestamps diferentes
+      if (localHash !== remoteHash && localTimestamp !== remoteVersioned.timestamp) {
+        conflicts.push({
+          dataKey,
+          localVersion: {
+            data: localData,
+            timestamp: localTimestamp,
+            hash: localHash,
+            version: parseInt(localStorage.getItem(`${storageKey}_version`) || '0', 10),
+          },
+          remoteVersion: {
+            data: remoteVersioned.data || remoteVersioned,
+            timestamp: remoteVersioned.timestamp,
+            hash: remoteHash,
+            version: remoteVersioned.version || 0,
+          },
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Erro ao detectar conflitos:', error);
+  }
+
+  return conflicts;
+}
+
+/**
+ * Resolve um conflito mantendo uma versão específica
+ */
+export function resolveConflict(
+  dataKey: string,
+  keepVersion: 'local' | 'remote' | 'merge',
+  conflict: ConflictData
+): void {
+  const storageKey = dataKey === 'questionnaires' 
+    ? 'published_questionnaires' 
+    : `${dataKey}_${conflict.dataKey.includes('_') ? conflict.dataKey.split('_')[1] : ''}`;
+
+  let finalData: any;
+  let finalTimestamp: string;
+  let finalVersion: number;
+
+  switch (keepVersion) {
+    case 'local':
+      finalData = conflict.localVersion.data;
+      finalTimestamp = conflict.localVersion.timestamp;
+      finalVersion = conflict.localVersion.version;
+      break;
+    case 'remote':
+      finalData = conflict.remoteVersion.data;
+      finalTimestamp = conflict.remoteVersion.timestamp;
+      finalVersion = conflict.remoteVersion.version;
+      break;
+    case 'merge':
+      // Merge inteligente: combinar arrays únicos por ID
+      if (Array.isArray(conflict.localVersion.data) && Array.isArray(conflict.remoteVersion.data)) {
+        const localMap = new Map(conflict.localVersion.data.map((item: any) => [item.id, item]));
+        const remoteMap = new Map(conflict.remoteVersion.data.map((item: any) => [item.id, item]));
+        
+        // Combinar: remoto tem prioridade em caso de IDs duplicados
+        const merged = [...conflict.localVersion.data];
+        conflict.remoteVersion.data.forEach((item: any) => {
+          if (!localMap.has(item.id)) {
+            merged.push(item);
+          } else {
+            // Atualizar item existente com versão mais recente
+            const index = merged.findIndex((m: any) => m.id === item.id);
+            if (index >= 0) {
+              merged[index] = item;
+            }
+          }
+        });
+        finalData = merged;
+      } else {
+        // Para objetos não-array, usar versão mais recente
+        finalData = new Date(conflict.remoteVersion.timestamp) > new Date(conflict.localVersion.timestamp)
+          ? conflict.remoteVersion.data
+          : conflict.localVersion.data;
+      }
+      finalTimestamp = new Date().toISOString();
+      finalVersion = Math.max(conflict.localVersion.version, conflict.remoteVersion.version) + 1;
+      break;
+  }
+
+  // Salvar versão escolhida
+  localStorage.setItem(storageKey, JSON.stringify(finalData));
+  localStorage.setItem(`${storageKey}_timestamp`, finalTimestamp);
+  localStorage.setItem(`${storageKey}_version`, finalVersion.toString());
+  
+  // Salvar backup da versão descartada
+  const backupKey = `${storageKey}_backup_${Date.now()}`;
+  const discardedVersion = keepVersion === 'local' ? conflict.remoteVersion : conflict.localVersion;
+  localStorage.setItem(backupKey, JSON.stringify({
+    data: discardedVersion.data,
+    timestamp: discardedVersion.timestamp,
+    version: discardedVersion.version,
+    reason: `Descartado em favor de versão ${keepVersion}`,
+  }));
+}
+
+/**
+ * Carrega todos os dados do usuário do Firebase para localStorage
+ * Agora com detecção de conflitos
+ */
+export async function loadAllDataFromFirebase(userId: string): Promise<ConflictData[]> {
+  if (!userId) {
+    return [];
+  }
+
+  // Detectar conflitos antes de carregar
+  const conflicts = await detectConflicts(userId);
+  
+  // Se houver conflitos, retornar para resolução pelo usuário
+  if (conflicts.length > 0) {
+    return conflicts;
   }
 
   try {
     // Carregar pacientes
-    const patients = await loadFromFirebase(userId, 'patients');
-    if (patients && Array.isArray(patients) && patients.length > 0) {
+    const patientsVersioned = await loadFromFirebase(userId, 'patients');
+    if (patientsVersioned) {
       const patientsKey = `patients_${userId}`;
-      const localPatients = JSON.parse(localStorage.getItem(patientsKey) || '[]');
-      
-      // Mesclar dados: Firebase tem prioridade se mais recente
-      if (patients.length >= localPatients.length) {
+      const patients = patientsVersioned.data || patientsVersioned;
+      if (Array.isArray(patients) && patients.length > 0) {
         localStorage.setItem(patientsKey, JSON.stringify(patients));
+        localStorage.setItem(`${patientsKey}_timestamp`, patientsVersioned.timestamp);
+        localStorage.setItem(`${patientsKey}_version`, String(patientsVersioned.version || 1));
       }
     }
 
     // Carregar resultados
-    const results = await loadFromFirebase(userId, 'results');
-    if (results && Array.isArray(results) && results.length > 0) {
+    const resultsVersioned = await loadFromFirebase(userId, 'results');
+    if (resultsVersioned) {
       const resultsKey = `results_${userId}`;
-      const localResults = JSON.parse(localStorage.getItem(resultsKey) || '[]');
-      
-      // Mesclar dados: Firebase tem prioridade se mais recente
-      if (results.length >= localResults.length) {
+      const results = resultsVersioned.data || resultsVersioned;
+      if (Array.isArray(results) && results.length > 0) {
         localStorage.setItem(resultsKey, JSON.stringify(results));
+        localStorage.setItem(`${resultsKey}_timestamp`, resultsVersioned.timestamp);
+        localStorage.setItem(`${resultsKey}_version`, String(resultsVersioned.version || 1));
       }
     }
 
     // Carregar questionários
-    const questionnaires = await loadFromFirebase(userId, 'questionnaires');
-    if (questionnaires && Array.isArray(questionnaires) && questionnaires.length > 0) {
-      const localQuestionnaires = JSON.parse(localStorage.getItem('published_questionnaires') || '[]');
-      
-      // Mesclar dados
-      if (questionnaires.length >= localQuestionnaires.length) {
+    const questionnairesVersioned = await loadFromFirebase(userId, 'questionnaires');
+    if (questionnairesVersioned) {
+      const questionnaires = questionnairesVersioned.data || questionnairesVersioned;
+      if (Array.isArray(questionnaires) && questionnaires.length > 0) {
         localStorage.setItem('published_questionnaires', JSON.stringify(questionnaires));
+        localStorage.setItem('published_questionnaires_timestamp', questionnairesVersioned.timestamp);
+        localStorage.setItem('published_questionnaires_version', String(questionnairesVersioned.version || 1));
       }
     }
 
     console.log('Dados do Firebase carregados');
   } catch (error) {
-    // Ignorar erros de carregamento
+    console.error('Erro ao carregar dados do Firebase:', error);
   }
+
+  return [];
 }

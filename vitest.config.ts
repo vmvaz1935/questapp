@@ -19,6 +19,19 @@ export default defineConfig({
         '**/*.config.*',
         '**/mockData',
       ],
+      thresholds: {
+        lines: 70,
+        functions: 70,
+        branches: 70,
+        statements: 70,
+      },
+      include: [
+        'components/**/*.{ts,tsx}',
+        'hooks/**/*.{ts,tsx}',
+        'services/**/*.{ts,tsx}',
+        'utils/**/*.{ts,tsx}',
+        'context/**/*.{ts,tsx}',
+      ],
     },
   },
   resolve: {

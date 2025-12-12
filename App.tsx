@@ -8,6 +8,17 @@ import { migrateLocalStorage } from './utils/migrateLocalStorage';
 import { fixLocalStorageOnLoad } from './utils/fixLocalStorageOnLoad';
 import { Layout } from './components/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary';
+
+// Configurar axe-core apenas em desenvolvimento
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  import('@axe-core/react').then((axe) => {
+    import('react-dom').then((ReactDOM) => {
+      axe.default(React, ReactDOM.default, 1000);
+    });
+  }).catch(() => {
+    // Ignorar se não estiver disponível
+  });
+}
 import {
   LandingPage,
   Login,

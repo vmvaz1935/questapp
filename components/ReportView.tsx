@@ -5,7 +5,8 @@ import { Patient, Questionnaire } from '../types';
 import { generatePDFReport } from '../utils/pdfGenerator';
 import { analyzeResults } from '../utils/resultAnalysis';
 import { exportCSV, exportJSON, prepareExportData } from '../utils/exportData';
-import { trackEvent, AnalyticsEvents } from '../utils/analytics';
+import { trackEvent } from '../utils/analytics';
+import PDFPreviewModal from './PDFPreviewModal';
 
 const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnaires }) => {
   const { professionalId } = useAuth();
@@ -15,6 +16,8 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
   const [results] = useLocalStorage<any[]>(resultsKey, []);
   const [patientId, setPatientId] = useState<string>('');
   const [selectedIdx, setSelectedIdx] = useState<Record<number, boolean>>({});
+  const [pdfPreview, setPdfPreview] = useState<{ blob: Blob; fileName: string } | null>(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   const qMap = useMemo(()=> Object.fromEntries(questionnaires.map(q=>[q.id,q])), [questionnaires]);
   const patient = patients.find(p=>p.id===patientId);
@@ -86,7 +89,7 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
     }
   };
 
-  const generatePDF = async () => {
+  const generatePDF = async (showPreview = true) => {
     if (!patient) return;
     
     // Filtrar apenas resultados selecionados
@@ -103,21 +106,56 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
       return;
     }
 
+    setIsGeneratingPDF(true);
     try {
       // Gerar PDF formatado
-      await generatePDFReport({
+      const result = await generatePDFReport({
         patient,
         selectedResults,
         citations
       });
-      trackEvent(AnalyticsEvents.QUESTIONNAIRE_EXPORT_PDF, {
-        patientId: patient.id,
-        resultsCount: selectedResults.length,
+      
+      trackEvent('pdf_generated', {
+        questionnaire_id: selectedResults[0]?.questionnaire?.id,
+        patient_id: patient.id,
+        file_size_kb: Math.round(result.blob.size / 1024),
       });
+
+      if (showPreview) {
+        // Mostrar preview
+        setPdfPreview({ blob: result.blob, fileName: result.fileName });
+      } else {
+        // Download direto
+        downloadPDF(result.blob, result.fileName);
+      }
     } catch (error: any) {
       console.error('Erro ao gerar PDF:', error);
       const errorMessage = error?.message || 'Erro desconhecido ao gerar PDF';
       alert(`Erro ao gerar PDF: ${errorMessage}\n\nVerifique o console para mais detalhes.`);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
+  const downloadPDF = (blob: Blob, fileName: string) => {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    trackEvent('pdf_downloaded', {
+      patient_id: patient?.id,
+    });
+  };
+
+  const handlePreviewDownload = () => {
+    if (pdfPreview) {
+      downloadPDF(pdfPreview.blob, pdfPreview.fileName);
+      setPdfPreview(null);
     }
   };
 
@@ -209,15 +247,27 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
                 JSON
               </button>
               <button 
-                onClick={generatePDF} 
-                className="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                disabled={patientResults.length === 0}
-                title={patientResults.length === 0 ? 'Nenhum resultado disponível' : 'Gerar relatório PDF formatado'}
-                aria-label="Gerar relatório PDF"
+                onClick={() => generatePDF(true)} 
+                className="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2" 
+                disabled={patientResults.length === 0 || isGeneratingPDF}
+                title={patientResults.length === 0 ? 'Nenhum resultado disponível' : 'Visualizar relatório PDF formatado'}
+                aria-label="Visualizar relatório PDF"
               >
-                {patientResults.filter((_, idx) => selectedIdx[idx]).length > 0 
-                  ? `PDF (${patientResults.filter((_, idx) => selectedIdx[idx]).length})`
-                  : 'PDF'}
+                {isGeneratingPDF ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Gerando...
+                  </>
+                ) : (
+                  <>
+                    {patientResults.filter((_, idx) => selectedIdx[idx]).length > 0 
+                      ? `PDF (${patientResults.filter((_, idx) => selectedIdx[idx]).length})`
+                      : 'PDF'}
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -340,14 +390,26 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
                   Exportar JSON
                 </button>
                 <button 
-                  onClick={generatePDF} 
-                  className="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={patientResults.filter((_, idx) => selectedIdx[idx]).length === 0}
-                  aria-label="Gerar relatório PDF"
+                  onClick={() => generatePDF(true)} 
+                  disabled={patientResults.filter((_, idx) => selectedIdx[idx]).length === 0 || isGeneratingPDF}
+                  className="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2"
+                  aria-label="Visualizar PDF"
                 >
-                  {patientResults.filter((_, idx) => selectedIdx[idx]).length > 0 
-                    ? `Gerar PDF (${patientResults.filter((_, idx) => selectedIdx[idx]).length} selecionado(s))`
-                    : 'Gerar PDF'}
+                  {isGeneratingPDF ? (
+                    <>
+                      <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Gerando...
+                    </>
+                  ) : (
+                    <>
+                      {patientResults.filter((_, idx) => selectedIdx[idx]).length > 0
+                        ? `Visualizar PDF (${patientResults.filter((_, idx) => selectedIdx[idx]).length} selecionado(s))`
+                        : 'Visualizar PDF'}
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -374,6 +436,15 @@ const ReportView: React.FC<{ questionnaires: Questionnaire[] }> = ({ questionnai
           )}
         </div>
       )}
+
+      {/* Modal de Preview de PDF */}
+      <PDFPreviewModal
+        pdfBlob={pdfPreview?.blob || null}
+        fileName={pdfPreview?.fileName || ''}
+        isOpen={!!pdfPreview}
+        onClose={() => setPdfPreview(null)}
+        onDownload={handlePreviewDownload}
+      />
     </div>
   );
 };

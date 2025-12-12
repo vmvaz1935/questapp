@@ -46,6 +46,18 @@ export interface ConsentData {
   version: string;
 }
 
+export interface DraftData {
+  id?: number;
+  draftId: string;
+  questionnaireId: string;
+  patientId?: string;
+  professionalId: string;
+  answers: Record<string, number>;
+  progress: number; // 0-100
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Database class
 export class FisioQDatabase extends Dexie {
   patients!: Table<PatientData, number>;
@@ -53,6 +65,7 @@ export class FisioQDatabase extends Dexie {
   results!: Table<ResultData, number>;
   profiles!: Table<ProfileData, number>;
   consents!: Table<ConsentData, number>;
+  drafts!: Table<DraftData, number>;
 
   constructor(professionalId: string) {
     super(`FisioQ_${professionalId}`);
@@ -63,6 +76,26 @@ export class FisioQDatabase extends Dexie {
       results: '++id, resultId, patientId, questionnaireId, professionalId, createdAt, updatedAt',
       profiles: '++id, profileId, createdAt, updatedAt',
       consents: '++id, professionalId, timestamp',
+    });
+
+    // Versão 2: adicionar store de drafts
+    this.version(2).stores({
+      patients: '++id, patientId, professionalId, createdAt, updatedAt',
+      questionnaires: '++id, questionnaireId, professionalId, createdAt, updatedAt',
+      results: '++id, resultId, patientId, questionnaireId, professionalId, createdAt, updatedAt',
+      profiles: '++id, profileId, createdAt, updatedAt',
+      consents: '++id, professionalId, timestamp',
+      drafts: '++id, draftId, questionnaireId, patientId, professionalId, createdAt, updatedAt',
+    });
+
+    // Versão 3: otimizar índices para queries mais rápidas
+    this.version(3).stores({
+      patients: '++id, patientId, professionalId, createdAt, updatedAt, [professionalId+updatedAt]',
+      questionnaires: '++id, questionnaireId, professionalId, createdAt, updatedAt',
+      results: '++id, resultId, patientId, questionnaireId, professionalId, createdAt, updatedAt, [patientId+questionnaireId], [professionalId+createdAt], [patientId+createdAt]',
+      profiles: '++id, profileId, createdAt, updatedAt',
+      consents: '++id, professionalId, timestamp, [professionalId+timestamp]',
+      drafts: '++id, draftId, questionnaireId, patientId, professionalId, createdAt, updatedAt, [questionnaireId+patientId], [professionalId+updatedAt]',
     });
   }
 }

@@ -3,7 +3,7 @@
  */
 
 import { Patient } from '../types';
-import { trackEvent, AnalyticsEvents } from './analytics';
+import { trackEvent } from './analytics';
 
 export interface ExportResult {
   questionnaireId: string;
@@ -112,9 +112,10 @@ export function exportCSV(data: ExportData, filename?: string) {
   const csv = exportToCSV(data);
   const defaultFilename = `fisioq-${data.patient.nome}-${new Date().toISOString().split('T')[0]}.csv`;
   downloadFile(csv, filename || defaultFilename, 'text/csv;charset=utf-8;');
-  trackEvent(AnalyticsEvents.QUESTIONNAIRE_EXPORT_CSV, {
-    patientId: data.patient.id,
-    resultsCount: data.results.length,
+  trackEvent('questionnaire_exported', {
+    patient_id: data.patient.id,
+    results_count: data.results.length,
+    format: 'csv',
   });
 }
 
@@ -125,9 +126,9 @@ export function exportJSON(data: ExportData, filename?: string) {
   const json = exportToJSON(data);
   const defaultFilename = `fisioq-${data.patient.nome}-${new Date().toISOString().split('T')[0]}.json`;
   downloadFile(json, filename || defaultFilename, 'application/json;charset=utf-8;');
-  trackEvent(AnalyticsEvents.QUESTIONNAIRE_EXPORTED, {
-    patientId: data.patient.id,
-    resultsCount: data.results.length,
+  trackEvent('questionnaire_exported', {
+    patient_id: data.patient.id,
+    results_count: data.results.length,
     format: 'json',
   });
 }

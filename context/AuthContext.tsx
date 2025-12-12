@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
+import { clearEncryptionCacheForProfessional } from '../services/encryption';
 
 interface AuthState { 
   professionalId: string | null; 
@@ -47,12 +48,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [professional]);
   
   const handleSetProfessionalId = (id: string | null) => {
+    const previousId = professionalId;
+    
     setProfessionalId(id);
     if (id) {
       localStorage.setItem('current_professional_id', id);
     } else {
       localStorage.removeItem('current_professional_id');
       localStorage.removeItem('is_google_auth');
+      
+      // Limpar cache de criptografia ao fazer logout
+      if (previousId) {
+        clearEncryptionCacheForProfessional(previousId);
+      }
+      
       logout();
     }
   };

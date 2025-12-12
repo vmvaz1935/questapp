@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { Patient, Questionnaire } from '../types';
+import EvolutionChart from './EvolutionChart';
 
 interface ComparisonViewProps {
   questionnaires: Questionnaire[];
@@ -15,20 +16,40 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({ questionnaires }) => {
   const [results] = useLocalStorage<any[]>(resultsKey, []);
   const [selectedPatientId, setSelectedPatientId] = useState<string>('');
   const [selectedQuestionnaireId, setSelectedQuestionnaireId] = useState<string>('');
+  const [dateFilter, setDateFilter] = useState<'all' | '30' | '90' | '180' | '365'>('all');
 
   const qMap = useMemo(() => Object.fromEntries(questionnaires.map(q => [q.id, q])), [questionnaires]);
   
   // Filtrar resultados do mesmo questionário para o paciente selecionado
   const comparisonResults = useMemo(() => {
     if (!selectedPatientId || !selectedQuestionnaireId) return [];
+    
+    const now = Date.now();
+    const filterDays: Record<string, number> = {
+      '30': 30,
+      '90': 90,
+      '180': 180,
+      '365': 365,
+      'all': Infinity,
+    };
+    const daysLimit = filterDays[dateFilter] || Infinity;
+    const cutoffDate = now - daysLimit * 24 * 60 * 60 * 1000;
+    
     return results
-      .filter(r => r.patientId === selectedPatientId && r.questionnaireId === selectedQuestionnaireId)
+      .filter(r => {
+        if (r.patientId !== selectedPatientId || r.questionnaireId !== selectedQuestionnaireId) return false;
+        if (dateFilter !== 'all') {
+          const resultDate = new Date(r.createdAt || 0).getTime();
+          return resultDate >= cutoffDate;
+        }
+        return true;
+      })
       .sort((a, b) => {
         const dateA = new Date(a.createdAt || 0).getTime();
         const dateB = new Date(b.createdAt || 0).getTime();
         return dateA - dateB;
       });
-  }, [results, selectedPatientId, selectedQuestionnaireId]);
+  }, [results, selectedPatientId, selectedQuestionnaireId, dateFilter]);
 
   const selectedPatient = patients.find(p => p.id === selectedPatientId);
   const selectedQuestionnaire = questionnaires.find(q => q.id === selectedQuestionnaireId);
@@ -49,7 +70,22 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({ questionnaires }) => {
     if (first === undefined || last === undefined) return null;
     const diff = last - first;
     const diffPct = first !== 0 ? ((diff / first) * 100) : 0;
-    return { first, last, diff, diffPct };
+    
+    // Calcular média de todas as avaliações
+    const allPercents = comparisonResults.map(r => percentFrom(r)).filter((p): p is number => p !== undefined);
+    const average = allPercents.length > 0 
+      ? allPercents.reduce((sum, p) => sum + p, 0) / allPercents.length 
+      : 0;
+    
+    // Calcular tendência (melhora ou piora)
+    const recent = comparisonResults.slice(-3).map(r => percentFrom(r)).filter((p): p is number => p !== undefined);
+    const older = comparisonResults.slice(0, Math.min(3, comparisonResults.length - recent.length))
+      .map(r => percentFrom(r)).filter((p): p is number => p !== undefined);
+    const recentAvg = recent.length > 0 ? recent.reduce((sum, p) => sum + p, 0) / recent.length : 0;
+    const olderAvg = older.length > 0 ? older.reduce((sum, p) => sum + p, 0) / older.length : 0;
+    const trend = recentAvg - olderAvg;
+    
+    return { first, last, diff, diffPct, average, trend };
   }, [comparisonResults, selectedQuestionnaire]);
 
   // Preparar dados para gráfico de linha
@@ -144,11 +180,29 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({ questionnaires }) => {
             </p>
           </div>
 
+          {/* Filtros de período */}
+          <div className="mb-4 flex items-center gap-2 flex-wrap">
+            <span className="text-sm text-gray-600 dark:text-gray-400">Período:</span>
+            {(['all', '30', '90', '180', '365'] as const).map((period) => (
+              <button
+                key={period}
+                onClick={() => setDateFilter(period)}
+                className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                  dateFilter === period
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                }`}
+              >
+                {period === 'all' ? 'Todos' : `Últimos ${period} dias`}
+              </button>
+            ))}
+          </div>
+
           {/* Resumo da evolução */}
           {evolution && (
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-4 mb-6">
-              <h4 className="font-semibold text-gray-800 dark:text-white mb-3">Evolução</h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <h4 className="font-semibold text-gray-800 dark:text-white mb-3">Resumo da Evolução</h4>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <div>
                   <p className="text-xs text-gray-600 dark:text-gray-400">Primeira avaliação</p>
                   <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{evolution.first.toFixed(2)}%</p>
@@ -156,6 +210,10 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({ questionnaires }) => {
                 <div>
                   <p className="text-xs text-gray-600 dark:text-gray-400">Última avaliação</p>
                   <p className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{evolution.last.toFixed(2)}%</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Média geral</p>
+                  <p className="text-lg font-bold text-purple-600 dark:text-purple-400">{evolution.average.toFixed(2)}%</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-600 dark:text-gray-400">Diferença absoluta</p>
@@ -170,151 +228,108 @@ const ComparisonView: React.FC<ComparisonViewProps> = ({ questionnaires }) => {
                   </p>
                 </div>
               </div>
+              {evolution.trend !== 0 && (
+                <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-700">
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Tendência recente</p>
+                  <p className={`text-sm font-medium ${evolution.trend >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                    {evolution.trend >= 0 ? '↗' : '↘'} {evolution.trend >= 0 ? 'Melhora' : 'Piora'} de {Math.abs(evolution.trend).toFixed(2)}% nas últimas avaliações
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
-          {/* Gráfico de linha */}
+          {/* Gráfico de linha melhorado */}
           {chartData.length > 0 && (
             <div className="mb-6">
               <h4 className="font-semibold text-gray-800 dark:text-white mb-4">Evolução Temporal</h4>
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                <svg width={chartWidth} height={chartHeight} viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="mx-auto">
-                  {/* Eixos */}
-                  <line
-                    x1={padding.left}
-                    y1={padding.top}
-                    x2={padding.left}
-                    y2={chartHeight - padding.bottom}
-                    stroke="#6B7280"
-                    strokeWidth="2"
-                  />
-                  <line
-                    x1={padding.left}
-                    y1={chartHeight - padding.bottom}
-                    x2={chartWidth - padding.right}
-                    y2={chartHeight - padding.bottom}
-                    stroke="#6B7280"
-                    strokeWidth="2"
-                  />
-
-                  {/* Grade horizontal */}
-                  {[0, 25, 50, 75, 100].map(val => {
-                    const y = padding.top + (chartHeight - padding.top - padding.bottom) - ((val - 0) / 100) * (chartHeight - padding.top - padding.bottom);
-                    return (
-                      <g key={val}>
-                        <line
-                          x1={padding.left}
-                          y1={y}
-                          x2={chartWidth - padding.right}
-                          y2={y}
-                          stroke="#E5E7EB"
-                          strokeWidth="1"
-                          strokeDasharray="4,4"
-                        />
-                        <text
-                          x={padding.left - 10}
-                          y={y + 4}
-                          textAnchor="end"
-                          fontSize="10"
-                          fill="#6B7280"
-                        >
-                          {val}%
-                        </text>
-                      </g>
-                    );
-                  })}
-
-                  {/* Linha do gráfico */}
-                  {chartData.length > 1 && chartPath && (
-                    <polyline
-                      points={chartPath}
-                      fill="none"
-                      stroke="#2563EB"
-                      strokeWidth="3"
-                    />
-                  )}
-
-                  {/* Pontos do gráfico */}
-                  {chartData.map((d, i) => {
-                    const minX = chartData[0].dateTime;
-                    const maxX = chartData[chartData.length - 1].dateTime;
-                    const rangeX = maxX - minX || 1;
-                    const x = padding.left + ((d.dateTime - minX) / rangeX) * (chartWidth - padding.left - padding.right);
-                    const y = padding.top + (chartHeight - padding.top - padding.bottom) - ((d.percent - 0) / 100) * (chartHeight - padding.top - padding.bottom);
-                    return (
-                      <g key={i}>
-                        <circle
-                          cx={x}
-                          cy={y}
-                          r="6"
-                          fill="#2563EB"
-                          stroke="#fff"
-                          strokeWidth="2"
-                        />
-                        <text
-                          x={x}
-                          y={chartHeight - padding.bottom + 20}
-                          textAnchor="middle"
-                          fontSize="10"
-                          fill="#6B7280"
-                          transform={`rotate(-45 ${x} ${chartHeight - padding.bottom + 20})`}
-                        >
-                          {d.date}
-                        </text>
-                        <title>{`${d.date}: ${d.percent.toFixed(2)}%`}</title>
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
+              <EvolutionChart
+                data={chartData}
+                width={800}
+                height={400}
+                showGrid={true}
+                showPoints={true}
+                label={`Evolução - ${selectedQuestionnaire.acronym}`}
+              />
             </div>
           )}
 
-          {/* Tabela comparativa */}
+          {/* Tabela comparativa melhorada */}
           <div className="overflow-x-auto">
-            <h4 className="font-semibold text-gray-800 dark:text-white mb-4">Resultados Detalhados</h4>
-            <table className="w-full border-collapse border border-gray-300 dark:border-gray-700">
-              <thead>
-                <tr className="bg-gray-100 dark:bg-gray-700">
-                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Data</th>
-                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Pontuação Total</th>
-                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Percentual</th>
-                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Diferença</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonResults.map((r, idx) => {
-                  const date = new Date(r.createdAt || Date.now());
-                  const pct = percentFrom(r);
-                  const prevPct = idx > 0 ? percentFrom(comparisonResults[idx - 1]) : undefined;
-                  const diff = prevPct !== undefined && pct !== undefined ? pct - prevPct : undefined;
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-semibold text-gray-800 dark:text-white">Resultados Detalhados</h4>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {comparisonResults.length} avaliação(ões) encontrada(s)
+              </span>
+            </div>
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 dark:bg-gray-700">
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">#</th>
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Data</th>
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Pontuação Total</th>
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Percentual</th>
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Diferença vs. Anterior</th>
+                    <th className="border-b border-gray-300 dark:border-gray-700 p-3 text-left text-sm font-semibold text-gray-800 dark:text-white">Diferença vs. Primeira</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonResults.map((r, idx) => {
+                    const date = new Date(r.createdAt || Date.now());
+                    const pct = percentFrom(r);
+                    const prevPct = idx > 0 ? percentFrom(comparisonResults[idx - 1]) : undefined;
+                    const diff = prevPct !== undefined && pct !== undefined ? pct - prevPct : undefined;
+                    const firstPct = percentFrom(comparisonResults[0]);
+                    const diffFromFirst = firstPct !== undefined && pct !== undefined ? pct - firstPct : undefined;
 
-                  return (
-                    <tr key={idx} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-700'}>
-                      <td className="border border-gray-300 dark:border-gray-700 p-3 text-sm text-gray-700 dark:text-gray-300">
-                        {date.toLocaleDateString('pt-BR')} {date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
-                      </td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-3 text-sm text-gray-700 dark:text-gray-300">
-                        {typeof r.totalScore === 'number' ? r.totalScore.toFixed(2) : '-'}
-                        {r.isPercent ? '%' : ''}
-                      </td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-3 text-sm font-medium text-blue-600 dark:text-blue-400">
-                        {pct !== undefined ? `${pct.toFixed(2)}%` : '-'}
-                      </td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-3 text-sm">
-                        {diff !== undefined ? (
-                          <span className={diff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                            {diff >= 0 ? '+' : ''}{diff.toFixed(2)}%
-                          </span>
-                        ) : (
-                          <span className="text-gray-400">-</span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                    return (
+                      <tr
+                        key={idx}
+                        className={`${
+                          idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-700'
+                        } hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors`}
+                      >
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+                          {idx + 1}
+                        </td>
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm text-gray-700 dark:text-gray-300">
+                          <div className="font-medium">{date.toLocaleDateString('pt-BR')}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                            {date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                          </div>
+                        </td>
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm text-gray-700 dark:text-gray-300">
+                          {typeof r.totalScore === 'number' ? r.totalScore.toFixed(2) : '-'}
+                          {r.isPercent ? '%' : ''}
+                        </td>
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm font-medium text-blue-600 dark:text-blue-400">
+                          {pct !== undefined ? `${pct.toFixed(2)}%` : '-'}
+                        </td>
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm">
+                          {diff !== undefined ? (
+                            <span className={`font-medium ${diff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                              {diff >= 0 ? '↗ +' : '↘ '}{diff.toFixed(2)}%
+                            </span>
+                          ) : (
+                            <span className="text-gray-400">-</span>
+                          )}
+                        </td>
+                        <td className="border-b border-gray-200 dark:border-gray-700 p-3 text-sm">
+                          {diffFromFirst !== undefined ? (
+                            <span className={`font-medium ${diffFromFirst >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                              {diffFromFirst >= 0 ? '↗ +' : '↘ '}{diffFromFirst.toFixed(2)}%
+                            </span>
+                          ) : (
+                            <span className="text-gray-400">-</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}

@@ -1,6 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { Questionnaire, Item, Patient } from '../types';
 import ScoreDisplay from './ScoreDisplay';
+import { useAutosave } from '../hooks/useAutosave';
+import AutosaveIndicator from './AutosaveIndicator';
+import { useIndexedDB } from '../hooks/useIndexedDB';
+import { validateItem, calculateQuestionnaireScore } from '../utils/scoringEngine';
+import ValidationMessage from './ValidationMessage';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { useDrafts } from '../hooks/useDrafts';
 
 interface QuestionnaireFormProps {
   questionnaire: Questionnaire;
@@ -12,32 +19,24 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
   const [answers, setAnswers] = useState<{ [itemId: string]: number }>({});
   const [scoreData, setScoreData] = useState<{ totalScore: number; domainScores: { [key: string]: number } } | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{ [itemId: string]: string }>({});
+  const errorRefs = useRef<{ [itemId: string]: HTMLElement | null }>({});
+  const startTimeRef = useRef<number>(Date.now());
+  const { track } = useAnalytics();
+  const { saveDraft, loadDraftByQuestionnaire, deleteDraft } = useDrafts();
+  const [isSavingDraft, setIsSavingDraft] = useState(false);
   // Exibe todas as perguntas em uma única página
 
-  // Autosave/load answers
+  // Autosave/load answers usando IndexedDB
   const storageKey = `qform_${questionnaire.id}`;
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) setAnswers(JSON.parse(raw));
-    } catch {}
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    try { localStorage.setItem(storageKey, JSON.stringify(answers)); } catch {}
-  }, [answers, storageKey]);
-  useEffect(() => {
-    const beforeUnload = (e: BeforeUnloadEvent) => {
-      if (!submitted && Object.keys(answers).length > 0) {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    };
-    window.addEventListener('beforeunload', beforeUnload);
-    return () => window.removeEventListener('beforeunload', beforeUnload);
-  }, [submitted, answers]);
+  const [savedAnswers, setSavedAnswers, isInitialized] = useIndexedDB<{ [itemId: string]: number }>({
+    store: 'profiles',
+    key: storageKey,
+    encrypt: false,
+    defaultValue: {},
+  });
 
-  // Contar total de itens incluindo subitems
+  // Contar total de itens incluindo subitems (precisa estar antes do useEffect)
   const totalItems = useMemo(() => {
     let count = 0;
     questionnaire.items.forEach(item => {
@@ -50,6 +49,105 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
     });
     return count;
   }, [questionnaire.items]);
+
+  // Carregar respostas salvas na inicialização (incluindo rascunhos)
+  useEffect(() => {
+    const loadSavedData = async () => {
+      if (!isInitialized) return;
+
+      // Tentar carregar rascunho primeiro
+      const draft = await loadDraftByQuestionnaire(questionnaire.id, patient?.id);
+      if (draft && draft.answers && Object.keys(draft.answers).length > 0) {
+        setAnswers(draft.answers);
+        return;
+      }
+
+      // Se não houver rascunho, carregar respostas salvas normais
+      if (savedAnswers && Object.keys(savedAnswers).length > 0) {
+        setAnswers(savedAnswers);
+      }
+    };
+
+    loadSavedData();
+  }, [isInitialized, questionnaire.id, patient?.id, loadDraftByQuestionnaire, savedAnswers]); // Apenas na inicialização
+
+  // Rastrear início do questionário
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+    track('questionnaire_started', {
+      questionnaire_id: questionnaire.id,
+      questionnaire_name: questionnaire.name,
+      questionnaire_items_count: totalItems,
+      patient_id: patient?.id,
+      patient_age: patient?.idade,
+      patient_sex: patient?.sexo,
+    });
+  }, [questionnaire.id]); // Apenas na montagem inicial
+
+  // Migrar dados do localStorage para IndexedDB (compatibilidade)
+  useEffect(() => {
+    if (isInitialized && Object.keys(answers).length === 0) {
+      try {
+        const raw = localStorage.getItem(`qform_${questionnaire.id}`);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && Object.keys(parsed).length > 0) {
+            setAnswers(parsed);
+            // Migrar para IndexedDB
+            setSavedAnswers(parsed);
+            // Remover do localStorage após migração
+            localStorage.removeItem(`qform_${questionnaire.id}`);
+          }
+        }
+      } catch (e) {
+        console.warn('Erro ao migrar dados do localStorage:', e);
+      }
+    }
+  }, [isInitialized, questionnaire.id, setSavedAnswers]);
+
+  // Autosave com feedback visual
+  const { status, lastSaved, error } = useAutosave({
+    value: answers,
+    debounceMs: 500,
+    onSave: async (value) => {
+      await setSavedAnswers(value);
+      // Rastrear autosave bem-sucedido
+      track('autosave_ok', {
+        questionnaire_id: questionnaire.id,
+        answers_count: Object.keys(value).length,
+      });
+    },
+    onError: (err) => {
+      // Rastrear erro no autosave
+      track('autosave_error', {
+        questionnaire_id: questionnaire.id,
+        error_message: err.message,
+      });
+    },
+  });
+  useEffect(() => {
+    const beforeUnload = (e: BeforeUnloadEvent) => {
+      if (!submitted && Object.keys(answers).length > 0) {
+        // Rastrear abandono
+        const timeSpent = Date.now() - startTimeRef.current;
+        const progressPct = Math.round((Object.keys(answers).length / totalItems) * 100);
+        const lastItemId = Object.keys(answers).pop() || '';
+        
+        track('questionnaire_abandoned', {
+          questionnaire_id: questionnaire.id,
+          progress_pct: progressPct,
+          last_item_id: lastItemId,
+          time_spent_ms: timeSpent,
+        });
+        
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', beforeUnload);
+    return () => window.removeEventListener('beforeunload', beforeUnload);
+  }, [submitted, answers, questionnaire.id, totalItems, track]);
+
 
   const answeredCount = useMemo(() => {
     let count = 0;
@@ -69,6 +167,11 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
   
   const progressPct = Math.round((answeredCount / totalItems) * 100);
   const visibleItems = questionnaire.items;
+
+  // Calcular estimativa de tempo
+  const estimatedMinutes = Math.ceil(totalItems * 0.5); // 0.5 minutos por item
+  const remainingItems = totalItems - answeredCount;
+  const estimatedRemainingMinutes = Math.ceil(remainingItems * 0.5);
 
   // Agrupar itens por domínio para melhor organização visual
   // Garantir que os itens estejam ordenados pela ordem numérica que aparecem no questionário
@@ -110,74 +213,85 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
     return sortedDomains;
   }, [questionnaire.items]);
 
-  const handleAnswerChange = (itemId: string, score: number) => {
+  const handleAnswerChange = (itemId: string, score: number, item?: Item) => {
     setAnswers(prev => ({ ...prev, [itemId]: score }));
+    
+    // Rastrear mudança de resposta
+    const timeSpent = Date.now() - startTimeRef.current;
+    track('answer_changed', {
+      questionnaire_id: questionnaire.id,
+      item_id: itemId,
+      time_spent_ms: timeSpent,
+      progress_pct: Math.round((Object.keys({ ...answers, [itemId]: score }).length / totalItems) * 100),
+    });
+    
+    // Validar imediatamente após mudança
+    if (item) {
+      const newAnswers = { ...answers, [itemId]: score };
+      const validation = validateItem(item, newAnswers);
+      
+      if (validation.valid) {
+        // Remover erro se existir
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[itemId];
+          return newErrors;
+        });
+      } else {
+        // Adicionar erro
+        setErrors(prev => ({ ...prev, [itemId]: validation.error || 'Erro de validação' }));
+      }
+    }
+  };
+
+  const handleBlur = (itemId: string, item: Item) => {
+    // Validar no blur também
+    // Se é um subitem, criar um item temporário para validação
+    if (item.subitems && item.subitems.length > 0) {
+      // Validar o item pai completo
+      const validation = validateItem(item, answers);
+      if (!validation.valid) {
+        // Adicionar erro ao subitem específico
+        setErrors(prev => ({ ...prev, [itemId]: validation.error || 'Esta pergunta é obrigatória.' }));
+      } else {
+        // Remover erro se validado
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[itemId];
+          return newErrors;
+        });
+      }
+    } else {
+      // Item simples
+      const validation = validateItem(item, answers);
+      if (!validation.valid) {
+        setErrors(prev => ({ ...prev, [itemId]: validation.error || 'Esta pergunta é obrigatória.' }));
+      } else {
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[itemId];
+          return newErrors;
+        });
+      }
+    }
   };
 
   const calculateScore = () => {
-    // Soma bruta dos itens (incluindo subitems, exceto os marcados como not_scored)
-    let totalScore = 0;
-    questionnaire.items.forEach(item => {
-      if (item.subitems && item.subitems.length > 0) {
-        item.subitems.forEach(sub => {
-          if (!sub.not_scored && answers[sub.id] !== undefined) {
-            totalScore += answers[sub.id] || 0;
-          }
-        });
-      } else if (answers[item.id] !== undefined) {
-        totalScore += answers[item.id] || 0;
-      }
-    });
-
-    // Cálculo por domínio (normalizado quando aplicável)
-    const domainScores: { [key: string]: number } = {};
-    questionnaire.scoring.domains.forEach(domain => {
-      let sum = 0; let count = 0;
-      domain.items.forEach(itemId => {
-        if (answers[itemId] !== undefined) { sum += answers[itemId]; count++; }
-      });
-      const formulaText = (domain.formula || '').toLowerCase();
-      let value = sum;
-      // Normalização comum (KOOS/HOOS/HAGOS/FAOS): 100 - [(sum * 100) / (4 * n)]
-      if (formulaText.includes('100 -') && formulaText.includes('/ (4 *') && count > 0) {
-        value = 100 - ((sum * 100) / (4 * count));
-      }
-      domainScores[domain.name] = value;
-    });
-
-    // Total
-    let finalScore = totalScore;
-    const formula = questionnaire.scoring.total_formula;
-    if (formula.includes('Soma de todos os itens')) {
-      // Parser para fórmulas como "[(Soma de todos os itens - X) / Y] * 100" ou "(Soma de todos os itens / X) * Y"
-      const simplified = formula.replace(/\s/g, '').replace(/Somadetodosositens/g, totalScore.toString());
-      
-      // Padrão 1: [(soma - X) / Y] * 100 (ex: DASH)
-      const m1 = simplified.match(/\[\((\d+\.?\d*)\-(\d+\.?\d*)\)\/(\d+\.?\d*)\)\]\*(\d+\.?\d*)/);
-      if (m1) {
-        const sum = parseFloat(m1[1]);
-        const subtract = parseFloat(m1[2]);
-        const divisor = parseFloat(m1[3]);
-        const mult = parseFloat(m1[4]);
-        if (divisor) finalScore = ((sum - subtract) / divisor) * mult;
-      } else {
-        // Padrão 2: (soma / X) * Y (ex: ODI)
-        const m2 = simplified.match(/\((\d+\.?\d*)\/(\d+\.?\d*)\)\*(\d+\.?\d*)/);
-        if (m2) {
-          const sum = parseFloat(m2[1]);
-          const divisor = parseFloat(m2[2]);
-          const mult = parseFloat(m2[3]);
-          if (divisor) finalScore = (sum / divisor) * mult;
-        }
-      }
-    } else if (formula.toLowerCase().includes('(2100 - total') || formula.includes('2100')) {
-      // WOSI: % = (2100 - total raw) / 2100 * 100
-      const max = 2100; finalScore = ((max - totalScore) / max) * 100;
+    // Usar scoringEngine centralizado
+    const result = calculateQuestionnaireScore(questionnaire, answers);
+    
+    if (result.error) {
+      console.error('Erro no cálculo de score:', result.error);
+      // Retornar estrutura compatível mesmo em caso de erro
+      return {
+        totalScore: 0,
+        domainScores: {},
+      };
     }
     
     return {
-      totalScore: finalScore,
-      domainScores,
+      totalScore: result.totalScore,
+      domainScores: result.domainScores || {},
     };
   };
 
@@ -224,28 +338,72 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Validar se todos os itens (incluindo subitems necessários) foram respondidos
-    const requiredAnswers = new Set<string>();
+    
+    // Validar todos os itens
+    const newErrors: { [itemId: string]: string } = {};
+    let firstErrorItemId: string | null = null;
+    
     questionnaire.items.forEach(item => {
-      if (item.subitems && item.subitems.length > 0) {
-        item.subitems.forEach(sub => {
-          if (!sub.not_scored) {
-            requiredAnswers.add(sub.id);
-          }
-        });
-      } else {
-        requiredAnswers.add(item.id);
+      const validation = validateItem(item, answers);
+      if (!validation.valid) {
+        if (item.subitems && item.subitems.length > 0) {
+          item.subitems.forEach(sub => {
+            if (!sub.not_scored && answers[sub.id] === undefined) {
+              newErrors[sub.id] = validation.error || 'Esta pergunta é obrigatória.';
+              if (!firstErrorItemId) firstErrorItemId = sub.id;
+            }
+          });
+        } else {
+          newErrors[item.id] = validation.error || 'Esta pergunta é obrigatória.';
+          if (!firstErrorItemId) firstErrorItemId = item.id;
+        }
       }
     });
     
-    const allAnswered = Array.from(requiredAnswers).every(id => answers[id] !== undefined);
-    if (!allAnswered) {
-      alert(`Por favor, responda todas as perguntas. Faltam ${totalItems - answeredCount} resposta(s).`);
+    setErrors(newErrors);
+    
+    // Se houver erros, scroll para o primeiro
+    if (Object.keys(newErrors).length > 0) {
+      if (firstErrorItemId && errorRefs.current[firstErrorItemId]) {
+        errorRefs.current[firstErrorItemId]?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+        // Focar no elemento após scroll
+        setTimeout(() => {
+          const element = document.querySelector(`[data-item-id="${firstErrorItemId}"]`) as HTMLElement;
+          if (element) {
+            element.focus();
+          }
+        }, 300);
+      }
       return;
     }
     const result = calculateScore();
     setScoreData(result);
     setSubmitted(true);
+    
+    // Deletar rascunho se existir (questionário foi completado)
+    loadDraftByQuestionnaire(questionnaire.id, patient?.id)
+      .then((draft) => {
+        if (draft) {
+          return deleteDraft(draft.draftId);
+        }
+      })
+      .catch((error) => {
+        console.warn('Erro ao deletar rascunho após conclusão:', error);
+      });
+    
+    // Rastrear conclusão do questionário
+    const totalTime = Date.now() - startTimeRef.current;
+    track('questionnaire_completed', {
+      questionnaire_id: questionnaire.id,
+      time_spent_ms: totalTime,
+      answers_count: Object.keys(answers).length,
+      score: result.totalScore,
+      progress_pct: 100,
+    });
+    
     if (onSaved) {
       const answersArray: { itemId: string; itemText: string; optionLabel?: string; score: number }[] = [];
       questionnaire.items.forEach(item => {
@@ -273,7 +431,25 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
       });
       onSaved({ questionnaireId: questionnaire.id, totalScore: result.totalScore, isPercent: questionnaire.scoring.range.max === 100, answers: answersArray });
     }
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    
+    // Scroll para resultados e focar após renderização
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      // Focar no primeiro elemento dos resultados após scroll
+      setTimeout(() => {
+        const resultsElement = document.querySelector('[data-results-section]') as HTMLElement;
+        if (resultsElement) {
+          const firstFocusable = resultsElement.querySelector(
+            'button, a, [tabindex]:not([tabindex="-1"])'
+          ) as HTMLElement;
+          if (firstFocusable) {
+            firstFocusable.focus();
+          } else {
+            resultsElement.focus();
+          }
+        }
+      }, 500);
+    }, 100);
   };
   
   // IMPORTANTE: Todos os hooks DEVEM ser chamados antes de qualquer return condicional
@@ -292,13 +468,15 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
   if (scoreData) {
     try {
       return (
-        <ScoreDisplay 
-          scoreData={scoreData} 
-          scoring={questionnaire.scoring}
-          questionnaire={questionnaire}
-          answers={answersArrayForDisplay}
-          patient={patient}
-        />
+        <div data-results-section tabIndex={-1} className="focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+          <ScoreDisplay 
+            scoreData={scoreData} 
+            scoring={questionnaire.scoring}
+            questionnaire={questionnaire}
+            answers={answersArrayForDisplay}
+            patient={patient}
+          />
+        </div>
       );
     } catch (error) {
       console.error('Erro ao exibir resultados:', error);
@@ -333,7 +511,28 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
       </div>
       {/* Cabeçalho do questionário */}
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-6 border-l-4 border-blue-600">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{questionnaire.name} ({questionnaire.acronym})</h2>
+        <div className="flex items-start justify-between mb-2">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{questionnaire.name} ({questionnaire.acronym})</h2>
+          <div className="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
+            <svg
+              className="h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>
+              {answeredCount === totalItems 
+                ? 'Concluído' 
+                : remainingItems > 0
+                  ? `~${estimatedRemainingMinutes} min restante${estimatedRemainingMinutes !== 1 ? 's' : ''}`
+                  : `~${estimatedMinutes} min`}
+            </span>
+          </div>
+        </div>
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-4">
           <p className="text-gray-700 dark:text-gray-300 font-medium leading-relaxed">{questionnaire.instructions.text}</p>
         </div>
@@ -364,8 +563,25 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                   ? item.subitems.filter(sub => !sub.not_scored).every(sub => answers[sub.id] !== undefined)
                   : answers[item.id] !== undefined;
                 
+                const hasError = item.subitems && item.subitems.length > 0
+                  ? item.subitems.some(sub => !sub.not_scored && errors[sub.id])
+                  : errors[item.id];
+                
                 return (
-                  <div key={item.id} className={`bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 transition-all ${isAnswered ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-300'}`}>
+                  <div 
+                    key={item.id} 
+                    ref={(el) => {
+                      if (el && item.id) errorRefs.current[item.id] = el;
+                    }}
+                    data-item-id={item.id}
+                    className={`bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 transition-all ${
+                      hasError 
+                        ? 'border-l-4 border-red-500' 
+                        : isAnswered 
+                          ? 'border-l-4 border-green-500' 
+                          : 'border-l-4 border-gray-300'
+                    }`}
+                  >
                     <p className="text-base font-semibold text-gray-800 dark:text-white mb-4 leading-relaxed">
                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold mr-3">
                         {index + 1}
@@ -409,9 +625,12 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                             name={subitem.id}
                                             value={option.score}
                                             checked={isSelected}
-                                            onChange={() => handleAnswerChange(subitem.id, option.score)}
+                                            onChange={() => handleAnswerChange(subitem.id, option.score, item)}
+                                            onBlur={() => handleBlur(subitem.id, item)}
                                             className="sr-only"
                                             aria-label={`${subitem.text}: ${option.label}`}
+                                            aria-describedby={errors[subitem.id] ? `error-${subitem.id}` : undefined}
+                                            aria-invalid={!!errors[subitem.id]}
                                           />
                                           <span className="text-sm font-medium">{option.label}</span>
                                         </label>
@@ -423,6 +642,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                             })}
                           </tbody>
                         </table>
+                        {hasError && (
+                          <ValidationMessage 
+                            error={Object.values(errors).find(err => err) || 'Por favor, responda todas as perguntas desta seção.'}
+                            itemId={item.id}
+                            className="mt-2"
+                          />
+                        )}
                       </div>
                     ) : item.format === 'dual_scale' && item.subitems ? (
                       <div className="space-y-6">
@@ -449,12 +675,18 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                       <button
                                         key={option.score}
                                         type="button"
-                                        onClick={() => handleAnswerChange(subitem.id, option.score)}
+                                        onClick={() => handleAnswerChange(subitem.id, option.score, item)}
+                                        onBlur={() => handleBlur(subitem.id, item)}
                                         disabled={subitem.not_scored}
+                                        data-item-id={subitem.id}
+                                        aria-invalid={!!errors[subitem.id]}
+                                        aria-describedby={errors[subitem.id] ? `error-${subitem.id}` : undefined}
                                         className={`flex-1 h-10 rounded-lg border-2 transition-all ${
-                                          isSelected
-                                            ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                                            : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400'
+                                          errors[subitem.id]
+                                            ? 'border-red-500 dark:border-red-500'
+                                            : isSelected
+                                              ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+                                              : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400'
                                         } ${subitem.not_scored ? 'opacity-75 cursor-default' : 'cursor-pointer'}`}
                                       >
                                         <span className="text-sm font-medium">{option.label}</span>
@@ -468,6 +700,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                       Valor selecionado: <span className="text-blue-600 dark:text-blue-400 font-bold">{value}</span>
                                     </span>
                                   </div>
+                                )}
+                                {errors[subitem.id] && (
+                                  <ValidationMessage 
+                                    error={errors[subitem.id]}
+                                    itemId={subitem.id}
+                                    className="mt-2"
+                                  />
                                 )}
                               </div>
                             </div>
@@ -486,9 +725,15 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                             max={10}
                             step={1}
                             aria-label={`Selecionar valor para ${item.text}`}
+                            aria-invalid={!!errors[item.id]}
+                            aria-describedby={errors[item.id] ? `error-${item.id}` : undefined}
+                            data-item-id={item.id}
                             value={value ?? 0}
-                            onChange={(e) => handleAnswerChange(item.id, Number(e.target.value))}
-                            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                            onChange={(e) => handleAnswerChange(item.id, Number(e.target.value), item)}
+                            onBlur={() => handleBlur(item.id, item)}
+                            className={`w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider ${
+                              errors[item.id] ? 'border-red-500' : ''
+                            }`}
                           />
                           <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-2">
                             <span>0</span>
@@ -500,6 +745,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Valor selecionado:</span>
                           <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">{value ?? 0}</span>
                         </div>
+                        {errors[item.id] && (
+                          <ValidationMessage 
+                            error={errors[item.id]}
+                            itemId={item.id}
+                            className="mt-2"
+                          />
+                        )}
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -509,9 +761,11 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                             <label
                               key={option.label}
                               className={`flex items-center p-4 rounded-lg border-2 transition-all cursor-pointer ${
-                                isSelected
-                                  ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500 shadow-md'
-                                  : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20'
+                                errors[item.id]
+                                  ? 'border-red-500 dark:border-red-500 bg-red-50/50 dark:bg-red-900/20'
+                                  : isSelected
+                                    ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500 shadow-md'
+                                    : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20'
                               }`}
                             >
                               <input
@@ -519,7 +773,11 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                                 name={item.id}
                                 value={option.score}
                                 checked={isSelected}
-                                onChange={() => handleAnswerChange(item.id, option.score)}
+                                onChange={() => handleAnswerChange(item.id, option.score, item)}
+                                onBlur={() => handleBlur(item.id, item)}
+                                aria-invalid={!!errors[item.id]}
+                                aria-describedby={errors[item.id] ? `error-${item.id}` : undefined}
+                                data-item-id={item.id}
                                 className="h-5 w-5 text-blue-600 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                               />
                               <span className={`ml-4 text-base flex-1 ${isSelected ? 'font-semibold text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'}`}>
@@ -528,6 +786,13 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
                             </label>
                           );
                         })}
+                        {errors[item.id] && (
+                          <ValidationMessage 
+                            error={errors[item.id]}
+                            itemId={item.id}
+                            className="mt-2"
+                          />
+                        )}
                       </div>
                     )}
                   </div>
@@ -538,17 +803,68 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ questionnaire, pa
         })}
         
         <div className="sticky bottom-4 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 border-t-4 border-blue-600 mt-8">
-          <button
-            type="submit"
-            disabled={!currentPageValid}
-            className={`w-full text-white font-semibold rounded-lg text-lg px-6 py-4 text-center shadow-lg transform transition-all ${
-              currentPageValid
-                ? 'bg-blue-600 hover:bg-blue-700 hover:scale-[1.02] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700'
-                : 'bg-gray-400 cursor-not-allowed'
-            }`}
-          >
-            {answeredCount === totalItems ? 'Calcular Pontuação' : `Responder ${totalItems - answeredCount} pergunta${totalItems - answeredCount > 1 ? 's' : ''} restante${totalItems - answeredCount > 1 ? 's' : ''}`}
-          </button>
+          <div className="flex items-center justify-between mb-3">
+            <AutosaveIndicator
+              status={status}
+              lastSaved={lastSaved}
+              error={error}
+              className="text-sm"
+            />
+          </div>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={async () => {
+                setIsSavingDraft(true);
+                try {
+                  const progress = Math.round((answeredCount / totalItems) * 100);
+                  await saveDraft(questionnaire.id, answers, patient?.id, progress);
+                  track('questionnaire_draft_saved', {
+                    questionnaire_id: questionnaire.id,
+                    progress_pct: progress,
+                  });
+                  alert('Rascunho salvo com sucesso! Você pode continuar depois.');
+                } catch (error) {
+                  console.error('Erro ao salvar rascunho:', error);
+                  alert('Erro ao salvar rascunho. Tente novamente.');
+                } finally {
+                  setIsSavingDraft(false);
+                }
+              }}
+              disabled={isSavingDraft || Object.keys(answers).length === 0}
+              className={`px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 flex items-center gap-2 ${
+                isSavingDraft ? 'cursor-wait' : ''
+              }`}
+            >
+              {isSavingDraft ? (
+                <>
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Salvando...
+                </>
+              ) : (
+                <>
+                  <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                  </svg>
+                  Salvar Rascunho
+                </>
+              )}
+            </button>
+            <button
+              type="submit"
+              disabled={!currentPageValid}
+              className={`flex-1 text-white font-semibold rounded-lg text-lg px-6 py-4 text-center shadow-lg transform transition-all ${
+                currentPageValid
+                  ? 'bg-blue-600 hover:bg-blue-700 hover:scale-[1.02] focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700'
+                  : 'bg-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {answeredCount === totalItems ? 'Calcular Pontuação' : `Responder ${totalItems - answeredCount} pergunta${totalItems - answeredCount > 1 ? 's' : ''} restante${totalItems - answeredCount > 1 ? 's' : ''}`}
+            </button>
+          </div>
         </div>
       </form>
     </div>

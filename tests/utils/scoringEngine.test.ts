@@ -1,122 +1,197 @@
 import { describe, it, expect } from 'vitest';
-import { calculateQuestionnaireScore, validateAnswers } from '../../utils/scoringEngine';
-import { Questionnaire } from '../../types';
+import { calculateQuestionnaireScore, validateItem, validateAnswers } from '../../utils/scoringEngine';
+import { Questionnaire, Item } from '../../types';
 
 describe('scoringEngine', () => {
-  const mockQuestionnaire: Questionnaire = {
-    id: 'test-1',
-    name: 'Test Questionnaire',
-    acronym: 'TQ',
-    domain: 'Test',
-    instructions: {
-      text: 'Test instructions',
-      reproduction_permitted: true,
-    },
-    items: [
-      {
-        id: 'Q1',
-        text: 'Question 1',
+  describe('validateItem', () => {
+    it('deve validar item simples sem resposta', () => {
+      const item: Item = {
+        id: 'item1',
+        text: 'Teste',
         domain: 'Test',
         options: [
-          { label: 'Option 1', score: 0 },
-          { label: 'Option 2', score: 1 },
-          { label: 'Option 3', score: 2 },
+          { label: 'Opção 1', score: 0 },
+          { label: 'Opção 2', score: 1 },
         ],
         reverse_scored: false,
-      },
-      {
-        id: 'Q2',
-        text: 'Question 2',
+      };
+
+      const result = validateItem(item, {});
+      expect(result.valid).toBe(false);
+      expect(result.error).toBeDefined();
+    });
+
+    it('deve validar item simples com resposta', () => {
+      const item: Item = {
+        id: 'item1',
+        text: 'Teste',
         domain: 'Test',
         options: [
-          { label: 'Option 1', score: 0 },
-          { label: 'Option 2', score: 1 },
-          { label: 'Option 3', score: 2 },
+          { label: 'Opção 1', score: 0 },
+          { label: 'Opção 2', score: 1 },
         ],
         reverse_scored: false,
-      },
-    ],
-    scoring: {
-      formula: '(Soma de todos os itens / 4) * 100',
-      interpretation: 'Higher is better',
-      range: {
-        min: 0,
-        max: 100,
-      },
-    },
-    source: {
-      filename: 'test.json',
-    },
-  };
-
-  describe('calculateQuestionnaireScore', () => {
-    it('deve calcular pontuação corretamente', () => {
-      const answers = {
-        Q1: 2,
-        Q2: 2,
       };
 
-      const result = calculateQuestionnaireScore(mockQuestionnaire, answers);
-
-      expect(result.totalScore).toBe(100); // (2+2)/4 * 100 = 100
-      expect(result.isPercent).toBe(true);
-      expect(result.error).toBeUndefined();
+      const result = validateItem(item, { item1: 1 });
+      expect(result.valid).toBe(true);
     });
 
-    it('deve retornar erro para questionário inválido', () => {
-      const invalidQuestionnaire = {
-        ...mockQuestionnaire,
-        items: [], // Inválido - sem items
+    it('deve validar item com subitems', () => {
+      const item: Item = {
+        id: 'item1',
+        text: 'Teste',
+        domain: 'Test',
+        options: [],
+        reverse_scored: false,
+        subitems: [
+          {
+            id: 'sub1',
+            text: 'Subitem 1',
+            options: [{ label: 'Opção 1', score: 0 }],
+          },
+          {
+            id: 'sub2',
+            text: 'Subitem 2',
+            options: [{ label: 'Opção 1', score: 0 }],
+            not_scored: true,
+          },
+        ],
       };
 
-      const result = calculateQuestionnaireScore(invalidQuestionnaire as Questionnaire, {});
+      const result1 = validateItem(item, {});
+      expect(result1.valid).toBe(false);
 
-      // A função pode retornar erro OU pontuação 0 quando items está vazio
-      // Verifica se há erro OU se a pontuação é 0 (o que também indica problema)
-      if (result.error) {
-        expect(result.error).toBeDefined();
-      } else {
-        // Se não retornou erro, a pontuação deve ser 0 (sem items para calcular)
-        expect(result.totalScore).toBe(0);
-      }
-    });
-
-    it('deve lidar com respostas faltando', () => {
-      const answers = {
-        Q1: 2,
-        // Q2 não respondido
-      };
-
-      const result = calculateQuestionnaireScore(mockQuestionnaire, answers);
-
-      expect(result.totalScore).toBe(50); // (2+0)/4 * 100 = 50
+      const result2 = validateItem(item, { sub1: 0 });
+      expect(result2.valid).toBe(true);
     });
   });
 
   describe('validateAnswers', () => {
-    it('deve validar respostas completas', () => {
-      const answers = {
-        Q1: 2,
-        Q2: 2,
+    it('deve identificar itens faltantes', () => {
+      const questionnaire: Questionnaire = {
+        id: 'test',
+        name: 'Test',
+        acronym: 'TST',
+        domain: 'Test',
+        instructions: { text: 'Test', reproduction_permitted: true },
+        items: [
+          {
+            id: 'item1',
+            text: 'Item 1',
+            domain: 'Test',
+            options: [{ label: 'Opção 1', score: 0 }],
+            reverse_scored: false,
+          },
+          {
+            id: 'item2',
+            text: 'Item 2',
+            domain: 'Test',
+            options: [{ label: 'Opção 1', score: 0 }],
+            reverse_scored: false,
+          },
+        ],
+        scoring: {
+          domains: [],
+          total_formula: 'Soma de todos os itens',
+          missing_data_rule: 'Não permitir',
+          range: { min: 0, max: 100 },
+          interpretation: 'Test',
+        },
+        source: { filename: 'test.json' },
       };
 
-      const result = validateAnswers(mockQuestionnaire, answers);
+      const result = validateAnswers(questionnaire, { item1: 0 });
+      expect(result.valid).toBe(false);
+      expect(result.missingItems).toContain('item2');
+    });
+  });
 
-      expect(result.valid).toBe(true);
-      expect(result.missingItems).toHaveLength(0);
+  describe('calculateQuestionnaireScore', () => {
+    it('deve calcular score básico', () => {
+      const questionnaire: Questionnaire = {
+        id: 'test',
+        name: 'Test',
+        acronym: 'TST',
+        domain: 'Test',
+        instructions: { text: 'Test', reproduction_permitted: true },
+        items: [
+          {
+            id: 'item1',
+            text: 'Item 1',
+            domain: 'Test',
+            options: [
+              { label: 'Opção 1', score: 0 },
+              { label: 'Opção 2', score: 1 },
+              { label: 'Opção 3', score: 2 },
+            ],
+            reverse_scored: false,
+          },
+          {
+            id: 'item2',
+            text: 'Item 2',
+            domain: 'Test',
+            options: [
+              { label: 'Opção 1', score: 0 },
+              { label: 'Opção 2', score: 1 },
+            ],
+            reverse_scored: false,
+          },
+        ],
+        scoring: {
+          domains: [],
+          total_formula: 'Soma de todos os itens',
+          missing_data_rule: 'Não permitir',
+          range: { min: 0, max: 100 },
+          interpretation: 'Test',
+        },
+        source: { filename: 'test.json' },
+      };
+
+      const result = calculateQuestionnaireScore(questionnaire, {
+        item1: 2,
+        item2: 1,
+      });
+
+      expect(result.totalScore).toBe(3);
+      expect(result.error).toBeUndefined();
     });
 
-    it('deve detectar respostas faltando', () => {
-      const answers = {
-        Q1: 2,
-        // Q2 não respondido
+    it('deve aplicar reverse scoring quando necessário', () => {
+      const questionnaire: Questionnaire = {
+        id: 'test',
+        name: 'Test',
+        acronym: 'TST',
+        domain: 'Test',
+        instructions: { text: 'Test', reproduction_permitted: true },
+        items: [
+          {
+            id: 'item1',
+            text: 'Item 1',
+            domain: 'Test',
+            options: [
+              { label: 'Opção 1', score: 0 },
+              { label: 'Opção 2', score: 1 },
+              { label: 'Opção 3', score: 2 },
+            ],
+            reverse_scored: true,
+          },
+        ],
+        scoring: {
+          domains: [],
+          total_formula: 'Soma de todos os itens',
+          missing_data_rule: 'Não permitir',
+          range: { min: 0, max: 100 },
+          interpretation: 'Test',
+        },
+        source: { filename: 'test.json' },
       };
 
-      const result = validateAnswers(mockQuestionnaire, answers);
+      const result = calculateQuestionnaireScore(questionnaire, {
+        item1: 0, // Score 0 deve virar 2 (max - score)
+      });
 
-      expect(result.valid).toBe(false);
-      expect(result.missingItems).toContain('Q2');
+      expect(result.totalScore).toBe(2);
     });
   });
 });
-

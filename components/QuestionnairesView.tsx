@@ -6,6 +6,7 @@ import QuestionnaireForm from './QuestionnaireForm';
 import BodySticker from './BodySticker';
 import { useFirebaseSync } from '../hooks/useFirebaseSync';
 import { auth } from '../config/firebaseConfig';
+import { useDrafts } from '../hooks/useDrafts';
 
 const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
   = ({ questionnaires }) => {
@@ -35,6 +36,8 @@ const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
   const [selectedPatientId, setSelectedPatientId] = useState<string>('');
   const [activeQ, setActiveQ] = useState<Questionnaire | null>(null);
   const [selectedCat, setSelectedCat] = useState<string>('');
+  const [showDrafts, setShowDrafts] = useState(false);
+  const { drafts, loadDraft, deleteDraft } = useDrafts();
 
   const groups = useMemo(()=>{
     const getCat = (q: Questionnaire) => {
@@ -119,6 +122,11 @@ const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
     );
   }
 
+  // Filtrar rascunhos por paciente se selecionado
+  const filteredDrafts = selectedPatientId 
+    ? drafts.filter(d => !d.patientId || d.patientId === selectedPatientId)
+    : drafts;
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-6">
@@ -137,17 +145,131 @@ const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
         </div>
       </div>
 
-      {/* Barra de categorias (selecionável) */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 mb-6 overflow-x-auto">
-        <div className="flex space-x-3 min-w-max items-center">
-          {Object.keys(groups).map(cat => (
-            <button key={cat} onClick={()=>setSelectedCat(cat)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium ${selectedCat===cat ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'}`}>
-              <BodySticker category={cat} size={28} />
-              <span>{cat}</span>
-            </button>
-          ))}
+      {/* Tabs: Questionários e Rascunhos */}
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 mb-6">
+        <div className="flex space-x-4 border-b border-gray-200 dark:border-gray-700 mb-4">
+          <button
+            onClick={() => { setShowDrafts(false); setSelectedCat(''); }}
+            className={`px-4 py-2 font-medium border-b-2 transition-colors ${
+              !showDrafts
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+            }`}
+          >
+            Questionários
+          </button>
+          <button
+            onClick={() => { setShowDrafts(true); setSelectedCat(''); }}
+            className={`px-4 py-2 font-medium border-b-2 transition-colors relative ${
+              showDrafts
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+            }`}
+          >
+            Rascunhos
+            {filteredDrafts.length > 0 && (
+              <span className="ml-2 px-2 py-0.5 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                {filteredDrafts.length}
+              </span>
+            )}
+          </button>
         </div>
+
+        {showDrafts ? (
+          /* Lista de Rascunhos */
+          <div>
+            {filteredDrafts.length === 0 ? (
+              <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                <svg className="mx-auto h-12 w-12 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="text-lg font-medium">Nenhum rascunho salvo</p>
+                <p className="text-sm mt-2">Os rascunhos aparecerão aqui quando você salvar o progresso de um questionário.</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {filteredDrafts.map((draft) => {
+                  const questionnaire = questionnaires.find(q => q.id === draft.questionnaireId);
+                  const draftPatient = patients.find(p => p.id === draft.patientId);
+                  
+                  return (
+                    <div
+                      key={draft.draftId}
+                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="px-2 py-1 text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">
+                              Rascunho
+                            </span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                              {draft.progress}% completo
+                            </span>
+                          </div>
+                          <h4 className="font-semibold text-gray-800 dark:text-white">
+                            {questionnaire?.name || 'Questionário desconhecido'} ({questionnaire?.acronym || 'N/A'})
+                          </h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                            Paciente: {draftPatient?.nome || 'Não especificado'}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            Última atualização: {new Date(draft.updatedAt).toLocaleString('pt-BR')}
+                          </p>
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <button
+                            onClick={async () => {
+                              if (!questionnaire) {
+                                alert('Questionário não encontrado.');
+                                return;
+                              }
+                              if (draft.patientId) {
+                                setSelectedPatientId(draft.patientId);
+                              }
+                              setActiveQ(questionnaire);
+                            }}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors text-sm"
+                          >
+                            Continuar
+                          </button>
+                          <button
+                            onClick={async () => {
+                              if (confirm('Tem certeza que deseja excluir este rascunho?')) {
+                                try {
+                                  await deleteDraft(draft.draftId);
+                                } catch (error) {
+                                  console.error('Erro ao deletar rascunho:', error);
+                                  alert('Erro ao deletar rascunho.');
+                                }
+                              }
+                            }}
+                            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors text-sm"
+                          >
+                            Excluir
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Barra de categorias (selecionável) */
+          <div className="overflow-x-auto">
+            <div className="flex space-x-3 min-w-max items-center">
+              {Object.keys(groups).map(cat => (
+                <button key={cat} onClick={()=>setSelectedCat(cat)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium ${selectedCat===cat ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'}`}>
+                  <BodySticker category={cat} size={28} />
+                  <span>{cat}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Lista da categoria escolhida */}

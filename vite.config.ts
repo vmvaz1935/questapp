@@ -118,6 +118,8 @@ export default defineConfig(({ mode }) => {
                 },
                 workbox: {
                   globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+                  // Incluir service worker customizado para Background Sync
+                  importScripts: ['/sw-background-sync.js'],
                   runtimeCaching: [
                     {
                       urlPattern: /^https:\/\/fonts\.googleapis\.com/,

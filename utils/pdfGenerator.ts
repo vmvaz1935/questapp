@@ -40,6 +40,11 @@ interface PDFData {
   citations: Record<string, string>;
 }
 
+export interface PDFGenerationResult {
+  blob: Blob;
+  fileName: string;
+}
+
 // Função helper para garantir que o texto seja tratado corretamente com UTF-8
 function ensureUTF8(text: string | undefined | null): string {
   if (!text) return '';
@@ -811,7 +816,9 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
     );
   }
 
-    // Salvar PDF
+    // Retornar blob do PDF em vez de salvar direto
+    const pdfBlob = doc.output('blob');
+    
     // Sanitizar nome do paciente para nome de arquivo
     const sanitizedName = patient.nome
       .replace(/[^a-zA-Z0-9\s]/g, '') // Remove caracteres especiais
@@ -820,12 +827,26 @@ export async function generatePDFReport(data: PDFData): Promise<void> {
     const dateStr = new Date().toISOString().split('T')[0];
     const fileName = `Relatorio_${sanitizedName}_${dateStr}.pdf`;
     
-    console.log('Salvando PDF:', fileName);
-    doc.save(fileName);
-    console.log('PDF salvo com sucesso');
+    console.log('PDF gerado com sucesso:', fileName);
+    return { blob: pdfBlob, fileName };
   } catch (error: any) {
     console.error('Erro na geração de PDF:', error);
     throw error; // Re-lançar o erro para ser capturado pelo componente
   }
+}
+
+/**
+ * Função helper para salvar PDF diretamente (compatibilidade)
+ */
+export async function savePDFReport(data: PDFData): Promise<void> {
+  const result = await generatePDFReport(data);
+  const url = URL.createObjectURL(result.blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = result.fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
