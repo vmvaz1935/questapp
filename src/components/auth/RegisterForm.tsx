@@ -22,8 +22,14 @@ export const RegisterForm: React.FC = () => {
     try {
       await register(email, password, name);
       navigate('/patients');
-    } catch (err) {
-      // Erro já está no store
+    } catch (err: any) {
+      // Erro já está no store e será exibido na UI
+      console.error('Erro ao criar conta:', err);
+      
+      // Se for erro de rede, mostrar mensagem mais amigável
+      if (err.message?.includes('conectar ao servidor') || err.message?.includes('Network Error')) {
+        // A mensagem já está sendo exibida pelo componente de erro
+      }
     }
   };
 
@@ -88,7 +94,14 @@ export const RegisterForm: React.FC = () => {
 
           {error && (
             <div className="p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-400 rounded-lg text-sm">
-              {error}
+              <div className="font-semibold mb-1">Erro ao criar conta</div>
+              <div>{error}</div>
+              {error.includes('conectar ao servidor') && (
+                <div className="mt-2 text-xs">
+                  <p>O backend não está configurado ou não está acessível.</p>
+                  <p>Por favor, configure a variável de ambiente VITE_API_URL no Vercel ou use o modo offline.</p>
+                </div>
+              )}
             </div>
           )}
 

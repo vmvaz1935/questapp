@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { useAuthStore } from '../src/stores/authStore';
-import { trackPageview, trackEvent, AnalyticsEvents } from '../utils/analytics';
+import { trackEvent, AnalyticsEvents } from '../utils/analytics';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,12 +18,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   // Track pageview quando rota muda
   useEffect(() => {
-    trackPageview(location.pathname);
+    trackEvent(AnalyticsEvents.PAGE_VIEW, { route: location.pathname });
   }, [location.pathname]);
 
   const handleSignOut = async () => {
     // Track logout event
-    trackEvent(AnalyticsEvents.LOGOUT);
+    trackEvent(AnalyticsEvents.LOGOUT, {});
 
     // Usar novo sistema de logout
     await logout();

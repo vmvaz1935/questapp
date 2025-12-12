@@ -3,14 +3,13 @@ import './i18n/config';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { initSentry } from './utils/sentry';
-import { initPlausible } from './utils/analytics';
+// Plausible analytics removido - usando sistema interno de analytics
 import App from './App';
 
 // Inicializar Sentry (se habilitado)
 initSentry().catch(console.warn);
 
-// Inicializar Plausible (se habilitado)
-initPlausible();
+// Analytics inicializado via sistema interno (utils/analytics.ts)
 
 // Registrar Service Worker para PWA (será feito pelo VitePWA plugin)
 if ('serviceWorker' in navigator) {

@@ -25,9 +25,41 @@ export type AnalyticsEvent =
   | '2fa_required'
   | '2fa_verified'
   | 'page_load'
+  | 'page_view'
   | 'offline_detected'
   | 'online_restored'
-  | 'questionnaire_exported';
+  | 'questionnaire_exported'
+  | 'logout';
+
+// Exportar como objeto para facilitar uso
+export const AnalyticsEvents = {
+  QUESTIONNAIRE_VIEWED: 'questionnaire_viewed',
+  QUESTIONNAIRE_STARTED: 'questionnaire_started',
+  ANSWER_CHANGED: 'answer_changed',
+  AUTOSAVE_OK: 'autosave_ok',
+  AUTOSAVE_ERROR: 'autosave_error',
+  QUESTIONNAIRE_COMPLETED: 'questionnaire_completed',
+  QUESTIONNAIRE_ABANDONED: 'questionnaire_abandoned',
+  QUESTIONNAIRE_DRAFT_SAVED: 'questionnaire_draft_saved',
+  PDF_GENERATED: 'pdf_generated',
+  PDF_DOWNLOADED: 'pdf_downloaded',
+  SYNC_INITIATED: 'sync_initiated',
+  SYNC_PROGRESS: 'sync_progress',
+  SYNC_SUCCESS: 'sync_success',
+  SYNC_CONFLICT: 'sync_conflict',
+  SYNC_ERROR: 'sync_error',
+  LOGIN_STARTED: 'login_started',
+  LOGIN_SUCCESS: 'login_success',
+  LOGIN_ERROR: 'login_error',
+  TWO_FA_REQUIRED: '2fa_required',
+  TWO_FA_VERIFIED: '2fa_verified',
+  PAGE_LOAD: 'page_load',
+  PAGE_VIEW: 'page_view',
+  OFFLINE_DETECTED: 'offline_detected',
+  ONLINE_RESTORED: 'online_restored',
+  QUESTIONNAIRE_EXPORTED: 'questionnaire_exported',
+  LOGOUT: 'logout',
+} as const;
 
 export interface AnalyticsProperties {
   questionnaire_id?: string;

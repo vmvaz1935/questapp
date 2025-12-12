@@ -29,17 +29,6 @@ export function useLazyList<T>({
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  
-  // Expor ref no retorno
-  const returnValue = {
-    displayedItems,
-    hasMore,
-    isLoading,
-    loadMore,
-    reset,
-  } as UseLazyListReturn<T> & { loadMoreRef: React.RefObject<HTMLDivElement> };
-  
-  (returnValue as any).loadMoreRef = loadMoreRef;
 
   const displayedItems = items.slice(0, displayedCount);
   const hasMore = displayedCount < items.length;

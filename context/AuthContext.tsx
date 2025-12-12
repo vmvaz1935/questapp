@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../src/stores/authStore';
 import { clearEncryptionCacheForProfessional } from '../services/encryption';
 
 interface AuthState { 

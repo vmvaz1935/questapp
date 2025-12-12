@@ -32,7 +32,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ onSuccess,
         window.google.accounts.id.prompt();
       } else {
         // Fallback: usar Firebase Auth se disponível
-        const { loadFirebaseIfAvailable } = await import('../../utils/firebaseHelper');
+        const { loadFirebaseIfAvailable } = await import('../../../utils/firebaseHelper');
         const { firebaseConfig, firebaseAuth } = await loadFirebaseIfAvailable();
 
         if (!firebaseConfig?.isFirebaseConfigured || !firebaseConfig.auth || !firebaseConfig.googleProvider) {

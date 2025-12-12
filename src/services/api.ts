@@ -1,13 +1,36 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Verificar se estamos em produção e se há URL da API configurada
+const getApiUrl = () => {
+  // Se houver variável de ambiente, usar ela
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  
+  // Em produção (Vercel), tentar usar URL relativa ou variável de ambiente do Vercel
+  if (import.meta.env.PROD) {
+    // Se não houver backend configurado, retornar null para indicar que a API não está disponível
+    return null;
+  }
+  
+  // Em desenvolvimento, usar localhost
+  return 'http://localhost:5000/api';
+};
+
+const API_URL = getApiUrl();
 
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL || '/api', // Fallback para URL relativa se não houver API_URL
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // 10 segundos de timeout
 });
+
+// Verificar se a API está disponível
+if (!API_URL && import.meta.env.PROD) {
+  console.warn('[API] Backend não configurado. Algumas funcionalidades podem não funcionar.');
+}
 
 // Interceptor para adicionar token
 apiClient.interceptors.request.use(
@@ -38,7 +61,8 @@ apiClient.interceptors.response.use(
           throw new Error('No refresh token');
         }
 
-        const response = await axios.post(`${API_URL}/auth/refresh`, {
+        const refreshUrl = API_URL ? `${API_URL}/auth/refresh` : '/api/auth/refresh';
+        const response = await axios.post(refreshUrl, {
           refreshToken,
         });
 

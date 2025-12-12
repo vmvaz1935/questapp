@@ -72,7 +72,17 @@ export const useAuthStore = create<AuthState>()(
           localStorage.setItem('accessToken', response.data.accessToken);
           localStorage.setItem('refreshToken', response.data.refreshToken);
         } catch (error: any) {
-          const errorMessage = error.response?.data?.error || 'Erro ao registrar';
+          let errorMessage = 'Erro ao registrar';
+          
+          if (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')) {
+            errorMessage = 'Não foi possível conectar ao servidor. Verifique sua conexão ou tente novamente mais tarde.';
+          } else if (error.response?.data?.error) {
+            errorMessage = error.response.data.error;
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          console.error('Erro ao registrar:', error);
           set({
             error: errorMessage,
             isLoading: false,

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plano de Negócios FisioQ - Plataforma SaaS para Fisioterapeutas">
+    <title>FisioQ - Plano de Negócios</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn prev-btn" id="prevBtn" aria-label="Slide anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-btn next-btn" id="nextBtn" aria-label="Próximo slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+    
+    <!-- Slide Indicators -->
+    <div class="slide-indicators" id="slideIndicators"></div>
+    
+    <!-- Main Container -->
+    <div class="presentation-container" id="presentationContainer">
+        
+        <!-- Slide 1: Capa -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content cover-slide">
+                <div class="cover-content">
+                    <h1 class="cover-title">FisioQ</h1>
+                    <h2 class="cover-subtitle">Plano de Negócios</h2>
+                    <p class="cover-description">Plataforma SaaS para Fisioterapeutas</p>
+                    <div class="cover-meta">
+                        <p>Novembro 2025</p>
+                        <p>Versão Beta</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: O Problema -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h1 class="slide-title">O Problema</h1>
+                <div class="problem-grid">
+                    <div class="problem-item">
+                        <i class="fas fa-clipboard-list problem-icon"></i>
+                        <h3>Gestão Manual</h3>
+                        <p>Fisioterapeutas ainda usam papel e planilhas para gerenciar pacientes</p>
+                    </div>
+                    <div class="problem-item">
+                        <i class="fas fa-chart-line problem-icon"></i>
+                        <h3>Dificuldade de Acompanhamento</h3>
+                        <p>Falta de ferramentas para acompanhar evolução do tratamento</p>
+                    </div>
+                    <div class="problem-item">
+                        <i class="fas fa-file-medical problem-icon"></i>
+                        <h3>Questionários Desorganizados</h3>
+                        <p>Questionários clínicos espalhados, sem padronização</p>
+                    </div>
+                    <div class="problem-item">
+                        <i class="fas fa-shield-alt problem-icon"></i>
+                        <h3>Conformidade LGPD</h3>
+                        <p>Dificuldade em garantir conformidade com proteção de dados</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: A Solução -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h1 class="slide-title">A Solução</h1>
+                <div class="solution-content">
+                    <div class="solution-main">
+                        <h2 class="solution-title">FisioQ</h2>
+                        <p class="solution-tagline">A plataforma completa para fisioterapeutas gerenciarem pacientes, aplicarem questionários validados e acompanharem a evolução do tratamento de forma profissional e eficiente.</p>
+                        <div class="solution-features">
+                            <div class="feature-badge">
+                                <i class="fas fa-check-circle"></i>
+                                <span>PWA Offline</span>
+                            </div>
+                            <div class="feature-badge">
+                                <i class="fas fa-check-circle"></i>
+                                <span>LGPD Compliant</span>
+                            </div>
+                            <div class="feature-badge">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Multi-idioma</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: O Mercado -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h1 class="slide-title">O Mercado</h1>
+                <div class="market-content">
+                    <div class="market-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">200k+</div>
+                            <div class="stat-label">Fisioterapeutas no Brasil</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">R$ 2,5 bi</div>
+                            <div class="stat-label">Mercado de Saúde Digital (crescimento anual)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">30%</div>
+                            <div class="stat-label">Taxa de crescimento anual do setor</div>
+                        </div>
+                    </div>
+                    <div class="market-opportunities">
+                        <h3>Oportunidades</h3>
+                        <ul>
+                            <li>Digitalização acelerada dos processos clínicos</li>
+                            <li>Demanda por conformidade LGPD</li>
+                            <li>Expansão internacional (Espanha, Portugal)</li>
+                            <li>Parcerias com universidades e centros de pesquisa</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: O Produto - Funcionalidades -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h1 class="slide-title">O Produto</h1>
+                <div class="product-features">
+                    <div class="feature-card">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Gerenciamento de Pacientes</h3>
+                        <p>Cadastro completo, histórico e evolução</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt feature-icon"></i>
+                        <h3>25+ Questionários Validados</h3>
+                        <p>Biblioteca completa de questionários científicos</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar feature-icon"></i>
+                        <h3>Relatórios e Análises</h3>
+                        <p>Gráficos, comparações temporais e exportação</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt feature-icon"></i>
+                        <h3>PWA Offline</h3>
+                        <p>Funciona sem internet, instalável</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3>LGPD Compliant</h3>
+                        <p>Criptografia AES-GCM, isolamento de dados</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-globe feature-icon"></i>
+                        <h3>Multi-idioma</h3>
+                        <p>Português e Inglês</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: Modelo de Negócio -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h1 class="slide-title">Modelo de Negócio</h1>
+                <div class="pricing-plans">
+                    <div class="plan-card free-plan">
+                        <div class="plan-header">
+                            <h3>Gratuito</h3>
+                            <div class="plan-price">R$ 0<span>/mês</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Até 3 pacientes</li>
+                            <li><i class="fas fa-check"></i> 3 questionários</li>
+                            <li><i class="fas fa-check"></i> Todos os tipos de questionários</li>
+                            <li><i class="fas fa-check"></i> Relatórios básicos</li>
+                            <li><i class="fas fa-check"></i> Suporte por email</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card pro-plan featured">
+                        <div class="plan-badge">Mais Popular</div>
+                        <div class="plan-header">
+                            <h3>Pro</h3>
+                            <div class="plan-price">R$ 50<span>/mês</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Pacientes ilimitados</li>
+                            <li><i class="fas fa-check"></i> Questionários ilimitados</li>
+                            <li><i class="fas fa-check"></i> Todos os tipos de questionários</li>
+                            <li><i class="fas fa-check"></i> Relatórios avançados</li>
+                            <li><i class="fas fa-check"></i> Exportação de dados</li>
+                            <li><i class="fas fa-check"></i> Sincronização na nuvem</li>
+                            <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: Diferenciais Competitivos -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h1 class="slide-title">Diferenciais Competitivos</h1>
+                <div class="competitive-advantages">
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Questionários Validados</h3>
+                        <p>Biblioteca completa de 25+ questionários cientificamente validados</p>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3>Preço Competitivo</h3>
+                        <p>R$ 50/mês vs. R$ 100-300 dos concorrentes</p>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>LGPD Compliant</h3>
+                        <p>Conformidade total com proteção de dados</p>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3>PWA Offline</h3>
+                        <p>Funciona sem internet, instalável</p>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Multi-idioma</h3>
+                        <p>Expansão internacional facilitada</p>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon">
+                            <i class="fas fa-mouse-pointer"></i>
+                        </div>
+                        <h3>Fácil de Usar</h3>
+                        <p>Interface intuitiva, sem necessidade de treinamento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Tecnologia e Arquitetura -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h1 class="slide-title">Tecnologia e Arquitetura</h1>
+                <div class="tech-content">
+                    <div class="tech-stack">
+                        <h3>Stack Tecnológico</h3>
+                        <div class="tech-items">
+                            <div class="tech-item">React 19</div>
+                            <div class="tech-item">TypeScript</div>
+                            <div class="tech-item">Vite</div>
+                            <div class="tech-item">Firebase</div>
+                            <div class="tech-item">IndexedDB</div>
+                            <div class="tech-item">Tailwind CSS</div>
+                        </div>
+                    </div>
+                    <div class="tech-highlights">
+                        <div class="highlight-card">
+                            <i class="fas fa-lock"></i>
+                            <h4>Segurança</h4>
+                            <p>AES-GCM (256 bits), PBKDF2, LGPD compliant</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h4>Performance</h4>
+                            <p>Bundle: 159KB (gzip: 53KB), Code splitting</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <h4>Escalabilidade</h4>
+                            <p>Arquitetura modular, Firebase backend</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Status Atual -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h1 class="slide-title">Status Atual</h1>
+                <div class="status-content">
+                    <div class="status-progress">
+                        <div class="progress-circle">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring-circle" cx="100" cy="100" r="90" />
+                            </svg>
+                            <div class="progress-text">70%</div>
+                        </div>
+                        <p class="progress-label">Completo</p>
+                    </div>
+                    <div class="status-features">
+                        <h3>Funcionalidades Implementadas</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Gerenciamento de pacientes</li>
+                            <li><i class="fas fa-check"></i> 25+ questionários validados</li>
+                            <li><i class="fas fa-check"></i> Sistema de relatórios</li>
+                            <li><i class="fas fa-check"></i> Autenticação e segurança</li>
+                            <li><i class="fas fa-check"></i> PWA funcional</li>
+                            <li><i class="fas fa-check"></i> LGPD compliant</li>
+                            <li><i class="fas fa-check"></i> Multi-idioma</li>
+                        </ul>
+                    </div>
+                    <div class="status-metrics">
+                        <div class="metric">
+                            <div class="metric-value">159KB</div>
+                            <div class="metric-label">Bundle inicial</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">70%</div>
+                            <div class="metric-label">Progresso</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">Beta</div>
+                            <div class="metric-label">Status</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 10: Roadmap -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h1 class="slide-title">Roadmap</h1>
+                <div class="roadmap-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-period">3-6 meses</div>
+                        <h3>Curto Prazo</h3>
+                        <ul>
+                            <li>Completar testes (cobertura ≥70%)</li>
+                            <li>Melhorias de acessibilidade</li>
+                            <li>Background sync offline</li>
+                            <li>Push notifications</li>
+                            <li>Export CSV/JSON</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-period">6-12 meses</div>
+                        <h3>Médio Prazo</h3>
+                        <ul>
+                            <li>Versão mobile nativa (React Native)</li>
+                            <li>Integração com prontuários eletrônicos</li>
+                            <li>API para integrações</li>
+                            <li>Dashboard analítico avançado</li>
+                            <li>Marketplace de questionários</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-period">12+ meses</div>
+                        <h3>Longo Prazo</h3>
+                        <ul>
+                            <li>Expansão internacional</li>
+                            <li>IA para análise preditiva</li>
+                            <li>Telefisioterapia integrada</li>
+                            <li>Parcerias com universidades</li>
+                            <li>Certificações adicionais (HIPAA)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 11: Projeções Financeiras -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h1 class="slide-title">Projeções Financeiras</h1>
+                <div class="financial-content">
+                    <div class="revenue-model">
+                        <h3>Modelo de Receita: Freemium</h3>
+                        <p>Plano gratuito para aquisição + Assinatura mensal R$ 50,00</p>
+                        <p class="revenue-per-user">Potencial anual por usuário: <strong>R$ 600,00</strong></p>
+                    </div>
+                    <div class="projections">
+                        <div class="projection-chart">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        <div class="projection-tables">
+                            <div class="projection-table">
+                                <h4>Conservadora (Ano 1)</h4>
+                                <table>
+                                    <tr>
+                                        <td>Mês 3</td>
+                                        <td>50 usuários</td>
+                                        <td>R$ 2.500/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mês 6</td>
+                                        <td>200 usuários</td>
+                                        <td>R$ 10.000/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mês 12</td>
+                                        <td>500 usuários</td>
+                                        <td>R$ 25.000/mês</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2">Receita Anual</td>
+                                        <td>R$ 150k - R$ 300k</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="projection-table">
+                                <h4>Otimista (Ano 1)</h4>
+                                <table>
+                                    <tr>
+                                        <td>Mês 3</td>
+                                        <td>150 usuários</td>
+                                        <td>R$ 7.500/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mês 6</td>
+                                        <td>500 usuários</td>
+                                        <td>R$ 25.000/mês</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mês 12</td>
+                                        <td>1.500 usuários</td>
+                                        <td>R$ 75.000/mês</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2">Receita Anual</td>
+                                        <td>R$ 450k - R$ 900k</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 12: Necessidades de Investimento -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h1 class="slide-title">Necessidades de Investimento</h1>
+                <div class="investment-content">
+                    <div class="investment-breakdown">
+                        <div class="breakdown-item">
+                            <div class="breakdown-bar" style="width: 40%"></div>
+                            <div class="breakdown-info">
+                                <h3>Marketing e Aquisição</h3>
+                                <p>40% - R$ 60k - R$ 120k</p>
+                            </div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-bar" style="width: 25%"></div>
+                            <div class="breakdown-info">
+                                <h3>Desenvolvimento</h3>
+                                <p>25% - R$ 37,5k - R$ 75k</p>
+                            </div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-bar" style="width: 20%"></div>
+                            <div class="breakdown-info">
+                                <h3>Infraestrutura</h3>
+                                <p>20% - R$ 30k - R$ 60k</p>
+                            </div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-bar" style="width: 10%"></div>
+                            <div class="breakdown-info">
+                                <h3>Suporte</h3>
+                                <p>10% - R$ 15k - R$ 30k</p>
+                            </div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-bar" style="width: 5%"></div>
+                            <div class="breakdown-info">
+                                <h3>Reserva</h3>
+                                <p>5% - R$ 7,5k - R$ 15k</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investment-total">
+                        <div class="total-card">
+                            <h2>Total Necessário</h2>
+                            <div class="total-amount">R$ 150k - R$ 300k</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 13: Riscos e Mitigações -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h1 class="slide-title">Riscos e Mitigações</h1>
+                <div class="risks-content">
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <i class="fas fa-exclamation-triangle risk-icon"></i>
+                            <h3>Concorrência</h3>
+                        </div>
+                        <p class="risk-description">Mercado com alguns players estabelecidos</p>
+                        <div class="mitigation">
+                            <strong>Mitigação:</strong> Diferenciação por preço, qualidade e LGPD compliance
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <i class="fas fa-exclamation-triangle risk-icon"></i>
+                            <h3>Adoção Lenta</h3>
+                        </div>
+                        <p class="risk-description">Profissionais podem resistir à mudança</p>
+                        <div class="mitigation">
+                            <strong>Mitigação:</strong> Plano gratuito, treinamentos, suporte dedicado
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <i class="fas fa-exclamation-triangle risk-icon"></i>
+                            <h3>Regulamentação</h3>
+                        </div>
+                        <p class="risk-description">Mudanças na LGPD ou regulamentações</p>
+                        <div class="mitigation">
+                            <strong>Mitigação:</strong> Conformidade proativa, consultoria jurídica
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <i class="fas fa-exclamation-triangle risk-icon"></i>
+                            <h3>Tecnologia</h3>
+                        </div>
+                        <p class="risk-description">Dependência de terceiros (Firebase, gateways)</p>
+                        <div class="mitigation">
+                            <strong>Mitigação:</strong> Arquitetura modular, possibilidade de migração
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 14: Equipe e Competências -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h1 class="slide-title">Equipe e Competências</h1>
+                <div class="team-content">
+                    <div class="competencies">
+                        <h3>Competências Técnicas Demonstradas</h3>
+                        <div class="competency-grid">
+                            <div class="competency-item">
+                                <i class="fas fa-code"></i>
+                                <span>Desenvolvimento Full-Stack</span>
+                            </div>
+                            <div class="competency-item">
+                                <i class="fas fa-lock"></i>
+                                <span>Segurança e Criptografia</span>
+                            </div>
+                            <div class="competency-item">
+                                <i class="fas fa-gavel"></i>
+                                <span>Conformidade LGPD</span>
+                            </div>
+                            <div class="competency-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>PWA e Performance</span>
+                            </div>
+                            <div class="competency-item">
+                                <i class="fas fa-sitemap"></i>
+                                <span>Arquitetura Escalável</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-needs">
+                        <h3>Necessidades de Equipe</h3>
+                        <ul>
+                            <li><i class="fas fa-user-tie"></i> Desenvolvedor Full-Stack (manutenção e novas features)</li>
+                            <li><i class="fas fa-bullhorn"></i> Marketing Digital (aquisição de usuários)</li>
+                            <li><i class="fas fa-headset"></i> Suporte ao Cliente (atendimento e onboarding)</li>
+                            <li><i class="fas fa-palette"></i> Designer UX/UI (melhorias de experiência)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 15: Métricas de Sucesso (KPIs) -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h1 class="slide-title">Métricas de Sucesso (KPIs)</h1>
+                <div class="kpis-content">
+                    <div class="kpi-category">
+                        <h3><i class="fas fa-user-plus"></i> Aquisição</h3>
+                        <div class="kpi-items">
+                            <div class="kpi-item">
+                                <div class="kpi-label">Taxa de Conversão</div>
+                                <div class="kpi-value">10-15%</div>
+                                <div class="kpi-target">Free → Pro</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">CAC</div>
+                                <div class="kpi-value">< R$ 100</div>
+                                <div class="kpi-target">Custo por Cliente</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">Crescimento Mensal</div>
+                                <div class="kpi-value">20-30%</div>
+                                <div class="kpi-target">Taxa de Crescimento</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-category">
+                        <h3><i class="fas fa-heart"></i> Engajamento</h3>
+                        <div class="kpi-items">
+                            <div class="kpi-item">
+                                <div class="kpi-label">Retenção Mensal</div>
+                                <div class="kpi-value">> 85%</div>
+                                <div class="kpi-target">Taxa de Retenção</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">Questionários/Usuário</div>
+                                <div class="kpi-value">> 10</div>
+                                <div class="kpi-target">Por Mês</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">Tempo na Plataforma</div>
+                                <div class="kpi-value">> 30min</div>
+                                <div class="kpi-target">Por Sessão</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-category">
+                        <h3><i class="fas fa-dollar-sign"></i> Financeiro</h3>
+                        <div class="kpi-items">
+                            <div class="kpi-item">
+                                <div class="kpi-label">MRR</div>
+                                <div class="kpi-value">Crescimento</div>
+                                <div class="kpi-target">Receita Recorrente</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">LTV</div>
+                                <div class="kpi-value">> R$ 1.200</div>
+                                <div class="kpi-target">Lifetime Value (2 anos)</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-label">Churn Rate</div>
+                                <div class="kpi-value">< 5%</div>
+                                <div class="kpi-target">Por Mês</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 16: Call to Action -->
+        <section class="slide" data-slide="16">
+            <div class="slide-content">
+                <div class="cta-content">
+                    <h1 class="cta-title">Próximos Passos</h1>
+                    <div class="cta-steps">
+                        <div class="cta-step">
+                            <div class="step-number">1</div>
+                            <h3>Finalizar Desenvolvimento</h3>
+                            <p>Completar features críticas e testes</p>
+                        </div>
+                        <div class="cta-step">
+                            <div class="step-number">2</div>
+                            <h3>Lançamento Beta Público</h3>
+                            <p>Disponibilizar para primeiros usuários</p>
+                        </div>
+                        <div class="cta-step">
+                            <div class="step-number">3</div>
+                            <h3>Campanha de Marketing</h3>
+                            <p>Aquisição direcionada de usuários</p>
+                        </div>
+                        <div class="cta-step">
+                            <div class="step-number">4</div>
+                            <h3>Parcerias Estratégicas</h3>
+                            <p>Associações de fisioterapeutas</p>
+                        </div>
+                        <div class="cta-step">
+                            <div class="step-number">5</div>
+                            <h3>Busca de Investimento</h3>
+                            <p>Investidores e parceiros estratégicos</p>
+                        </div>
+                    </div>
+                    <div class="cta-opportunity">
+                        <h2>Oportunidade de Investimento</h2>
+                        <p>O FisioQ está posicionado para capturar uma fatia significativa do mercado de software para fisioterapeutas no Brasil, com um produto funcional, preço competitivo e diferenciais claros.</p>
+                        <div class="cta-contact">
+                            <p><strong>Contato:</strong> [Seu Email] | [Seu Telefone]</p>
+                            <p><strong>Website:</strong> [URL do Projeto]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
+
