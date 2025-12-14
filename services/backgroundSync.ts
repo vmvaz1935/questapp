@@ -102,10 +102,10 @@ export async function processSyncQueue(): Promise<{ success: number; failed: num
     }
 
     try {
-      // Importar dinamicamente para evitar erros quando Firebase não está instalado
-      const { saveToFirebase } = await import('./firebaseSync');
+      // Importar dinamicamente para evitar erros quando Supabase não está instalado
+      const { saveToSupabase } = await import('./supabaseSync');
       
-      await saveToFirebase(operation.userId, operation.dataKey, operation.data);
+      await saveToSupabase(operation.userId, operation.dataKey, operation.data);
       
       // Sucesso: remover da fila
       removeFromSyncQueue(operation.id);

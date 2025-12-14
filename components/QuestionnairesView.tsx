@@ -4,35 +4,38 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import { useAuth } from '../context/AuthContext';
 import QuestionnaireForm from './QuestionnaireForm';
 import BodySticker from './BodySticker';
-import { useFirebaseSync } from '../hooks/useFirebaseSync';
-import { auth } from '../config/firebaseConfig';
+import { useSupabaseSync } from '../hooks/useSupabaseSync';
+import { getCurrentUserId } from '../config/supabaseConfig';
 import { useDrafts } from '../hooks/useDrafts';
 
 const QuestionnairesView: React.FC<{ questionnaires: Questionnaire[] }>
   = ({ questionnaires }) => {
-  const { professionalId, isGoogleAuth } = useAuth();
+  const { professionalId } = useAuth();
   const patientsKey = professionalId ? `patients_${professionalId}` : 'patients';
   const resultsKey = professionalId ? `results_${professionalId}` : 'results';
   const [patients] = useLocalStorage<Patient[]>(patientsKey, []);
   const [results, setResults] = useLocalStorage<any[]>(resultsKey, []);
+  const [supabaseUserId, setSupabaseUserId] = useState<string | null>(null);
   
-  // Obter UID do Firebase se autenticado com Google
-  const firebaseUserId = isGoogleAuth && auth?.currentUser?.uid || null;
+  // Obter UID do Supabase se autenticado
+  useEffect(() => {
+    getCurrentUserId().then(setSupabaseUserId);
+  }, [professionalId]);
   
-  // Sincronizar com Firebase
-  const { syncData } = useFirebaseSync({ 
-    userId: firebaseUserId || professionalId, 
-    isGoogleAuth 
+  // Sincronizar com Supabase
+  const { syncData } = useSupabaseSync({ 
+    userId: supabaseUserId || professionalId, 
+    isAuthenticated: !!professionalId 
   });
   
-  // Sincronizar resultados quando mudarem (apenas se autenticado com Google)
+  // Sincronizar resultados quando mudarem (se autenticado)
   useEffect(() => {
-    if (isGoogleAuth && firebaseUserId && results.length > 0) {
+    if (supabaseUserId && results.length > 0) {
       syncData('results', results).catch(err => {
         console.error('Erro ao sincronizar resultados:', err);
       });
     }
-  }, [results, isGoogleAuth, firebaseUserId, syncData]);
+  }, [results, supabaseUserId, syncData]);
   const [selectedPatientId, setSelectedPatientId] = useState<string>('');
   const [activeQ, setActiveQ] = useState<Questionnaire | null>(null);
   const [selectedCat, setSelectedCat] = useState<string>('');

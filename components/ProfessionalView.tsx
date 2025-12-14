@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Questionnaire, Patient } from '../types';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useAuth } from '../context/AuthContext';
-import { useFirebaseSync } from '../hooks/useFirebaseSync';
-import { auth } from '../config/firebaseConfig';
+import { useSupabaseSync } from '../hooks/useSupabaseSync';
+import { getCurrentUserId } from '../config/supabaseConfig';
 import { usePlanLimits } from '../hooks/usePlanLimits';
 import PaymentModal from './PaymentModal';
 import SyncConflictModal from './SyncConflictModal';
@@ -14,19 +14,22 @@ interface ProfessionalViewProps {
 }
 
 const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) => {
-  const { professionalId, isGoogleAuth } = useAuth();
+  const { professionalId } = useAuth();
   const storageKey = professionalId ? `patients_${professionalId}` : 'patients';
   const [patients, setPatients] = useLocalStorage<Patient[]>(storageKey, []);
   const { plan, maxPatients, canAddPatient } = usePlanLimits();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [supabaseUserId, setSupabaseUserId] = useState<string | null>(null);
   
-  // Obter UID do Firebase se autenticado com Google
-  const firebaseUserId = isGoogleAuth && auth?.currentUser?.uid || null;
+  // Obter UID do Supabase se autenticado
+  useEffect(() => {
+    getCurrentUserId().then(setSupabaseUserId);
+  }, [professionalId]);
   
-  // Sincronizar com Firebase
-  const { syncData, conflicts, resolveConflict, clearConflicts } = useFirebaseSync({ 
-    userId: firebaseUserId || professionalId, 
-    isGoogleAuth 
+  // Sincronizar com Supabase
+  const { syncData, conflicts, resolveConflict, clearConflicts } = useSupabaseSync({ 
+    userId: supabaseUserId || professionalId, 
+    isAuthenticated: !!professionalId 
   });
 
   // Lazy loading para lista de pacientes (se houver muitos)
@@ -42,14 +45,14 @@ const ProfessionalView: React.FC<ProfessionalViewProps> = ({ questionnaires }) =
     incrementSize: 20,
   });
   
-  // Sincronizar pacientes quando mudarem (apenas se autenticado com Google)
+  // Sincronizar pacientes quando mudarem (se autenticado)
   useEffect(() => {
-    if (isGoogleAuth && firebaseUserId && patients.length > 0) {
+    if (supabaseUserId && patients.length > 0) {
       syncData('patients', patients).catch(err => {
         console.error('Erro ao sincronizar pacientes:', err);
       });
     }
-  }, [patients, isGoogleAuth, firebaseUserId, syncData]);
+  }, [patients, supabaseUserId, syncData]);
 
   const [form, setForm] = useState<Partial<Patient>>({
     nome: '',

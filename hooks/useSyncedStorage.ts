@@ -1,24 +1,24 @@
-// Hook que sincroniza localStorage com Firebase automaticamente
+// Hook que sincroniza localStorage com Supabase automaticamente
 import { useState, useEffect, useCallback } from 'react';
-import { saveToFirebase, loadFromFirebase } from '../services/firebaseSync';
-import { isFirebaseConfigured } from '../config/firebaseConfig';
+import { saveToSupabase, loadFromSupabase } from '../services/supabaseSync';
+import { isSupabaseConfigured } from '../config/supabaseConfig';
 
 interface UseSyncedStorageOptions {
   userId: string | null;
-  isGoogleAuth: boolean;
+  isAuthenticated: boolean;
   dataKey: string; // Chave do localStorage (ex: 'patients_123')
-  firebaseKey: string; // Chave no Firebase (ex: 'patients')
+  supabaseKey: string; // Chave no Supabase (ex: 'patients')
   initialValue: any;
 }
 
 /**
- * Hook que combina localStorage com sincronização Firebase
+ * Hook que combina localStorage com sincronização Supabase
  */
 export function useSyncedStorage<T>({
   userId,
-  isGoogleAuth,
+  isAuthenticated,
   dataKey,
-  firebaseKey,
+  supabaseKey,
   initialValue
 }: UseSyncedStorageOptions): [T, (value: T | ((prev: T) => T)) => void] {
   
@@ -32,25 +32,25 @@ export function useSyncedStorage<T>({
     }
   });
 
-  // Carregar do Firebase na inicialização (se autenticado com Google)
+  // Carregar do Supabase na inicialização (se autenticado)
   useEffect(() => {
-    if (userId && isGoogleAuth && isFirebaseConfigured) {
-      loadFromFirebase(userId, firebaseKey).then((firebaseData) => {
-        if (firebaseData !== null && Array.isArray(firebaseData) && firebaseData.length > 0) {
+    if (userId && isAuthenticated && isSupabaseConfigured) {
+      loadFromSupabase(userId, supabaseKey).then((supabaseData) => {
+        if (supabaseData !== null && Array.isArray(supabaseData) && supabaseData.length > 0) {
           const localData = JSON.parse(localStorage.getItem(dataKey) || '[]');
-          // Usar dados do Firebase se tiver mais itens ou se localStorage estiver vazio
-          if (firebaseData.length >= localData.length || localData.length === 0) {
-            setStoredValue(firebaseData as T);
-            localStorage.setItem(dataKey, JSON.stringify(firebaseData));
+          // Usar dados do Supabase se tiver mais itens ou se localStorage estiver vazio
+          if (supabaseData.length >= localData.length || localData.length === 0) {
+            setStoredValue(supabaseData as T);
+            localStorage.setItem(dataKey, JSON.stringify(supabaseData));
           }
         }
       }).catch(error => {
-        console.error(`Erro ao carregar ${firebaseKey} do Firebase:`, error);
+        console.error(`Erro ao carregar ${supabaseKey} do Supabase:`, error);
       });
     }
-  }, [userId, isGoogleAuth, dataKey, firebaseKey]);
+  }, [userId, isAuthenticated, dataKey, supabaseKey]);
 
-  // Função para atualizar valor (salva em ambos: localStorage e Firebase)
+  // Função para atualizar valor (salva em ambos: localStorage e Supabase)
   const setValue = useCallback((value: T | ((prev: T) => T)) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
@@ -59,17 +59,17 @@ export function useSyncedStorage<T>({
       // Salvar no localStorage (sempre)
       localStorage.setItem(dataKey, JSON.stringify(valueToStore));
       
-      // Salvar no Firebase (se autenticado com Google)
-      if (userId && isGoogleAuth && isFirebaseConfigured) {
-        saveToFirebase(userId, firebaseKey, valueToStore).catch(error => {
-          console.error(`Erro ao salvar ${firebaseKey} no Firebase:`, error);
-          // Não bloqueia a aplicação se o Firebase falhar
+      // Salvar no Supabase (se autenticado)
+      if (userId && isAuthenticated && isSupabaseConfigured) {
+        saveToSupabase(userId, supabaseKey, valueToStore).catch(error => {
+          console.error(`Erro ao salvar ${supabaseKey} no Supabase:`, error);
+          // Não bloqueia a aplicação se o Supabase falhar
         });
       }
     } catch (error) {
       console.error(`Erro ao salvar ${dataKey}:`, error);
     }
-  }, [storedValue, dataKey, firebaseKey, userId, isGoogleAuth]);
+  }, [storedValue, dataKey, supabaseKey, userId, isAuthenticated]);
 
   return [storedValue, setValue];
 }
