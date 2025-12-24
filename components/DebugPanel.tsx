@@ -17,22 +17,25 @@ import {
   checkBuild,
 } from '../utils/debug';
 
-// Apenas renderizar em desenvolvimento
-if (import.meta.env.PROD) {
-  // Componente vazio em produção
-  export const DebugPanel: React.FC = () => null;
-} else {
-  export const DebugPanel: React.FC = () => {
-    const {
-      state,
-      addLog,
-      runDiagnostic,
-      exportDiagnostic,
-      clearLogs,
-      togglePanel,
-      setActiveTab,
-      closePanel,
-    } = useDebug();
+// Componente de Debug Panel
+// Apenas renderiza em desenvolvimento
+export const DebugPanel: React.FC = () => {
+  // Em produção, não renderizar nada
+  if (import.meta.env.PROD) {
+    return null;
+  }
+  
+  // Em desenvolvimento, renderizar o painel
+  const {
+    state,
+    addLog,
+    runDiagnostic,
+    exportDiagnostic,
+    clearLogs,
+    togglePanel,
+    setActiveTab,
+    closePanel,
+  } = useDebug();
     
     const [diagnostics, setDiagnostics] = useState<DiagnosticResult | null>(state.lastDiagnostic || null);
     
@@ -56,36 +59,36 @@ if (import.meta.env.PROD) {
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('fisioq:open-debug-panel', handleOpenPanel);
-      };
-    }, [togglePanel, openPanel]);
-    
-    // Executar diagnóstico quando painel abrir
-    useEffect(() => {
-      if (state.isOpen && !diagnostics) {
-        runDiagnostic().then(setDiagnostics).catch(console.error);
-      }
-    }, [state.isOpen, diagnostics, runDiagnostic]);
-    
-    const handleRunDiagnostics = async () => {
-      const result = await runDiagnostic();
-      setDiagnostics(result);
     };
-    
-    const handleExport = async () => {
-      await exportDiagnostic();
-    };
-    
-    const handleClearCache = () => {
-      if (confirm('Tem certeza que deseja limpar o cache? Isso não afetará os dados do usuário.')) {
-        // Limpar apenas cache de diagnóstico, não dados do usuário
-        localStorage.removeItem('sync_queue');
-        addLog('info', 'cache', 'Cache limpo');
-      }
-    };
-    
-    if (!state.isOpen) {
-      return null;
+  }, [togglePanel, openPanel]);
+  
+  // Executar diagnóstico quando painel abrir
+  useEffect(() => {
+    if (state.isOpen && !diagnostics) {
+      runDiagnostic().then(setDiagnostics).catch(console.error);
     }
+  }, [state.isOpen, diagnostics, runDiagnostic]);
+  
+  const handleRunDiagnostics = async () => {
+    const result = await runDiagnostic();
+    setDiagnostics(result);
+  };
+  
+  const handleExport = async () => {
+    await exportDiagnostic();
+  };
+  
+  const handleClearCache = () => {
+    if (confirm('Tem certeza que deseja limpar o cache? Isso não afetará os dados do usuário.')) {
+      // Limpar apenas cache de diagnóstico, não dados do usuário
+      localStorage.removeItem('sync_queue');
+      addLog('info', 'cache', 'Cache limpo');
+    }
+  };
+  
+  if (!state.isOpen) {
+    return null;
+  }
     
     const tabs = [
       { id: 'auth', label: 'Autenticação', icon: '🔐' },
@@ -211,8 +214,7 @@ if (import.meta.env.PROD) {
         </div>
       </div>
     );
-  };
-}
+};
 
 // Componentes de abas individuais
 function AuthTab({ diagnostics }: { diagnostics: DiagnosticResult['authentication'] }) {
