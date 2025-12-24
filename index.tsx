@@ -11,6 +11,15 @@ initSentry().catch(console.warn);
 
 // Analytics inicializado via sistema interno (utils/analytics.ts)
 
+// Inicializar debug console (apenas em desenvolvimento)
+if (import.meta.env.DEV) {
+  import('./utils/debugConsole').then(({ initDebugConsole }) => {
+    initDebugConsole();
+  }).catch(() => {
+    // Ignorar se não disponível
+  });
+}
+
 // Registrar Service Worker para PWA (será feito pelo VitePWA plugin)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

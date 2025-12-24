@@ -41,8 +41,14 @@ export async function saveToSupabase(
 
   const client = getSupabaseClient();
   if (!client) {
-    console.warn('Supabase não configurado, pulando sincronização');
+    if (import.meta.env.DEV) {
+      console.warn('[DEBUG] Supabase não configurado, pulando sincronização', { userId, dataKey });
+    }
     return;
+  }
+  
+  if (import.meta.env.DEV) {
+    console.log('[DEBUG] Iniciando sincronização Supabase', { userId, dataKey, dataSize: JSON.stringify(data).length });
   }
 
   try {
@@ -304,9 +310,13 @@ export async function syncAllData(userId: string): Promise<void> {
       await saveToSupabase(userId, 'questionnaires', questionnaires);
     }
 
-    console.log('Sincronização com Supabase concluída');
+    if (import.meta.env.DEV) {
+      console.log('[DEBUG] Sincronização com Supabase concluída', { userId });
+    }
   } catch (error) {
-    console.error('Erro ao sincronizar:', error);
+    if (import.meta.env.DEV) {
+      console.error('[DEBUG] Erro ao sincronizar com Supabase', { userId, error });
+    }
     throw error;
   }
 }

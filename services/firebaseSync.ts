@@ -64,7 +64,14 @@ export async function saveToFirebase(
     const { doc, getDoc, setDoc, updateDoc } = firebaseFirestore;
 
     if (!isFirebaseConfigured || !db) {
+      if (import.meta.env.DEV) {
+        console.warn('[DEBUG] Firebase não configurado, pulando sincronização', { userId, dataKey });
+      }
       return;
+    }
+    
+    if (import.meta.env.DEV) {
+      console.log('[DEBUG] Iniciando sincronização Firebase', { userId, dataKey, dataSize: JSON.stringify(data).length });
     }
 
     const userDocRef = doc(db, 'users', userId);
@@ -105,6 +112,9 @@ export async function saveToFirebase(
   } catch (error) {
     // Firebase não instalado ou erro de conexão - ignorar
     // Os dados ainda estão salvos no localStorage
+    if (import.meta.env.DEV) {
+      console.error('[DEBUG] Erro ao sincronizar com Firebase', { userId, dataKey, error });
+    }
   }
 }
 

@@ -8,6 +8,7 @@ import { migrateLocalStorage } from './utils/migrateLocalStorage';
 import { fixLocalStorageOnLoad } from './utils/fixLocalStorageOnLoad';
 import { Layout } from './components/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { DebugPanel } from './components/DebugPanel';
 
 // Configurar axe-core apenas em desenvolvimento
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
@@ -251,6 +252,7 @@ const App: React.FC = () => (
     <BrowserRouter>
       <AuthProvider>
         <InnerApp />
+        {import.meta.env.DEV && <DebugPanel />}
       </AuthProvider>
     </BrowserRouter>
   </ErrorBoundary>

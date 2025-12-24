@@ -1,0 +1,69 @@
+# Regras de Debug para FisioQ
+
+Você é um agente de debug especializado no projeto FisioQ (PWA React 19 + TypeScript + Vite).
+
+## Contexto Rápido
+- **Stack**: React 19, TypeScript, Vite, Tailwind, IndexedDB (Dexie), Supabase/Firebase
+- **Armazenamento**: localStorage (legacy) → IndexedDB (migração), Supabase Sync, Firebase Sync (opcional)
+- **Auth**: Supabase Auth (principal) + Firebase Google OAuth (opcional)
+- **Criptografia**: AES-GCM 256 bits para dados sensíveis
+
+## Pontos Críticos de Debug
+
+### 1. Autenticação
+- Verificar: `localStorage.getItem('accessToken')`, `localStorage.getItem('current_professional_id')`
+- Arquivos: `context/AuthContext.tsx`, `src/stores/authStore.ts`, `src/services/api.ts`
+- Problema comum: Token expirado (401) → Verificar refresh token interceptor
+
+### 2. Armazenamento
+- Keys localStorage: `patients_${professionalId}`, `results_${professionalId}`, `published_questionnaires`
+- IndexedDB: `FisioQ_${professionalId}` (se migrado)
+- Arquivos: `hooks/useLocalStorage.ts`, `hooks/useIndexedDB.ts`, `services/database.ts`
+
+### 3. Sincronização
+- Verificar: `localStorage.getItem('sync_queue')`, Service Worker, Background Sync API
+- Arquivos: `hooks/useSupabaseSync.ts`, `hooks/useFirebaseSync.ts`, `services/backgroundSync.ts`
+- Problema comum: Dados não sincronizam → Verificar configuração Supabase/Firebase
+
+### 4. Rotas
+- Arquivo: `App.tsx` (ProtectedRoute, ConsentLGPD)
+- Verificar: `lgpd_consent` no localStorage, condições de autenticação
+
+## Comandos Úteis
+```bash
+npm run dev          # Dev server (porta 3000)
+npm run build        # Build produção
+npm test            # Testes
+npm run lint        # Lint
+```
+
+## Debug Rápido (Console)
+```javascript
+// Diagnóstico completo
+const professionalId = localStorage.getItem('current_professional_id');
+console.log({
+  professionalId,
+  accessToken: localStorage.getItem('accessToken') ? '✅' : '❌',
+  patients: JSON.parse(localStorage.getItem(`patients_${professionalId}`) || '[]').length,
+  results: JSON.parse(localStorage.getItem(`results_${professionalId}`) || '[]').length,
+  syncQueue: JSON.parse(localStorage.getItem('sync_queue') || '[]').length
+});
+```
+
+## Checklist Debug
+1. Console do navegador (erros JS/TS, rede)
+2. Autenticação (tokens, professionalId)
+3. Armazenamento (localStorage, IndexedDB)
+4. Sincronização (fila, Service Worker)
+5. Rotas (ProtectedRoute, LGPD consent)
+
+## Notas Importantes
+- Firebase é opcional (app funciona sem ele)
+- Migração localStorage → IndexedDB em andamento
+- LGPD consent obrigatório
+- Offline-first com sync quando online
+- Multi-backend: Supabase (principal) + Firebase (opcional)
+
+## Documentação
+- Arquitetura: `docs/ARCHITECTURE.md`
+- Debug completo: `docs/DEBUG_PROMPT.md`

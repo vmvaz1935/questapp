@@ -67,16 +67,28 @@ export class ErrorBoundary extends Component<Props, State> {
                   Recarregar Página
                 </button>
               </div>
-              {this.state.error && process.env.NODE_ENV === 'development' && (
-                <details className="mt-6 text-left">
-                  <summary className="cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
-                    Detalhes do erro (apenas em desenvolvimento)
-                  </summary>
-                  <pre className="mt-2 text-xs bg-gray-100 dark:bg-gray-900 p-4 rounded overflow-auto max-h-48">
-                    {this.state.error.toString()}
-                    {this.state.error.stack}
-                  </pre>
-                </details>
+              {this.state.error && import.meta.env.DEV && (
+                <>
+                  <button
+                    onClick={() => {
+                      // Disparar evento customizado para abrir debug panel
+                      window.dispatchEvent(new CustomEvent('fisioq:open-debug-panel'));
+                    }}
+                    className="mt-3 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 text-sm"
+                    aria-label="Abrir painel de debug"
+                  >
+                    🔍 Abrir Painel de Debug
+                  </button>
+                  <details className="mt-6 text-left">
+                    <summary className="cursor-pointer text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                      Detalhes do erro (apenas em desenvolvimento)
+                    </summary>
+                    <pre className="mt-2 text-xs bg-gray-100 dark:bg-gray-900 p-4 rounded overflow-auto max-h-48">
+                      {this.state.error.toString()}
+                      {this.state.error.stack}
+                    </pre>
+                  </details>
+                </>
               )}
             </div>
           </div>
